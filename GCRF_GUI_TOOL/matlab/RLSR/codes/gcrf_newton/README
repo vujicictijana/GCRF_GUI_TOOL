@@ -1,0 +1,27 @@
+This directory contains an initial version of the code release to
+accompany the paper "Sparse Gaussian Conditional Random Fields:
+Algorithms, Theory, and Application to Energy Forecasting."  The code
+requires the Eigen3 linear algebra library (freely available at
+http://eigen.tuxfamily.org), and can be compiled from within MATLAB
+using:
+
+>> mex gcrf_newton.cc gcrf_newton_mex.cc -I/usr/include/eigen3 
+
+(replacing -I/usr/include/eigen3 with the appropriate directory of
+your Eigen installation).
+
+The function can be called from MATLAB as:
+
+[Lambda Theta h] = gcrf_newton_mex(S, lambda, Lambda0, Theta0, params)
+where:
+ - S is the joint sample covariance matrix
+ - lambda is the L_1 regularization parameter
+ - Lambda0 and Theta0 are initial values for the parameters
+ - params is a struct that can contain the following files
+    quiet: 1 to output no debugging info
+    max_iters: maximum number of outer loop iterations
+    ls_max_iters: maximum of inner loop iterations
+    sigma, alpha, beta: backtracking line search parameters
+    tol: convergence tolerance of the outer loop
+    cd_tol: convergence tolerance of the inner loop
+
