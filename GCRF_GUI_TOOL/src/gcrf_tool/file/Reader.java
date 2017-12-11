@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import gcrf_tool.exceptions.ConfigurationParameterseException;
-import gcrf_tool.frames.MainFrame;
+import gcrf_tool.gui.frames.MainFrame;
 
 public class Reader {
 

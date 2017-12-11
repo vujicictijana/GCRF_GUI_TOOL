@@ -14,7 +14,7 @@ import javax.swing.JTabbedPane;
 import gcrf_tool.exceptions.ConfigurationParameterseException;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
-import gcrf_tool.frames.MainFrame;
+import gcrf_tool.gui.frames.MainFrame;
 import gcrf_tool.gui.style.Style;
 
 import java.awt.GridBagConstraints;

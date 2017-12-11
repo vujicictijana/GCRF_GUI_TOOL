@@ -3,7 +3,7 @@ package gcrf_tool.algorithms.matlab;
 import java.io.IOException;
 import java.net.URL;
 
-import gcrf_tool.frames.MainFrame;
+import gcrf_tool.gui.frames.MainFrame;
 import matlabcontrol.MatlabConnectionException;
 import matlabcontrol.MatlabInvocationException;
 import matlabcontrol.MatlabProxy;

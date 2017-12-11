@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 import gcrf_tool.algorithms.matlab.UpGCRF;
 import gcrf_tool.file.Reader;
-import gcrf_tool.frames.ProgressBar;
+import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
 
 public class UpGCRFTrainMyModelForGUI extends Thread {

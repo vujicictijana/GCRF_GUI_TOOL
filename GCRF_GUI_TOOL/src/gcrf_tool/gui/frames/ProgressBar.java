@@ -1,4 +1,4 @@
-package gcrf_tool.frames;
+package gcrf_tool.gui.frames;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;

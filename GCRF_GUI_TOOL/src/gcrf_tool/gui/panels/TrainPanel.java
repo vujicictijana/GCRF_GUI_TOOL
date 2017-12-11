@@ -18,7 +18,7 @@ import gcrf_tool.algorithms.basic.BasicCalcs;
 import gcrf_tool.exceptions.ConfigurationParameterseException;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
-import gcrf_tool.frames.ProgressBar;
+import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
 import gcrf_tool.gui.threads.DirGCRFTrainMyModelForGUI;
 import gcrf_tool.gui.threads.GCRFTrainMyModelForGUI;
