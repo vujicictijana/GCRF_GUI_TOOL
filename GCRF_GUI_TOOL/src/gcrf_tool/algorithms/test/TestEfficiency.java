@@ -6,8 +6,8 @@ import org.ojalgo.matrix.PrimitiveMatrix;
 
 import gcrf_tool.algorithms.asymmetric.CalculationsAsymmetric;
 import gcrf_tool.algorithms.asymmetric.GradientDescentAsymmetric;
-import gcrf_tool.generators.ArrayGenerator;
-import gcrf_tool.generators.GraphGenerator;
+import gcrf_tool.data.generators.ArrayGenerator;
+import gcrf_tool.data.generators.GraphGenerator;
 
 public class TestEfficiency {
 

@@ -1,4 +1,4 @@
-package gcrf_tool.tool.predictors.linearregression;
+package gcrf_tool.predictors.linearregression;
 
 public class TemporalData {
 

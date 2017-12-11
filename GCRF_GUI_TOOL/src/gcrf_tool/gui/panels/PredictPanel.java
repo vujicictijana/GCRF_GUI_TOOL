@@ -23,9 +23,9 @@ import gcrf_tool.gui.threads.DirGCRFTestMyModelForGUI;
 import gcrf_tool.gui.threads.GCRFTestMyModelForGUI;
 import gcrf_tool.gui.threads.UmGCRFTestMyModelForGUI;
 import gcrf_tool.predictors.helper.Helper;
+import gcrf_tool.predictors.linearregression.LinearRegression;
+import gcrf_tool.predictors.linearregression.MultivariateLinearRegression;
 import gcrf_tool.predictors.neuralnetwork.MyNN;
-import gcrf_tool.tool.predictors.linearregression.LinearRegression;
-import gcrf_tool.tool.predictors.linearregression.MultivariateLinearRegression;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

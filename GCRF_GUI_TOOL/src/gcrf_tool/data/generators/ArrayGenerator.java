@@ -1,4 +1,4 @@
-package gcrf_tool.generators;
+package gcrf_tool.data.generators;
 
 import java.util.Random;
 

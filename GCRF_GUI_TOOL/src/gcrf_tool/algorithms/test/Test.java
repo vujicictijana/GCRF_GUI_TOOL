@@ -2,8 +2,8 @@ package gcrf_tool.algorithms.test;
 
 import gcrf_tool.algorithms.asymmetric.*;
 import gcrf_tool.algorithms.symmetric.*;
-import gcrf_tool.generators.ArrayGenerator;
-import gcrf_tool.generators.GraphGenerator;
+import gcrf_tool.data.generators.ArrayGenerator;
+import gcrf_tool.data.generators.GraphGenerator;
 
 public class Test {
 

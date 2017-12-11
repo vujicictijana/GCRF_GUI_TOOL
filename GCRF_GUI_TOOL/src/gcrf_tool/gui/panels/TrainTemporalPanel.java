@@ -24,11 +24,11 @@ import gcrf_tool.gui.threads.MGCRFTrainMyModelForGUI;
 import gcrf_tool.gui.threads.RLSRTrainMyModelForGUI;
 import gcrf_tool.gui.threads.UpGCRFTrainMyModelForGUI;
 import gcrf_tool.predictors.helper.Helper;
+import gcrf_tool.predictors.linearregression.LinearRegression;
+import gcrf_tool.predictors.linearregression.MultivariateLinearRegression;
+import gcrf_tool.predictors.linearregression.MyLR;
+import gcrf_tool.predictors.linearregression.TemporalData;
 import gcrf_tool.predictors.neuralnetwork.MyNN;
-import gcrf_tool.tool.predictors.linearregression.LinearRegression;
-import gcrf_tool.tool.predictors.linearregression.MultivariateLinearRegression;
-import gcrf_tool.tool.predictors.linearregression.MyLR;
-import gcrf_tool.tool.predictors.linearregression.TemporalData;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

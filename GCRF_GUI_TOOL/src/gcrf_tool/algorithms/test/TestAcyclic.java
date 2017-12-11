@@ -3,8 +3,8 @@ package gcrf_tool.algorithms.test;
 import java.text.DecimalFormat;
 
 import gcrf_tool.algorithms.asymmetric.*;
+import gcrf_tool.data.generators.*;
 import gcrf_tool.file.Writer;
-import gcrf_tool.generators.*;
 
 public class TestAcyclic {
 	public double[] testTrain(int no, int maxIter) {

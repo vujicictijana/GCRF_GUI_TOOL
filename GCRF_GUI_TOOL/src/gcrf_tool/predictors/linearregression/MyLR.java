@@ -1,4 +1,4 @@
-package gcrf_tool.tool.predictors.linearregression;
+package gcrf_tool.predictors.linearregression;
 
 import gcrf_tool.file.Writer;
 import gcrf_tool.predictors.helper.Helper;

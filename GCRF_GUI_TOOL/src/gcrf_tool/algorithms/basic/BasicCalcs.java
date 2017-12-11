@@ -4,7 +4,7 @@ import org.ojalgo.matrix.BasicMatrix;
 import org.ojalgo.matrix.PrimitiveMatrix;
 import org.ujmp.core.Matrix;
 
-import gcrf_tool.generators.GraphGenerator;
+import gcrf_tool.data.generators.GraphGenerator;
 
 public class BasicCalcs {
 

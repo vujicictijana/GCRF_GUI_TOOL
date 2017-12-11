@@ -13,9 +13,9 @@ import java.util.Stack;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
 
-import gcrf_tool.generators.ArrayGenerator;
-import gcrf_tool.generators.GraphGenerator;
-import gcrf_tool.tool.predictors.linearregression.TemporalData;
+import gcrf_tool.data.generators.ArrayGenerator;
+import gcrf_tool.data.generators.GraphGenerator;
+import gcrf_tool.predictors.linearregression.TemporalData;
 
 public class Helper {
 

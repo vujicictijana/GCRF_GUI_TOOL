@@ -24,8 +24,8 @@ import gcrf_tool.gui.threads.DirGCRFTrainMyModelForGUI;
 import gcrf_tool.gui.threads.GCRFTrainMyModelForGUI;
 import gcrf_tool.gui.threads.UmGCRFTrainMyModelForGUI;
 import gcrf_tool.predictors.helper.Helper;
+import gcrf_tool.predictors.linearregression.MyLR;
 import gcrf_tool.predictors.neuralnetwork.MyNN;
-import gcrf_tool.tool.predictors.linearregression.MyLR;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

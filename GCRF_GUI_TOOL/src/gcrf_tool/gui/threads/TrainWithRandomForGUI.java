@@ -19,10 +19,10 @@ import gcrf_tool.algorithms.asymmetric.GradientDescentAsymmetric;
 import gcrf_tool.algorithms.symmetric.AlgorithmSymmetric;
 import gcrf_tool.algorithms.symmetric.CalculationsSymmetric;
 import gcrf_tool.algorithms.symmetric.GradientDescentSymmetric;
+import gcrf_tool.data.generators.GraphGenerator;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.frames.ProgressBar;
-import gcrf_tool.generators.GraphGenerator;
 import gcrf_tool.gui.style.Style;
 
 public class TrainWithRandomForGUI extends Thread {

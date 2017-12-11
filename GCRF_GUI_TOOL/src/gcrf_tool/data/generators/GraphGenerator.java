@@ -1,4 +1,4 @@
-package gcrf_tool.generators;
+package gcrf_tool.data.generators;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
