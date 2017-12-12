@@ -9,12 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import gcrf_tool.methods.AlgorithmSymmetric;
+import gcrf_tool.methods.GCRF;
+import gcrf_tool.data.datasets.Dataset;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
-import gcrf_tool.methods.GradientDescentSymmetric;
+import gcrf_tool.learning.Parameters;
 
 public class GCRFTrainMyModelForGUI extends Thread {
 	private ProgressBar frame;
@@ -73,13 +74,11 @@ public class GCRFTrainMyModelForGUI extends Thread {
 		});
 		try {
 			long start = System.currentTimeMillis();
-			GradientDescentSymmetric gdS = new GradientDescentSymmetric(alpha,
-					beta, lr, s, r, y);
-			double[] resS = gdS.learn(maxIter, false, frame.getCurrent());
-
-			AlgorithmSymmetric algS = new AlgorithmSymmetric(resS[0], resS[1],
-					s, r, y);
+			Parameters p = new Parameters(alpha, beta, maxIter, lr, false, frame.getCurrent());
+			Dataset d = new Dataset(s, r, y);	
+			GCRF algS = new GCRF(p, d);
 			double r2S = algS.rSquared();
+			double[] resS = algS.getParameters();
 			long elapsedTime = System.currentTimeMillis() - start;
 			time += df.format((double) elapsedTime / 1000);
 

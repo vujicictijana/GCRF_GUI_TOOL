@@ -32,15 +32,19 @@ public class Basic implements Algorithm {
 		this.calcs = calcs;
 	}
 
-	public double[] predictOutputsForTrain() {
+	public double[] predictOutputs() {
 		return calcs.mu(alpha, beta);
 	}
 
-	public double rSquaredForTrain() {
-		return BasicCalcs.rSquared(predictOutputsForTrain(), expectedY);
+	public double rSquared() {
+		return BasicCalcs.rSquared(predictOutputs(), expectedY);
 	}
 
 	public double rSquaredForTest(double[] predictedY, double[] expectedY) {
 		return BasicCalcs.rSquared(predictedY, expectedY);
+	}
+	
+	public double[] getParameters(){
+		return new double[] {alpha, beta};
 	}
 }

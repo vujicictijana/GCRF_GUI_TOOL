@@ -8,10 +8,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import gcrf_tool.data.datasets.Dataset;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.style.Style;
-import gcrf_tool.methods.AlgorithmSymmetric;
+import gcrf_tool.methods.GCRF;
 
 public class GCRFTestMyModelForGUI extends Thread {
 	private JFrame mainFrame;
@@ -68,8 +69,9 @@ public class GCRFTestMyModelForGUI extends Thread {
 	}
 
 	public double resultSymmetric(double alpha, double beta) {
-		AlgorithmSymmetric alg = new AlgorithmSymmetric(alpha, beta, s, r, y);
-		outputs = alg.outputs();
+		Dataset d = new Dataset(s, r, y);
+		GCRF alg = new GCRF(alpha, beta, d);
+		outputs = alg.predictOutputs();
 		return alg.rSquared();
 	}
 

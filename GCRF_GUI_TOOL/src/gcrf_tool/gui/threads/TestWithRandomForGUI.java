@@ -9,19 +9,19 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-
-import gcrf_tool.methods.AlgorithmSymmetric;
+import gcrf_tool.methods.GCRF;
 import gcrf_tool.calculations.BasicCalcs;
 import gcrf_tool.calculations.Calculations;
+import gcrf_tool.calculations.CalculationsDirGCRF;
 import gcrf_tool.calculations.CalculationsGCRF;
+import gcrf_tool.data.datasets.Dataset;
 import gcrf_tool.data.generators.ArrayGenerator;
 import gcrf_tool.data.generators.GraphGenerator;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
-import gcrf_tool.methods.AlgorithmAsymmetric;
-import gcrf_tool.methods.CalculationsAsymmetric;
+import gcrf_tool.methods.DirGCRF;
 
 public class TestWithRandomForGUI extends Thread {
 	private ProgressBar frame;
@@ -34,9 +34,8 @@ public class TestWithRandomForGUI extends Thread {
 	private double alphaGen;
 	private double betaGen;
 
-	public TestWithRandomForGUI(ProgressBar frame, JFrame mainFrame,
-			JPanel panel, String modelFolder, int noOfNodes, int times,
-			double probability, double alphaGen, double betaGen) {
+	public TestWithRandomForGUI(ProgressBar frame, JFrame mainFrame, JPanel panel, String modelFolder, int noOfNodes,
+			int times, double probability, double alphaGen, double betaGen) {
 		super();
 		this.frame = frame;
 		this.mainFrame = mainFrame;
@@ -72,13 +71,11 @@ public class TestWithRandomForGUI extends Thread {
 
 	private void exportResults(double[] results, double[] resultsS) {
 		Writer.createFolder(modelFolder + "/Test");
-		String fileName = modelFolder + "/Test/TestWith" + noOfNodes + "Nodes"
-				+ times + "times.txt";
+		String fileName = modelFolder + "/Test/TestWith" + noOfNodes + "Nodes" + times + "times.txt";
 		String[] a = exportTxt(results, resultsS);
 		Writer.write(a, fileName);
 		JOptionPane.showMessageDialog(mainFrame,
-				"Export successfully completed. \nFile location: "
-						+ modelFolder + "/Test.");
+				"Export successfully completed. \nFile location: " + modelFolder + "/Test.");
 	}
 
 	public double[] read(String file) {
@@ -94,8 +91,8 @@ public class TestWithRandomForGUI extends Thread {
 	}
 
 	public double[][] graph(int noOfNodes) {
-		String[] folders =  modelFolder.split("/");
-		String type = folders[folders.length-2];
+		String[] folders = modelFolder.split("/");
+		String type = folders[folders.length - 2];
 		return GraphGenerator.generateGraphByType(noOfNodes, type, probability);
 	}
 
@@ -106,12 +103,11 @@ public class TestWithRandomForGUI extends Thread {
 			frame.getCurrent().setValue((i + 1));
 			double[][] s = graph(noOfNodes);
 			double[] r = ArrayGenerator.generateArray(noOfNodes, 5);
-			CalculationsAsymmetric c = new CalculationsAsymmetric(s, r);
+			CalculationsDirGCRF c = new CalculationsDirGCRF(s, r);
 
 			double[] y = c.y(alphaGen, betaGen, 0.05);
-
-			AlgorithmAsymmetric alg = new AlgorithmAsymmetric(alpha, beta, s,
-					r, y);
+			Dataset d = new Dataset(s, r, y);
+			DirGCRF alg = new DirGCRF(alpha, beta, d);
 			results[i] = alg.rSquared();
 		}
 		return results;
@@ -123,15 +119,12 @@ public class TestWithRandomForGUI extends Thread {
 		frame.getCurrent().setValue(0);
 		for (int i = 0; i < results.length; i++) {
 			frame.getCurrent().setValue((i + 1));
-			double[][] s = GraphGenerator
-					.converteGraphToUndirected(graph(noOfNodes));
+			double[][] s = GraphGenerator.converteGraphToUndirected(graph(noOfNodes));
 			double[] r = ArrayGenerator.generateArray(noOfNodes, 5);
 			Calculations c = new CalculationsGCRF(s, r);
-
 			double[] y = c.y(alphaGen, betaGen, 0.05);
-
-			AlgorithmSymmetric alg = new AlgorithmSymmetric(alpha, beta, s, r,
-					y);
+			Dataset d = new Dataset(s, r, y);
+			GCRF alg = new GCRF(alpha, beta, d);
 			results[i] = alg.rSquared();
 		}
 		return results;
@@ -184,13 +177,10 @@ public class TestWithRandomForGUI extends Thread {
 			txt[txt.length - 4] = "Average DirGCRF: " + (sum / times);
 			txt[txt.length - 3] = "Average GCRF: " + (sumS / times);
 		}
-		txt[txt.length - 2] = "Standard deviation DirGCRF: "
-				+ df.format(BasicCalcs.standardDeviation(results));
+		txt[txt.length - 2] = "Standard deviation DirGCRF: " + df.format(BasicCalcs.standardDeviation(results));
 		if (resultsS != null) {
-			txt[txt.length - 2] = "Standard deviation DirGCRF: "
-					+ df.format(BasicCalcs.standardDeviation(results));
-			txt[txt.length - 1] = "Standard deviation GCRF: "
-					+ df.format(BasicCalcs.standardDeviation(resultsS));
+			txt[txt.length - 2] = "Standard deviation DirGCRF: " + df.format(BasicCalcs.standardDeviation(results));
+			txt[txt.length - 1] = "Standard deviation GCRF: " + df.format(BasicCalcs.standardDeviation(resultsS));
 		}
 		return txt;
 	}
@@ -220,8 +210,7 @@ public class TestWithRandomForGUI extends Thread {
 		data[times + 1][1] = df.format(BasicCalcs.standardDeviation(results));
 		if (resultsS != null) {
 			data[times][2] = sumS / times;
-			data[times + 1][2] = df.format(BasicCalcs
-					.standardDeviation(resultsS));
+			data[times + 1][2] = df.format(BasicCalcs.standardDeviation(resultsS));
 		}
 		return data;
 	}

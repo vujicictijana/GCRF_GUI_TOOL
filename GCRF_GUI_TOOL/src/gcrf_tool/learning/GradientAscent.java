@@ -21,8 +21,7 @@ public class GradientAscent implements LearningAlgorithm {
 	 * whether progress will be shown in the console (showProgress=true) or in
 	 * the specific JProgressBar (pass JProgressBar object or null).
 	 */
-	public GradientAscent(Parameters parameters, Calculations calcs, double[] y, boolean showProgress,
-			JProgressBar progress) {
+	public GradientAscent(Parameters parameters, Calculations calcs, double[] y) {
 		super();
 		this.alpha = parameters.getFirstAlpha();
 		this.beta = parameters.getFirstBeta();
@@ -30,8 +29,8 @@ public class GradientAscent implements LearningAlgorithm {
 		this.maxIter = parameters.getMaxIterations();
 		this.calcs = calcs;
 		this.y = y;
-		this.showProgress = showProgress;
-		this.progress = progress;
+		this.showProgress = parameters.isShowProgress();
+		this.progress = parameters.getProgressBar();
 	}
 
 	public double[] learn() {

@@ -13,9 +13,6 @@ import gcrf_tool.data.datasets.Dataset;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.style.Style;
-import gcrf_tool.learning.Parameters;
-import gcrf_tool.methods.AlgorithmAsymmetric;
-import gcrf_tool.methods.AlgorithmSymmetric;
 import gcrf_tool.methods.DirGCRF;
 import gcrf_tool.methods.GCRF;
 
@@ -88,16 +85,17 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 	}
 
 	public double resultAsymmetric(double alpha, double beta) {
-		AlgorithmAsymmetric alg = new AlgorithmAsymmetric(alpha, beta, s, r, y);
+		Dataset d = new Dataset(s, r, y);
+		DirGCRF alg = new DirGCRF(alpha, beta, d);
 		// System.out.println(alg.rSquared());
-		outputs = alg.outputs();
+		outputs = alg.predictOutputs();
 		return alg.rSquared();
 	}
 
 	public double resultSymmetric(double alpha, double beta) {
-		AlgorithmSymmetric alg = new AlgorithmSymmetric(alpha, beta, s, r, y);
-		// System.out.println(alg.rSquared());
-		outputsS = alg.outputs();
+		Dataset d = new Dataset(s, r, y);
+		GCRF alg = new GCRF(alpha, beta, d);
+		outputsS = alg.predictOutputs();
 		return alg.rSquared();
 	}
 

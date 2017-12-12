@@ -9,15 +9,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import gcrf_tool.data.datasets.Dataset;
 import gcrf_tool.data.generators.GraphGenerator;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
-import gcrf_tool.methods.AlgorithmAsymmetric;
-import gcrf_tool.methods.AlgorithmSymmetric;
-import gcrf_tool.methods.GradientDescentAsymmetric;
-import gcrf_tool.methods.GradientDescentSymmetric;
+import gcrf_tool.learning.GradientAscent;
+import gcrf_tool.learning.Parameters;
+import gcrf_tool.methods.DirGCRF;
+import gcrf_tool.methods.GCRF;
 
 public class DirGCRFTrainMyModelForGUI extends Thread {
 	private ProgressBar frame;
@@ -86,15 +87,13 @@ public class DirGCRFTrainMyModelForGUI extends Thread {
 		});
 		try {
 			long start = System.currentTimeMillis();
-			GradientDescentAsymmetric gda = new GradientDescentAsymmetric(
-					alpha, beta, lr, s, r, y);
-			double[] res = gda.learn(maxIter, false, frame.getCurrent());
-
-			AlgorithmAsymmetric alg = new AlgorithmAsymmetric(res[0], res[1],
-					s, r, y);
+			
+			Parameters p = new Parameters(alpha, beta, maxIter, lr, false, frame.getCurrent());
+			Dataset d = new Dataset(s, r, y);
+			DirGCRF alg = new DirGCRF(p,d);
 			double r2 = alg.rSquared();
-			// double[] res = { 0, 0 };
-			// double r2 = 0;
+			double[] res = alg.getParameters();
+	
 			long elapsedTime = System.currentTimeMillis() - start;
 			time += "\n* DirGCRF: " + df.format((double) elapsedTime / 1000);
 			double[] resS = null;
@@ -104,13 +103,12 @@ public class DirGCRFTrainMyModelForGUI extends Thread {
 				frame.setTitle("Progress standard GCRF");
 				start = System.currentTimeMillis();
 				double[][] sS = GraphGenerator.converteGraphToUndirected(s);
-				GradientDescentSymmetric gdS = new GradientDescentSymmetric(
-						alpha, beta, lr, sS, r, y);
-				resS = gdS.learn(maxIter, false, frame.getCurrent());
-
-				AlgorithmSymmetric algS = new AlgorithmSymmetric(resS[0],
-						resS[1], sS, r, y);
+	
+				Parameters p1 = new Parameters(alpha, beta, maxIter, lr, false, frame.getCurrent());
+				Dataset d1 = new Dataset(sS, r, y);	
+				GCRF algS = new GCRF(p1, d1);
 				r2S = algS.rSquared();
+				resS = algS.getParameters();
 				elapsedTime = System.currentTimeMillis() - start;
 				time += "\n* GCRF: " + df.format((double) elapsedTime / 1000);
 			}

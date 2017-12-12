@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import gcrf_tool.calculations.CalculationsDirGCRF;
 import gcrf_tool.data.generators.ArrayGenerator;
 import gcrf_tool.data.generators.GraphGenerator;
 import gcrf_tool.exceptions.ConfigurationParameterseException;
@@ -20,7 +21,6 @@ import gcrf_tool.file.Writer;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
 import gcrf_tool.gui.threads.TrainWithRandomForGUI;
-import gcrf_tool.methods.CalculationsAsymmetric;
 
 import javax.swing.JComboBox;
 
@@ -495,7 +495,7 @@ public class TrainRandomPanel extends JPanel {
 			frame.setVisible(true);
 			frame.setLocationRelativeTo(null);
 			double[] r = ArrayGenerator.generateArray(noOfNodes, 5);
-			CalculationsAsymmetric c = new CalculationsAsymmetric(s, r);
+			CalculationsDirGCRF c = new CalculationsDirGCRF(s, r);
 			double[] y = c.y(alphaGen, betaGen, 0.05);
 			boolean both = false;
 			if (chckbxSymmetric.isSelected()) {

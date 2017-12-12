@@ -16,15 +16,16 @@ import javax.swing.JTable;
 
 import gcrf_tool.calculations.Calculations;
 import gcrf_tool.calculations.CalculationsGCRF;
+import gcrf_tool.data.datasets.Dataset;
 import gcrf_tool.data.generators.GraphGenerator;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
-import gcrf_tool.methods.AlgorithmAsymmetric;
-import gcrf_tool.methods.AlgorithmSymmetric;
-import gcrf_tool.methods.GradientDescentAsymmetric;
-import gcrf_tool.methods.GradientDescentSymmetric;
+import gcrf_tool.learning.GradientAscent;
+import gcrf_tool.learning.Parameters;
+import gcrf_tool.methods.DirGCRF;
+import gcrf_tool.methods.GCRF;
 
 public class TrainWithRandomForGUI extends Thread {
 	private ProgressBar frame;
@@ -44,15 +45,14 @@ public class TrainWithRandomForGUI extends Thread {
 	private int yTable;
 	private JLabel timeLabel;
 	private String time;
-	private double alphaGen ;
-	private double betaGen ;
+	private double alphaGen;
+	private double betaGen;
 	DecimalFormat df = new DecimalFormat("#.##");
 	private Thread thisThread;
-	
-	public TrainWithRandomForGUI(String modelFolder, ProgressBar frame,
-			JFrame mainFrame, double[][] s, double[] r, double[] y,
-			double alpha, double beta, double lr, int maxIter, JPanel panel,
-			boolean both, int xTable, int yTable, JLabel timeLabel, double alphaGen, double betaGen) {
+
+	public TrainWithRandomForGUI(String modelFolder, ProgressBar frame, JFrame mainFrame, double[][] s, double[] r,
+			double[] y, double alpha, double beta, double lr, int maxIter, JPanel panel, boolean both, int xTable,
+			int yTable, JLabel timeLabel, double alphaGen, double betaGen) {
 		super();
 		this.frame = frame;
 		this.mainFrame = mainFrame;
@@ -91,21 +91,21 @@ public class TrainWithRandomForGUI extends Thread {
 				frame.setVisible(false);
 				Reader.deleteDir(new File(modelFolder));
 				thisThread.stop();
-				JOptionPane.showMessageDialog(frame,
-						"Training process is canceled.", "Error",
+				JOptionPane.showMessageDialog(frame, "Training process is canceled.", "Error",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		});
-		GradientDescentAsymmetric gda = new GradientDescentAsymmetric(alpha,
-				beta, lr, s, r, y);
-		long start = System.currentTimeMillis();
-		double[] res = gda.learn(maxIter, false, frame.getCurrent());
-		long elapsedTime = System.currentTimeMillis() - start;
-		time += "DirGCRF: " + df.format((double) elapsedTime/1000);
+		
 
-		AlgorithmAsymmetric alg = new AlgorithmAsymmetric(res[0], res[1], s, r,
-				y);
+		long start = System.currentTimeMillis();
+		
+		Parameters p = new Parameters(alpha, beta, maxIter, lr, false, frame.getCurrent());
+		Dataset d = new Dataset(s, r, y);
+		DirGCRF alg = new DirGCRF(p,d);
 		double r2 = alg.rSquared();
+		double[] res = alg.getParameters();
+		long elapsedTime = System.currentTimeMillis() - start;
+		time += "DirGCRF: " + df.format((double) elapsedTime / 1000);
 
 		double[] resS = null;
 		double r2S = -1;
@@ -116,17 +116,17 @@ public class TrainWithRandomForGUI extends Thread {
 			double[][] sS = GraphGenerator.converteGraphToUndirected(s);
 			Calculations cS = new CalculationsGCRF(sS, r);
 			double[] yS = cS.y(alphaGen, betaGen, 0.05);
-			GradientDescentSymmetric gdS = new GradientDescentSymmetric(alpha,
-					beta, lr, sS, r, yS);
+			
+			GradientAscent gdS = new GradientAscent(p,cS,yS);
 			start = System.currentTimeMillis();
-			resS = gdS.learn(maxIter, false, frame.getCurrent());
+			resS = gdS.learn();
 			elapsedTime = System.currentTimeMillis() - start;
-
-			AlgorithmSymmetric algS = new AlgorithmSymmetric(resS[0], resS[1],
-					sS, r, yS);
+			
+			Dataset d1= new Dataset(sS, r, yS);
+			GCRF algS = new GCRF(resS[0], resS[1], d1);
 			r2S = algS.rSquared();
 			elapsedTime = System.currentTimeMillis() - start;
-			time += " GCRF: " + df.format((double) elapsedTime/1000);
+			time += " GCRF: " + df.format((double) elapsedTime / 1000);
 		}
 		createTable(res, r2, resS, r2S);
 		createFile("DirGCRF.txt", res);
@@ -140,8 +140,7 @@ public class TrainWithRandomForGUI extends Thread {
 	}
 
 	public JTable createTable(double[] res, double r2, double[] resS, double r2S) {
-		String[] columnNames = { "Alg. ", "Alpha", "Beta",
-				"R^2 (with same data)" };
+		String[] columnNames = { "Alg. ", "Alpha", "Beta", "R^2 (with same data)" };
 		Object[][] data = fillData(res, r2, resS, r2S);
 
 		JTable table = new JTable(data, columnNames);
@@ -168,8 +167,7 @@ public class TrainWithRandomForGUI extends Thread {
 		Writer.write(resultsS, fileName);
 	}
 
-	public Object[][] fillData(double[] res, double r2, double[] resS,
-			double r2S) {
+	public Object[][] fillData(double[] res, double r2, double[] resS, double r2S) {
 		Object[][] data = null;
 		if (resS == null) {
 			data = new Object[1][4];
