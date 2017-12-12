@@ -10,10 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import gcrf_tool.algorithms.matlab.UmGCRF;
 import gcrf_tool.file.Reader;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
+import gcrf_tool.methods.matlab.UmGCRF;
 
 public class UmGCRFTrainMyModelForGUI extends Thread {
 	private ProgressBar frame;

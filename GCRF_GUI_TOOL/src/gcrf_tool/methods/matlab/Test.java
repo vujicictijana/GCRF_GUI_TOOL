@@ -1,4 +1,4 @@
-package gcrf_tool.algorithms.matlab;
+package gcrf_tool.methods.matlab;
 
 import java.io.IOException;
 import java.net.URL;

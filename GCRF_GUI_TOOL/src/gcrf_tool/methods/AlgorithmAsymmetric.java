@@ -1,8 +1,9 @@
-package gcrf_tool.algorithms.asymmetric;
+package gcrf_tool.methods;
 
 import java.text.DecimalFormat;
 
-import gcrf_tool.algorithms.basic.BasicCalcs;
+import gcrf_tool.calculations.BasicCalcs;
+
 
 public class AlgorithmAsymmetric {
 

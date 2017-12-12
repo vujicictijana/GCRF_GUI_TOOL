@@ -1,15 +1,17 @@
-package gcrf_tool.algorithms.symmetric;
+package gcrf_tool.methods;
 
 import javax.swing.JProgressBar;
 
-import gcrf_tool.algorithms.basic.BasicCalcs;
+import gcrf_tool.calculations.BasicCalcs;
+import gcrf_tool.calculations.Calculations;
+import gcrf_tool.calculations.CalculationsGCRF;
 
 public class GradientDescentSymmetric {
 	private double alpha;
 	private double beta;
 	// learning rate
 	private double lr;
-	CalculationsSymmetric calcs;
+	Calculations calcs;
 	private double[] r;
 	private double[] y;
 
@@ -21,7 +23,7 @@ public class GradientDescentSymmetric {
 		this.lr = lr;
 		this.r = r;
 		this.y = y;
-		calcs = new CalculationsSymmetric(s, r);
+		calcs = new CalculationsGCRF(s, r);
 	}
 
 	public double[] learn(int maxIter, boolean showProgress,

@@ -9,15 +9,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import gcrf_tool.algorithms.asymmetric.AlgorithmAsymmetric;
-import gcrf_tool.algorithms.asymmetric.GradientDescentAsymmetric;
-import gcrf_tool.algorithms.symmetric.AlgorithmSymmetric;
-import gcrf_tool.algorithms.symmetric.GradientDescentSymmetric;
 import gcrf_tool.data.generators.GraphGenerator;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
+import gcrf_tool.methods.AlgorithmAsymmetric;
+import gcrf_tool.methods.AlgorithmSymmetric;
+import gcrf_tool.methods.GradientDescentAsymmetric;
+import gcrf_tool.methods.GradientDescentSymmetric;
 
 public class DirGCRFTrainMyModelForGUI extends Thread {
 	private ProgressBar frame;

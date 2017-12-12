@@ -1,13 +1,11 @@
-package gcrf_tool.algorithms.matlab;
+package gcrf_tool.methods.matlab;
 
 import java.io.IOException;
-import java.net.URL;
 import java.text.DecimalFormat;
 
-import gcrf_tool.algorithms.basic.BasicCalcs;
+import gcrf_tool.calculations.BasicCalcs;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
-import gcrf_tool.gui.frames.MainFrame;
 import gcrf_tool.gui.frames.ProgressBar;
 import matlabcontrol.MatlabConnectionException;
 import matlabcontrol.MatlabInvocationException;

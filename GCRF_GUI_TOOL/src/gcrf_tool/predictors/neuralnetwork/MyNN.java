@@ -1,7 +1,5 @@
 package gcrf_tool.predictors.neuralnetwork;
 
-import java.util.Iterator;
-
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
@@ -9,7 +7,7 @@ import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.util.TransferFunctionType;
 
-import gcrf_tool.algorithms.basic.BasicCalcs;
+import gcrf_tool.calculations.BasicCalcs;
 import gcrf_tool.file.Writer;
 import gcrf_tool.predictors.helper.Helper;
 

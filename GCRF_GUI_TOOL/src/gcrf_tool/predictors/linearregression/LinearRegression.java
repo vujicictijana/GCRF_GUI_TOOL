@@ -2,7 +2,7 @@ package gcrf_tool.predictors.linearregression;
 
 import java.io.Serializable;
 
-import gcrf_tool.algorithms.basic.BasicCalcs;
+import gcrf_tool.calculations.BasicCalcs;
 import gcrf_tool.file.Writer;
 import gcrf_tool.predictors.helper.Helper;
 

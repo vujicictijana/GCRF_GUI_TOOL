@@ -1,13 +1,16 @@
-package gcrf_tool.algorithms.symmetric;
+package gcrf_tool.methods;
+
 import java.text.DecimalFormat;
 
-import gcrf_tool.algorithms.basic.BasicCalcs;
+import gcrf_tool.calculations.BasicCalcs;
+import gcrf_tool.calculations.Calculations;
+import gcrf_tool.calculations.CalculationsGCRF;
 
 public class AlgorithmSymmetric {
 
 	private double alpha;
 	private double beta;
-	private CalculationsSymmetric calcs;
+	private Calculations calcs;
 	private double[] expectedY;
 	DecimalFormat df = new DecimalFormat("#.##");
 
@@ -17,7 +20,7 @@ public class AlgorithmSymmetric {
 		this.alpha = alpha;
 		this.beta = beta;
 		this.expectedY = expectedY;
-		this.calcs = new CalculationsSymmetric(s, r);
+		this.calcs = new CalculationsGCRF(s, r);
 	}
 
 	public double[] outputs() {

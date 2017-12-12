@@ -1,8 +1,4 @@
 package gcrf_tool.predictors.linearregression;
-
-import gcrf_tool.file.Writer;
-import gcrf_tool.predictors.helper.Helper;
-
 public class MyLR {
 
 	public static double learn(double[][] x, double[] y, String folder) {

@@ -1,11 +1,9 @@
-package gcrf_tool.algorithms.matlab;
+package gcrf_tool.methods.matlab;
 
 import java.io.IOException;
-import java.net.URL;
 
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
-import gcrf_tool.gui.frames.MainFrame;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.predictors.helper.Helper;
 import matlabcontrol.MatlabConnectionException;

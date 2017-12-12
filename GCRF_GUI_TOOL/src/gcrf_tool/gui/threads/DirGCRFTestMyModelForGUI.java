@@ -9,11 +9,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import gcrf_tool.algorithms.asymmetric.AlgorithmAsymmetric;
-import gcrf_tool.algorithms.symmetric.AlgorithmSymmetric;
+import gcrf_tool.data.datasets.Dataset;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.style.Style;
+import gcrf_tool.learning.Parameters;
+import gcrf_tool.methods.AlgorithmAsymmetric;
+import gcrf_tool.methods.AlgorithmSymmetric;
+import gcrf_tool.methods.DirGCRF;
+import gcrf_tool.methods.GCRF;
 
 public class DirGCRFTestMyModelForGUI extends Thread {
 	private JFrame mainFrame;

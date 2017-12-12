@@ -13,12 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import gcrf_tool.algorithms.basic.BasicCalcs;
-import gcrf_tool.algorithms.matlab.UmGCRF;
+import gcrf_tool.calculations.BasicCalcs;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
+import gcrf_tool.methods.matlab.UmGCRF;
 
 public class UmGCRFTestMyModelForGUI extends Thread {
 	private ProgressBar frame;

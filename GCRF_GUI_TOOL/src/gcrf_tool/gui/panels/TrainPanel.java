@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.SwingConstants;
 
-import gcrf_tool.algorithms.basic.BasicCalcs;
+import gcrf_tool.calculations.BasicCalcs;
 import gcrf_tool.exceptions.ConfigurationParameterseException;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;

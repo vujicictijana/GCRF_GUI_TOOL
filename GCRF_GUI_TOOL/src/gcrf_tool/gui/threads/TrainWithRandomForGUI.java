@@ -14,16 +14,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import gcrf_tool.algorithms.asymmetric.AlgorithmAsymmetric;
-import gcrf_tool.algorithms.asymmetric.GradientDescentAsymmetric;
-import gcrf_tool.algorithms.symmetric.AlgorithmSymmetric;
-import gcrf_tool.algorithms.symmetric.CalculationsSymmetric;
-import gcrf_tool.algorithms.symmetric.GradientDescentSymmetric;
+import gcrf_tool.calculations.Calculations;
+import gcrf_tool.calculations.CalculationsGCRF;
 import gcrf_tool.data.generators.GraphGenerator;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
+import gcrf_tool.methods.AlgorithmAsymmetric;
+import gcrf_tool.methods.AlgorithmSymmetric;
+import gcrf_tool.methods.GradientDescentAsymmetric;
+import gcrf_tool.methods.GradientDescentSymmetric;
 
 public class TrainWithRandomForGUI extends Thread {
 	private ProgressBar frame;
@@ -113,7 +114,7 @@ public class TrainWithRandomForGUI extends Thread {
 			frame.setTitle("Progress GCRF");
 			start = System.currentTimeMillis();
 			double[][] sS = GraphGenerator.converteGraphToUndirected(s);
-			CalculationsSymmetric cS = new CalculationsSymmetric(sS, r);
+			Calculations cS = new CalculationsGCRF(sS, r);
 			double[] yS = cS.y(alphaGen, betaGen, 0.05);
 			GradientDescentSymmetric gdS = new GradientDescentSymmetric(alpha,
 					beta, lr, sS, r, yS);

@@ -8,10 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import gcrf_tool.algorithms.symmetric.AlgorithmSymmetric;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.style.Style;
+import gcrf_tool.methods.AlgorithmSymmetric;
 
 public class GCRFTestMyModelForGUI extends Thread {
 	private JFrame mainFrame;

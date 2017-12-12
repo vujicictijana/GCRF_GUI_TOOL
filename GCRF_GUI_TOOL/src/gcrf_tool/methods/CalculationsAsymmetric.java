@@ -1,8 +1,8 @@
-package gcrf_tool.algorithms.asymmetric;
+package gcrf_tool.methods;
 
 import org.ujmp.core.Matrix;
 
-import gcrf_tool.algorithms.basic.BasicCalcs;
+import gcrf_tool.calculations.BasicCalcs;
 
 public class CalculationsAsymmetric {
 
