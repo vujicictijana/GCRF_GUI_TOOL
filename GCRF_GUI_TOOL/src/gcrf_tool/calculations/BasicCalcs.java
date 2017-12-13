@@ -2,7 +2,6 @@ package gcrf_tool.calculations;
 
 import org.ojalgo.matrix.BasicMatrix;
 import org.ojalgo.matrix.PrimitiveMatrix;
-import org.ujmp.core.Matrix;
 
 public class BasicCalcs {
 
@@ -71,8 +70,9 @@ public class BasicCalcs {
 
 	public static double trace(double[][] matrix) {
 		// sum of the elements on the main diagonal
-		Matrix m1 = Matrix.Factory.linkToArray(matrix);
-		return m1.trace();
+		BasicMatrix.Factory<PrimitiveMatrix> mtrxFactory = PrimitiveMatrix.FACTORY;
+		PrimitiveMatrix mtrxA = mtrxFactory.rows(matrix);
+		return mtrxA.getTrace().getNumber();
 	}
 
 	/**
@@ -122,9 +122,10 @@ public class BasicCalcs {
 	 */
 
 	public static double[][] multiplyMatrixByANumber(double[][] matrix, double number) {
-		Matrix m1 = Matrix.Factory.linkToArray(matrix);
-		Matrix res = m1.times(number);
-		return res.toDoubleArray();
+		BasicMatrix.Factory<PrimitiveMatrix> mtrxFactory = PrimitiveMatrix.FACTORY;
+		PrimitiveMatrix mtrxA = mtrxFactory.rows(matrix);
+		PrimitiveMatrix m = mtrxA.multiply(number);
+		return m.toRawCopy2D();
 	}
 
 	/**
@@ -137,10 +138,11 @@ public class BasicCalcs {
 	 * @return the resulting matrix as two dimensional array of double values
 	 */
 	public static double[][] multiplyTwoMatrices(double[][] matrix1, double[][] matrix2) {
-		Matrix m1 = Matrix.Factory.linkToArray(matrix1);
-		Matrix m2 = Matrix.Factory.linkToArray(matrix2);
-		Matrix res = m1.times(m2);
-		return res.toDoubleArray();
+		BasicMatrix.Factory<PrimitiveMatrix> mtrxFactory = PrimitiveMatrix.FACTORY;
+		PrimitiveMatrix mtrxA = mtrxFactory.rows(matrix1);
+		PrimitiveMatrix mtrxB = mtrxFactory.rows(matrix2);
+		PrimitiveMatrix res = mtrxA.multiply(mtrxB);
+		return res.toRawCopy2D();
 	}
 
 	/**
@@ -153,10 +155,11 @@ public class BasicCalcs {
 	 * @return the resulting matrix as two dimensional array of double values
 	 */
 	public static double[][] matrixMinusMatrix(double[][] matrix1, double[][] matrix2) {
-		Matrix m1 = Matrix.Factory.linkToArray(matrix1);
-		Matrix m2 = Matrix.Factory.linkToArray(matrix2);
-		Matrix res = m1.minus(m2);
-		return res.toDoubleArray();
+		BasicMatrix.Factory<PrimitiveMatrix> mtrxFactory = PrimitiveMatrix.FACTORY;
+		PrimitiveMatrix mtrxA = mtrxFactory.rows(matrix1);
+		PrimitiveMatrix mtrxB = mtrxFactory.rows(matrix2);
+		PrimitiveMatrix res = mtrxA.subtract(mtrxB);
+		return res.toRawCopy2D();
 	}
 
 	/**
@@ -169,10 +172,11 @@ public class BasicCalcs {
 	 * @return the resulting matrix as two dimensional array of double values
 	 */
 	public static double[][] matrixPlusMatrix(double[][] matrix1, double[][] matrix2) {
-		Matrix m1 = Matrix.Factory.linkToArray(matrix1);
-		Matrix m2 = Matrix.Factory.linkToArray(matrix2);
-		Matrix res = m1.plus(m2);
-		return res.toDoubleArray();
+		BasicMatrix.Factory<PrimitiveMatrix> mtrxFactory = PrimitiveMatrix.FACTORY;
+		PrimitiveMatrix mtrxA = mtrxFactory.rows(matrix1);
+		PrimitiveMatrix mtrxB = mtrxFactory.rows(matrix2);
+		PrimitiveMatrix res = mtrxA.add(mtrxB);
+		return res.toRawCopy2D();
 	}
 
 	/**
@@ -368,7 +372,7 @@ public class BasicCalcs {
 		}
 		return 1 - (firstSum / secondSum);
 	}
-	
+
 	public static double rSquaredWitNaN(double[] output, double[] expectedY) {
 		double avg = averageWitNaN(expectedY);
 		double firstSum = 0;
@@ -381,7 +385,7 @@ public class BasicCalcs {
 		}
 		return 1 - (firstSum / secondSum);
 	}
-	
+
 	public static double averageWitNaN(double[] array) {
 		double sum = 0;
 		int no = 0;
