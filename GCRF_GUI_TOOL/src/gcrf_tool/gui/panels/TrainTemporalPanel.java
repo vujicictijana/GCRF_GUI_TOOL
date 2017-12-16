@@ -25,7 +25,7 @@ import gcrf_tool.gui.threads.RLSRTrainMyModelForGUI;
 import gcrf_tool.gui.threads.UpGCRFTrainMyModelForGUI;
 import gcrf_tool.predictors.helper.Helper;
 import gcrf_tool.predictors.linearregression.LinearRegression;
-import gcrf_tool.predictors.linearregression.MultivariateLinearRegression;
+import gcrf_tool.predictors.linearregression.MultipleLinearRegression;
 import gcrf_tool.predictors.linearregression.MyLR;
 import gcrf_tool.predictors.linearregression.TemporalData;
 import gcrf_tool.predictors.neuralnetwork.MyNN;
@@ -806,7 +806,7 @@ public class TrainTemporalPanel extends JPanel {
 					nodes, noTrain);
 			MyLR.learn(t.getxTrain(), t.getyTrain(), path);
 			if (Writer.checkFolder(path + "/mlr")) {
-				MultivariateLinearRegression m = (MultivariateLinearRegression) Helper
+				MultipleLinearRegression m = (MultipleLinearRegression) Helper
 						.deserilazie(path + "/mlr/lr.txt");
 				return m.test(t.getyTest(), t.getxTest(), path, true);
 			}

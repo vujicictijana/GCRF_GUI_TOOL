@@ -12,7 +12,7 @@ public class MyLR {
 			return LinearRegression.test(y, xOne, folder, lr,false);
 		} else {
 			try {
-				MultivariateLinearRegression m = new MultivariateLinearRegression(x, y);
+				MultipleLinearRegression m = new MultipleLinearRegression(x, y);
 				return m.test(y, x, folder, false);
 			} catch (Exception e) {
 

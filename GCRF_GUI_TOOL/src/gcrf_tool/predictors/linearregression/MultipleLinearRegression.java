@@ -8,7 +8,7 @@ import gcrf_tool.predictors.helper.Helper;
 import Jama.Matrix;
 import Jama.QRDecomposition;
 
-public class MultivariateLinearRegression implements Serializable {
+public class MultipleLinearRegression implements Serializable {
 
 	private static final long serialVersionUID = 2267604643584597866L;
 	private final int N; // number of
@@ -17,7 +17,7 @@ public class MultivariateLinearRegression implements Serializable {
 	private double SSE; // sum of squared
 	private double SST; // sum of squared
 
-	public MultivariateLinearRegression(double[][] x, double[] y) {
+	public MultipleLinearRegression(double[][] x, double[] y) {
 		if (x.length != y.length)
 			throw new RuntimeException("dimensions don't agree");
 		N = y.length;

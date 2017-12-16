@@ -15,5 +15,11 @@ public interface Algorithm {
 	 * Returns the coefficient of determination (R^2) for test data.
 	 */
 	public double rSquaredForTest(double[] predictedY, double[] expectedY);
+	
+	
+	/**
+	 * Returns alpha and beta parameters.
+	 */
+	double[] getParameters();
 
 }

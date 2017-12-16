@@ -24,7 +24,7 @@ import gcrf_tool.gui.threads.GCRFTestMyModelForGUI;
 import gcrf_tool.gui.threads.UmGCRFTestMyModelForGUI;
 import gcrf_tool.predictors.helper.Helper;
 import gcrf_tool.predictors.linearregression.LinearRegression;
-import gcrf_tool.predictors.linearregression.MultivariateLinearRegression;
+import gcrf_tool.predictors.linearregression.MultipleLinearRegression;
 import gcrf_tool.predictors.neuralnetwork.MyNN;
 
 import java.awt.event.ActionListener;
@@ -422,7 +422,7 @@ public class PredictPanel extends JPanel {
 		}
 		if (Writer.checkFolder(path + "/mlr")) {
 			double[][] xMlr = Helper.prepareDataForLR(x);
-			MultivariateLinearRegression m = (MultivariateLinearRegression) Helper
+			MultipleLinearRegression m = (MultipleLinearRegression) Helper
 					.deserilazie(path + "/mlr/lr.txt");
 			double[] y = new double[x.length];
 			return m.test(y, xMlr, path, true);
