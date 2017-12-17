@@ -8,7 +8,7 @@ public class ArrayGenerator {
 		double[] r = new double[noOfNodes];
 		Random rand = new Random();
 		for (int i = 0; i < r.length; i++) {
-			r[i] = rand.nextInt(maximum) + 1 + Math.random();
+			r[i] = rand.nextInt(maximum) + Math.random();
 		}
 		return r;
 	}

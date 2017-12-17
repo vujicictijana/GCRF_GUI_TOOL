@@ -14,7 +14,6 @@ import gcrf_tool.predictors.helper.Helper;
 public class MyNN {
 	public static double learn(int hidden, DataSet trainingSet,
 			double maxError, int maxIter, String folder) {
-
 		BackPropagation b = new BackPropagation();
 		b.setMaxError(maxError);
 		b.setMaxIterations(maxIter);

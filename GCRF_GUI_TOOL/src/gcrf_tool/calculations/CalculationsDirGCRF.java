@@ -53,7 +53,6 @@ public class CalculationsDirGCRF extends CalculationsGCRF implements Calculation
 	 */
 
 	public double[][] q(double alpha, double beta) {
-		System.out.println();
 		// Q = alpha*I + beta*L
 		double[][] alphaI = alphaI(alpha);
 		double[][] betaL = betaL(beta);

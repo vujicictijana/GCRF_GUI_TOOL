@@ -60,7 +60,6 @@ public class Writer {
 
 	}
 
-
 	public static void createFolder(String name) {
 		File dir = new File(name);
 		if (!dir.exists()) {

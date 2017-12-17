@@ -60,6 +60,7 @@ public class UpGCRF {
 			}
 			proxy.setVariable("N", noOfNodes);
 			proxy.eval("similarities{1} = S");
+		
 
 			// rain data test
 			// proxy.eval("load rain_data_northwest.mat");
