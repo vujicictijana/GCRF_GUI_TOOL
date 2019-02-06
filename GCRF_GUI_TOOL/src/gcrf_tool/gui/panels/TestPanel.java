@@ -28,19 +28,11 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-import gcrf_tool.calculations.BasicCalcs;
 import gcrf_tool.exceptions.ConfigurationParameterseException;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
-import gcrf_tool.gui.frames.ProgressBar;
+import gcrf_tool.gui.logic.TrainTestOnNetworks;
 import gcrf_tool.gui.style.Style;
-import gcrf_tool.gui.threads.DirGCRFTestMyModelForGUI;
-import gcrf_tool.gui.threads.GCRFTestMyModelForGUI;
-import gcrf_tool.gui.threads.UmGCRFTestMyModelForGUI;
-import gcrf_tool.predictors.helper.Helper;
-import gcrf_tool.predictors.linearregression.LinearRegression;
-import gcrf_tool.predictors.linearregression.MultipleLinearRegression;
-import gcrf_tool.predictors.neuralnetwork.MyNN;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -50,7 +42,6 @@ import java.util.Map;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JComboBox;
 
-import org.neuroph.core.data.DataSet;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -61,9 +52,7 @@ public class TestPanel extends JPanel {
 
 	private static final long serialVersionUID = 356011421979477981L;
 	private JButton btnTrain;
-	private JPanel panel;
 	private JFrame mainFrame;
-	private JPanel panelForTable;
 	private JLabel label_1;
 	private JTextField txtModelName;
 	private JFileChooser fc;
@@ -151,20 +140,12 @@ public class TestPanel extends JPanel {
 		gbc_txtModelName.gridx = 1;
 		gbc_txtModelName.gridy = 4;
 		add(getTxtModelName(), gbc_txtModelName);
-		panel = this;
 		GridBagConstraints gbc_btnTrain = new GridBagConstraints();
 		gbc_btnTrain.fill = GridBagConstraints.BOTH;
 		gbc_btnTrain.insets = new Insets(0, 0, 5, 5);
 		gbc_btnTrain.gridx = 1;
 		gbc_btnTrain.gridy = 6;
 		add(getBtnTrain(), gbc_btnTrain);
-		GridBagConstraints gbc_panelForTable = new GridBagConstraints();
-		gbc_panelForTable.insets = new Insets(0, 0, 5, 5);
-		gbc_panelForTable.fill = GridBagConstraints.BOTH;
-		gbc_panelForTable.gridwidth = 8;
-		gbc_panelForTable.gridx = 1;
-		gbc_panelForTable.gridy = 8;
-		add(getPanelForTable(), gbc_panelForTable);
 		fc = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
 		fc.setFileFilter(filter);
@@ -247,7 +228,7 @@ public class TestPanel extends JPanel {
 									JOptionPane.ERROR_MESSAGE);
 							return;
 						}
-						double result = callPredictor(dataPath, x, y);
+						double result = TrainTestOnNetworks.callPredictorTest(dataPath, x, y);
 						if (result == -9000) {
 							JOptionPane.showMessageDialog(mainFrame, "Selected dataset is not suitable for this model.", "Error",
 									JOptionPane.ERROR_MESSAGE);
@@ -278,8 +259,11 @@ public class TestPanel extends JPanel {
 								return;
 							}
 
-							callMethod(noOfNodes, method, dataPath, y, r, s);
-
+							String resultCall = TrainTestOnNetworks.callMethodTest(noOfNodes, method, dataPath, y, r, s,mainFrame,matlabPath,proxy);
+							if(resultCall!=null){
+							JOptionPane.showMessageDialog(mainFrame, resultCall, "Error",
+									JOptionPane.ERROR_MESSAGE);
+							}
 						}
 
 					}
@@ -292,54 +276,7 @@ public class TestPanel extends JPanel {
 		return btnTrain;
 	}
 
-	private void testDirGCRF(int noOfNodes, String modelFolder, double[] r, double[] y, double[][] s) {
-		DirGCRFTestMyModelForGUI test = new DirGCRFTestMyModelForGUI(mainFrame, panelForTable, modelFolder, s, r, y);
-		test.start();
-	}
-
-	private void testGCRF(int noOfNodes, String modelFolder, double[] r, double[] y, double[][] s) {
-		GCRFTestMyModelForGUI test = new GCRFTestMyModelForGUI(mainFrame, panelForTable, modelFolder, s, r, y);
-		test.start();
-	}
-
-	private void testUmGCRF(String modelFolder, double[] r, double[] y, double[][] s) {
-		ProgressBar frame = new ProgressBar("Testing");
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-
-		UmGCRFTestMyModelForGUI test = new UmGCRFTestMyModelForGUI(matlabPath, mainFrame, panelForTable, modelFolder, s,
-				r, y, frame, proxy);
-		test.start();
-	}
-
-	private void callMethod(int noOfNodes, String method, String dataPath, double[] y, double[] r, double[][] s) {
-
-		switch (method) {
-		case "DirGCRF":
-			testDirGCRF(noOfNodes, dataPath, r, y, s);
-			break;
-		case "GCRF":
-			if (BasicCalcs.isSymmetric(s)) {
-				testGCRF(noOfNodes, dataPath, r, y, s);
-			} else {
-				JOptionPane.showMessageDialog(mainFrame, "For GCRF method matrix should be symmetric.", "Error",
-						JOptionPane.ERROR_MESSAGE);
-			}
-			break;
-		case "UmGCRF":
-			if (BasicCalcs.isSymmetric(s)) {
-				testUmGCRF(dataPath, r, y, s);
-			} else {
-				JOptionPane.showMessageDialog(mainFrame, "For UmGCRF method matrix should be symmetric.", "Error",
-						JOptionPane.ERROR_MESSAGE);
-			}
-			break;
-		default:
-			JOptionPane.showMessageDialog(mainFrame, "Unknown method.", "Error", JOptionPane.ERROR_MESSAGE);
-			break;
-		}
-	}
+	
 
 	public String validateData() {
 		if (cmbDataset.getSelectedIndex() == 0) {
@@ -360,14 +297,6 @@ public class TestPanel extends JPanel {
 		return Writer.checkFolder(path);
 	}
 
-	private JPanel getPanelForTable() {
-		if (panelForTable == null) {
-			panelForTable = new JPanel();
-			panelForTable.setLayout(null);
-		}
-		return panelForTable;
-	}
-
 	private JLabel getLabel_1_1() {
 		if (label_1 == null) {
 			label_1 = new JLabel("Model name:");
@@ -386,32 +315,7 @@ public class TestPanel extends JPanel {
 		return txtModelName;
 	}
 
-	private double callPredictor(String path, String[] x, double[] y) {
 
-		if (Writer.checkFolder(path + "/nn")) {
-
-			DataSet testSet = Helper.prepareDataForNN(x, y);
-			
-			return MyNN.test(path, testSet);
-
-		}
-		if (Writer.checkFolder(path + "/mlr")) {
-			double[][] xMlr = Helper.prepareDataForLR(x);
-			MultipleLinearRegression m = (MultipleLinearRegression) Helper.deserilazie(path + "/mlr/lr.txt");
-			return m.test(y, xMlr, path, true);
-		}
-		if (Writer.checkFolder(path + "/lr")) {
-			double[][] xMlr = Helper.prepareDataForLR(x);
-			double[] xOne = new double[xMlr.length];
-			for (int i = 0; i < xOne.length; i++) {
-				xOne[i] = xMlr[i][0];
-			}
-			LinearRegression lr = (LinearRegression) Helper.deserilazie(path + "/lr/lr.txt");
-			return LinearRegression.test(y, xOne, path, lr, true);
-		}
-		return -7000;
-
-	}
 
 	private JLabel getLblMethod() {
 		if (lblMethod == null) {
@@ -461,7 +365,7 @@ public class TestPanel extends JPanel {
 	}
 	private JComboBox<String> getCmbDataset() {
 		if (cmbDataset == null) {
-			cmbDataset = new JComboBox();
+			cmbDataset = new JComboBox<String>();
 			cmbDataset.addItem("choose dataset");
 			String[] files = Reader.getAllFolders(Reader.jarFile()  + "/Datasets/Networks");
 			for (int i = 0; i < files.length; i++) {

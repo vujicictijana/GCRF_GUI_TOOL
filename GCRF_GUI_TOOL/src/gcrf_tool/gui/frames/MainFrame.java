@@ -62,7 +62,6 @@ public class MainFrame extends JFrame {
 	private JMenu mnSettings;
 	private JMenuItem menuParameters;
 	private JFrame frame;
-	private JPanel mainPanel;
 	private JMenuItem mntmNewMenuItem;
 	private JMenu mnDatasets;
 	private JMenuItem menuAddDataset;

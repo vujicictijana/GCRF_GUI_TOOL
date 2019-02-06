@@ -31,7 +31,6 @@ import gcrf_tool.data.generators.GraphGenerator;
 import gcrf_tool.exceptions.ConfigurationParameterseException;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
-import gcrf_tool.gui.frames.MainFrame;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
 import gcrf_tool.gui.threads.TestWithRandomForGUI;
@@ -39,7 +38,7 @@ import gcrf_tool.gui.threads.TestWithRandomForGUI;
 import javax.swing.JComboBox;
 
 import java.awt.event.ItemListener;
-import java.net.URL;
+import java.io.File;
 import java.awt.event.ItemEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -71,7 +70,7 @@ public class TestRandomPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public TestRandomPanel(JFrame mainFrame) {
-		if (Reader.checkFile( Reader.jarFile() + "/cfg.txt")) {
+		if (Reader.checkFile(Reader.jarFile() + "/cfg.txt")) {
 			String result = readParametersFromCfg();
 			if (result != null) {
 				JOptionPane.showMessageDialog(mainFrame,
@@ -82,10 +81,11 @@ public class TestRandomPanel extends JPanel {
 				this.mainFrame = mainFrame;
 				setBackground(UIManager.getColor("Button.background"));
 				GridBagLayout gridBagLayout = new GridBagLayout();
-				gridBagLayout.columnWidths = new int[]{155, 91, 33, 129, 0, 0, 0, 0};
-				gridBagLayout.rowHeights = new int[]{36, 33, 31, 30, 32, 0, 45, 0, 285, 0};
-				gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-				gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				gridBagLayout.columnWidths = new int[] { 155, 91, 33, 129, 0, 0, 0, 0 };
+				gridBagLayout.rowHeights = new int[] { 36, 33, 31, 30, 32, 0, 45, 0, 285, 0 };
+				gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+						Double.MIN_VALUE };
 				setLayout(gridBagLayout);
 				GridBagConstraints gbc_lblTestRandomModels = new GridBagConstraints();
 				gbc_lblTestRandomModels.fill = GridBagConstraints.BOTH;
@@ -199,7 +199,7 @@ public class TestRandomPanel extends JPanel {
 					if (message != null) {
 						JOptionPane.showMessageDialog(mainFrame, message, "Error", JOptionPane.ERROR_MESSAGE);
 					} else {
-						String model = Reader.jarFile()  + "/RandomModels/"
+						String model = Reader.jarFile() + "/RandomModels/"
 								+ cmbModel.getSelectedItem().toString().replaceAll(" - ", "/");
 						int noOfNodes = Integer.parseInt(txtNoOfNodes.getText());
 						int times = Integer.parseInt(txtTimes.getText());
@@ -226,25 +226,38 @@ public class TestRandomPanel extends JPanel {
 	private JComboBox<String> getCmbModel() {
 		if (cmbModel == null) {
 			cmbModel = new JComboBox<String>();
-			cmbModel.addItem("choose model");
+			File f = new File(Reader.jarFile() + "/RandomModels");
+			if (f.exists()) {
 
-			String[] files = Reader.getAllFiles(Reader.jarFile()  + "/RandomModels");
-			for (int i = 0; i < files.length; i++) {
-				cmbModel.addItem(files[i]);
-			}			
-			cmbModel.addItemListener(new ItemListener() {
-				public void itemStateChanged(ItemEvent arg0) {
-					if (cmbModel.getSelectedItem().toString().contains("probability")) {
-
-						String model = Reader.jarFile()  + "/RandomModels/"
-								+ cmbModel.getSelectedItem().toString().replaceAll(" - ", "/");
-						String probModel = model.split("/")[model.split("/").length - 1];
-						probModel = probModel.substring(probModel.indexOf("s") + 1, probModel.indexOf("p"));
-						txtProb.setEnabled(true);
-						txtProb.setText(probModel);
-					}
+				String[] files = Reader.getAllFiles(Reader.jarFile() + "/RandomModels");
+				if(files.length==0){
+					cmbModel.addItem("You should train random model first.");
+					return cmbModel;
+					
 				}
-			});
+
+				cmbModel.addItem("choose model");
+				for (int i = 0; i < files.length; i++) {
+					cmbModel.addItem(files[i]);
+				}
+				cmbModel.addItemListener(new ItemListener() {
+					public void itemStateChanged(ItemEvent arg0) {
+						if (cmbModel.getSelectedItem().toString().contains("probability")) {
+
+							String model = Reader.jarFile() + "/RandomModels/"
+									+ cmbModel.getSelectedItem().toString().replaceAll(" - ", "/");
+							String probModel = model.split("/")[model.split("/").length - 1];
+							probModel = probModel.substring(probModel.indexOf("s") + 1, probModel.indexOf("p"));
+							txtProb.setEnabled(true);
+							txtProb.setText(probModel);
+						}
+					}
+				});
+			}else{
+
+				cmbModel.addItem("You should train random model first.");
+			}
+
 		}
 		return cmbModel;
 	}
@@ -279,7 +292,6 @@ public class TestRandomPanel extends JPanel {
 		}
 		return null;
 	}
-
 
 	public boolean checkModel(String path) {
 		return Writer.checkFolder(path);
@@ -345,6 +357,7 @@ public class TestRandomPanel extends JPanel {
 		}
 		return null;
 	}
+
 	private JLabel getLblTestRandomModels() {
 		if (lblTestRandomModels == null) {
 			lblTestRandomModels = new JLabel("TEST RANDOM MODELS:");

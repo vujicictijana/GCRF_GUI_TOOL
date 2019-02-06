@@ -46,10 +46,9 @@ public class LinearRegression implements Serializable {
 		N = x.length;
 
 		// first pass
-		double sumx = 0.0, sumy = 0.0, sumx2 = 0.0;
+		double sumx = 0.0, sumy = 0.0;
 		for (int i = 0; i < N; i++) {
 			sumx += x[i];
-			sumx2 += x[i] * x[i];
 			sumy += y[i];
 		}
 		double xbar = sumx / N;

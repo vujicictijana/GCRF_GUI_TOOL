@@ -102,18 +102,29 @@ public class Writer {
 		try {
 			FileChannel source = null;
 			FileChannel destination = null;
-
+			FileInputStream input = null;
+			FileOutputStream output = null;
+			
 			try {
-				source = new FileInputStream(sourceFile).getChannel();
-				destination = new FileOutputStream(destFile).getChannel();
+				input = new FileInputStream(sourceFile);
+				source = input.getChannel();
+				output =  new FileOutputStream(destFile);
+				destination =output.getChannel();
 				destination.transferFrom(source, 0, source.size());
 			} finally {
+				if (input != null) {
+					input.close();
+				}
+				if (output != null) {
+					output.close();
+				}
 				if (source != null) {
 					source.close();
 				}
 				if (destination != null) {
 					destination.close();
 				}
+			
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1710,7 +1710,7 @@ public class TrainTemporalPanel extends JPanel {
 
 	private JComboBox<String> getCmbDataset() {
 		if (cmbDataset == null) {
-			cmbDataset = new JComboBox();
+			cmbDataset = new JComboBox<String>();
 			cmbDataset.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent arg0) {
 					if (cmbDataset.getSelectedIndex() > 0) {

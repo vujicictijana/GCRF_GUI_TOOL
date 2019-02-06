@@ -29,18 +29,11 @@ import javax.swing.JButton;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.SwingConstants;
 
-import gcrf_tool.calculations.BasicCalcs;
 import gcrf_tool.exceptions.ConfigurationParameterseException;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
-import gcrf_tool.gui.frames.ProgressBar;
+import gcrf_tool.gui.logic.TrainTestOnNetworks;
 import gcrf_tool.gui.style.Style;
-import gcrf_tool.gui.threads.DirGCRFTrainMyModelForGUI;
-import gcrf_tool.gui.threads.GCRFTrainMyModelForGUI;
-import gcrf_tool.gui.threads.UmGCRFTrainMyModelForGUI;
-import gcrf_tool.predictors.helper.Helper;
-import gcrf_tool.predictors.linearregression.MyLR;
-import gcrf_tool.predictors.neuralnetwork.MyNN;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -57,7 +50,6 @@ import java.awt.Rectangle;
 import javax.swing.JComboBox;
 
 import org.jdesktop.swingx.prompt.PromptSupport;
-import org.neuroph.core.data.DataSet;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
@@ -82,7 +74,6 @@ public class TrainPanel extends JPanel {
 	private JLabel lblMaxIterations;
 	private JTextField txtIter;
 	private JFileChooser fc;
-	private JPanel panel;
 	private JFrame mainFrame;
 	private JCheckBox chckbxStandard;
 	private JLabel lblStandard;
@@ -125,17 +116,17 @@ public class TrainPanel extends JPanel {
 	public TrainPanel(JFrame mainFrame) {
 		setBounds(new Rectangle(0, 0, 900, 650));
 		setMinimumSize(new Dimension(500, 500));
-//		if (Reader.checkFile(Reader.jarFile() + "/cfg.txt")) {
-//
-//			String result = readParametersFromCfg();
-//			if (result != null) {
-//				JOptionPane
-//						.showMessageDialog(
-//								mainFrame,
-//								result
-//										+ " Please configure parameters values in Settings->Configuration.",
-//								"Error", JOptionPane.ERROR_MESSAGE);
-//			} else {
+		if (Reader.checkFile(Reader.jarFile() + "/cfg.txt")) {
+
+			String result = readParametersFromCfg();
+			if (result != null) {
+				JOptionPane
+						.showMessageDialog(
+								mainFrame,
+								result
+										+ " Please configure parameters values in Settings->Configuration.",
+								"Error", JOptionPane.ERROR_MESSAGE);
+			} else {
 
 				setBackground(UIManager.getColor("Button.background"));
 				GridBagLayout gridBagLayout = new GridBagLayout();
@@ -352,7 +343,6 @@ public class TrainPanel extends JPanel {
 				gbc_cmbPredictor.gridy = 6;
 				add(getCmbPredictor(), gbc_cmbPredictor);
 				fc = new JFileChooser();
-				panel = this;
 				FileNameExtensionFilter filter = new FileNameExtensionFilter(
 						"TEXT FILES", "txt", "text");
 				fc.setFileFilter(filter);
@@ -374,14 +364,14 @@ public class TrainPanel extends JPanel {
 				add(getBtnTrain(), gbc_btnTrain);
 				setTxtValues();
 
-//			}
-//		} else {
-//			JOptionPane
-//					.showMessageDialog(
-//							mainFrame,
-//							"Please configure parameters values in Settings->Configuration.",
-//							"Error", JOptionPane.ERROR_MESSAGE);
-//		}
+			}
+		} else {
+			JOptionPane
+					.showMessageDialog(
+							mainFrame,
+							"Please configure parameters values in Settings->Configuration.",
+							"Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private JLabel getLblDataset() {
@@ -559,7 +549,7 @@ public class TrainPanel extends JPanel {
 						double[][] s = Reader.readGraph(sPath, noOfNodes);
 
 						String path = createFolderAndSaveData(method);
-						double result = callPredictor(path, x, y);
+						double result = TrainTestOnNetworks.callPredictorTrain(cmbPredictor.getSelectedItem().toString(), path, x, y,txtHidden.getText(),txtIterNN.getText());
 
 						if (result == -7000) {
 							JOptionPane.showMessageDialog(mainFrame,
@@ -592,9 +582,9 @@ public class TrainPanel extends JPanel {
 
 							double[] r = Reader.readArray(path + "/data/r.txt",
 									noOfNodes);
-							String okMethod = callMethod(method, path,
+							String okMethod = TrainTestOnNetworks.callMethodTrain(method, path,
 									noOfNodes, alpha, beta, lr, maxIter, y, r,
-									s);
+									s,mainFrame,chckbxStandard.isSelected(), matlabPath,proxy);
 
 							if (okMethod != null) {
 								JOptionPane.showMessageDialog(mainFrame,
@@ -618,20 +608,7 @@ public class TrainPanel extends JPanel {
 		return btnTrain;
 	}
 
-	private double callPredictor(String path, String[] x, double[] y) {
-		if (cmbPredictor.getSelectedItem().toString().contains("neural")) {
-			int noOfHidden = Integer.parseInt(txtHidden.getText());
-			int noOfIter = Integer.parseInt(txtIterNN.getText());
-			DataSet trainingSet = Helper.prepareDataForNN(x, y);
-			return MyNN.learn(noOfHidden, trainingSet, 0.003, noOfIter, path);
-		}
-		if (cmbPredictor.getSelectedItem().toString().contains("linear")) {
-			double[][] xNumbers = Helper.prepareDataForLR(x);
-			return MyLR.learn(xNumbers, y, path);
-		}
-		return -7000;
 
-	}
 
 	private String createFolderAndSaveData(String method) {
 		File matrixFile = new File(xPath);
@@ -654,82 +631,9 @@ public class TrainPanel extends JPanel {
 		return path;
 	}
 
-	private String callMethod(String method, String path, int noOfNodes,
-			double alpha, double beta, double lr, int maxIter, double[] y,
-			double[] r, double[][] s) {
-		switch (method) {
-		case "DirGCRF":
-			trainDirGCRF(noOfNodes, path, maxIter, alpha, beta, lr, r, y, s);
-			break;
-		case "GCRF":
-			if (BasicCalcs.isSymmetric(s)) {
-				trainGCRF(noOfNodes, path, maxIter, alpha, beta, lr, r, y, s);
-			} else {
-				return "For GCRF method matrix should be symmetric.";
-			}
-			break;
-		case "UmGCRF":
-			if (BasicCalcs.isSymmetric(s)) {
-				trainUmGCRF(path, r, y, s);
-			} else {
-				return "For UmGCRF method matrix should be symmetric.";
-			}
-			break;
-		default:
-			return "Unknown method.";
-		}
-		return null;
 
-	}
 
-	public void trainDirGCRF(int noOfNodes, String modelFolder, int maxIter,
-			double alpha, double beta, double lr, double[] r, double[] y,
-			double[][] s) {
 
-		ProgressBar frame = new ProgressBar(maxIter);
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-
-		boolean both = false;
-		if (chckbxStandard.isSelected()) {
-			both = true;
-		}
-		DirGCRFTrainMyModelForGUI t = new DirGCRFTrainMyModelForGUI(
-				modelFolder, frame, mainFrame, s, r, y, alpha, beta, lr,
-				maxIter, both);
-		// 10, 10
-		t.start();
-
-	}
-
-	public void trainGCRF(int noOfNodes, String modelFolder, int maxIter,
-			double alpha, double beta, double lr, double[] r, double[] y,
-			double[][] s) {
-
-		ProgressBar frame = new ProgressBar(maxIter);
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-
-		GCRFTrainMyModelForGUI t = new GCRFTrainMyModelForGUI(modelFolder,
-				frame, mainFrame, s, r, y, alpha, beta, lr, maxIter);
-
-		t.start();
-	}
-
-	public void trainUmGCRF(String modelFolder, double[] r, double[] y,
-			double[][] s) {
-		ProgressBar frame = new ProgressBar("Training");
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-
-		UmGCRFTrainMyModelForGUI t = new UmGCRFTrainMyModelForGUI(matlabPath,
-				modelFolder, frame, mainFrame, s, r, y, proxy);
-
-		t.start();
-	}
 
 	private JLabel getLblMaxIterations() {
 		if (lblMaxIterations == null) {
@@ -1039,7 +943,7 @@ public class TrainPanel extends JPanel {
 						String[] x = Reader.read(xPath);
 						double[] y = Reader.readArray(yPath, noOfNodes);
 
-						double result = callPredictor(null, x, y);
+						double result = TrainTestOnNetworks.callPredictorTrain(cmbPredictor.getSelectedItem().toString(), null, x, y,txtHidden.getText(),txtIterNN.getText());
 						if (result == -7000) {
 							JOptionPane.showMessageDialog(mainFrame,
 									"Unknown predictor.", "Error",
@@ -1184,7 +1088,7 @@ public class TrainPanel extends JPanel {
 
 	private JComboBox<String> getCmbDataset() {
 		if (cmbDataset == null) {
-			cmbDataset = new JComboBox();
+			cmbDataset = new JComboBox<String>();
 			cmbDataset.addItem("choose dataset");
 			String[] files = Reader.getAllFolders(Reader.jarFile()
 					+ "/Datasets/Networks");
@@ -1200,12 +1104,17 @@ public class TrainPanel extends JPanel {
 			Style.questionButtonStyle(btnQuestionMethods);
 			btnQuestionMethods.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					String text = "Standard GCRF - incorporates the outputs of unstructured predictors and the correlation between output variables. "
+							+ "\nDirected GCRF (DirGCRF) – extends the GCRF to allow modeling asymmetric relationships (directed graphs).";
+					
+					if (useMatlab) {
+						text += "\nUnimodal GCRF (UmGCRF) – method that extends the GCRF parameter space to include negative values. ";
+					}
 
 					JOptionPane
 							.showMessageDialog(
 									mainFrame,
-									"Standard GCRF - incorporates the outputs of unstructured predictors and the correlation between output variables. "
-											+ "\nDirected GCRF (DirGCRF) – extends the GCRF to allow modeling asymmetric relationships (directed graphs).",
+									text,
 									"Help", JOptionPane.QUESTION_MESSAGE,
 									Style.questionIcon());
 				}

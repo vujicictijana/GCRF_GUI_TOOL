@@ -27,7 +27,6 @@ public class MultipleLinearRegression implements Serializable {
 
 	private static final long serialVersionUID = 2267604643584597866L;
 	private final int N; // number of
-	private final int p; // number of dependent variables
 	private final Matrix beta; // regression coefficients
 	private double SSE; // sum of squared
 	private double SST; // sum of squared
@@ -36,7 +35,6 @@ public class MultipleLinearRegression implements Serializable {
 		if (x.length != y.length)
 			throw new RuntimeException("dimensions don't agree");
 		N = y.length;
-		p = x[0].length;
 
 		Matrix X = new Matrix(x);
 

@@ -30,7 +30,6 @@ import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.frames.ProgressBar;
 import gcrf_tool.gui.style.Style;
-import gcrf_tool.learning.GradientAscent;
 import gcrf_tool.learning.Parameters;
 import gcrf_tool.methods.DirGCRF;
 import gcrf_tool.methods.GCRF;

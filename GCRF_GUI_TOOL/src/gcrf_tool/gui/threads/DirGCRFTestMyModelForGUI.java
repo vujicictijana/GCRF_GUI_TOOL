@@ -15,25 +15,19 @@
 
 package gcrf_tool.gui.threads;
 
-import java.awt.Color;
 import java.text.DecimalFormat;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import gcrf_tool.data.datasets.Dataset;
 import gcrf_tool.file.Reader;
 import gcrf_tool.file.Writer;
-import gcrf_tool.gui.style.Style;
 import gcrf_tool.methods.DirGCRF;
 import gcrf_tool.methods.GCRF;
 
 public class DirGCRFTestMyModelForGUI extends Thread {
 	private JFrame mainFrame;
-	private JPanel panel;
 	private String modelFolder;
 	private double[][] s;
 	private double[] r;
@@ -42,20 +36,13 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 	public double[] outputsS;
 	DecimalFormat df = new DecimalFormat("#.######");
 
-	public DirGCRFTestMyModelForGUI(JFrame mainFrame, JPanel panel,
-			String modelFolder, double[][] s, double[] r, double[] y) {
+	public DirGCRFTestMyModelForGUI(JFrame mainFrame, String modelFolder, double[][] s, double[] r, double[] y) {
 		super();
 		this.mainFrame = mainFrame;
-		this.panel = panel;
 		this.modelFolder = modelFolder;
 		this.s = s;
 		this.r = r;
 		this.y = y;
-		if (panel != null) {
-			panel.removeAll();
-			panel.revalidate();
-			panel.repaint();
-		}
 	}
 
 	public void run() {
@@ -68,21 +55,10 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 
 		if (paramS != null) {
 			resultS = resultSymmetric(paramS[0], paramS[1]);
-			// System.out.println("S " + paramS[0] + " " + paramS[1]);
-			if (panel != null) {
-				createTable(result, resultS);
-			}
-		} else {
-			if (panel != null) {
-				createTable(result, -1);
-			}
-		}
 
-		if (panel == null) {
-			exportResults(result, resultS, "predict");
-		} else {
-			exportResults(result, resultS, "test");
 		}
+		exportResults(result, resultS, "test");
+
 		mainFrame.setEnabled(true);
 	}
 
@@ -91,8 +67,7 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 		if (txt != null) {
 			double[] params = new double[txt.length];
 			for (int i = 0; i < txt.length; i++) {
-				params[i] = Double.parseDouble(txt[i].substring(txt[i]
-						.indexOf("=") + 1));
+				params[i] = Double.parseDouble(txt[i].substring(txt[i].indexOf("=") + 1));
 			}
 			return params;
 		}
@@ -114,27 +89,8 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 		return alg.rSquared();
 	}
 
-	public JTable createTable(double result, double resultS) {
-		JTable table = null;
-		if (resultS != -1) {
-			String[] columnNames = { "R^2 DirGCRF", "R^2 GCRF" };
-			Object[][] data = fillData(result, resultS);
-			table = new JTable(data, columnNames);
-		} else {
-			String[] columnNames = { "R^2 DirGCRF" };
-			Object[][] data = fillData(result, resultS);
-			table = new JTable(data, columnNames);
-		}
-		table.setBackground(new Color(240, 240, 240));
-		JScrollPane scrollPane = new JScrollPane(table);
-		Style.resultTable(table, -1);
-		panel.add(scrollPane);
-		scrollPane.setBounds(10, 10, 700, 200);
-		return table;
-	}
 
-	public String[] exportTxt(double[] array, double result, String method,
-			String type) {
+	public String[] exportTxt(double[] array, double result, String method, String type) {
 		String[] txt = new String[array.length + 1];
 
 		for (int i = 0; i < array.length; i++) {
@@ -158,9 +114,14 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 			String[] text1 = exportTxt(outputsS, resultS, "GCRF", folder);
 			Writer.write(text1, fileName1);
 		}
+		String textDialog = "";
+		if (resultS != -1) {
+			textDialog += "R^2 DirGCRF: "  +  df.format(result) + "\nR^2 GCRF: " +   df.format(resultS);
+		} else {
+			textDialog += "R^2 DirGCRF: "  +  df.format(result);
+		}
 		JOptionPane.showMessageDialog(mainFrame,
-				"Export successfully completed.\nFile location: " + modelFolder
-						+ "/" + folder + ".");
+				textDialog +  "\nExport successfully completed.\nFile location: " + modelFolder + "/" + folder + ".");
 	}
 
 	public Object[][] fillData(double result, double resultS) {

@@ -15,7 +15,6 @@
 
 package gcrf_tool.gui.threads;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -24,9 +23,6 @@ import java.text.DecimalFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import gcrf_tool.calculations.BasicCalcs;
 import gcrf_tool.file.Reader;
@@ -38,7 +34,6 @@ import gcrf_tool.methods.matlab.UmGCRF;
 public class UmGCRFTestMyModelForGUI extends Thread {
 	private ProgressBar frame;
 	private JFrame mainFrame;
-	private JPanel panel;
 	private String modelFolder;
 	private double[][] s;
 	private double[] r;
@@ -49,12 +44,10 @@ public class UmGCRFTestMyModelForGUI extends Thread {
 	private long proxyTime;
 	private boolean cancelTrain;
 
-	public UmGCRFTestMyModelForGUI(String matlabPath, JFrame mainFrame,
-			JPanel panel, String modelFolder, double[][] s, double[] r,
+	public UmGCRFTestMyModelForGUI(String matlabPath, JFrame mainFrame, String modelFolder, double[][] s, double[] r,
 			double[] y, ProgressBar frame, long proxyTime) {
 		super();
 		this.mainFrame = mainFrame;
-		this.panel = panel;
 		this.modelFolder = modelFolder;
 		this.s = s;
 		this.r = r;
@@ -62,20 +55,13 @@ public class UmGCRFTestMyModelForGUI extends Thread {
 		this.frame = frame;
 		this.matlabPath = matlabPath;
 		this.proxyTime = proxyTime;
-		if (panel != null) {
-			panel.removeAll();
-			panel.revalidate();
-			panel.repaint();
-		}
 	}
 
 	public void run() {
 		if (Reader.checkFile(matlabPath) == false) {
-			JOptionPane
-					.showMessageDialog(
-							mainFrame,
-							"Path to MATLAB.exe is not good. Please change path in Settings->Configuration",
-							"Results", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(mainFrame,
+					"Path to MATLAB.exe is not good. Please change path in Settings->Configuration", "Results",
+					JOptionPane.ERROR_MESSAGE);
 			frame.setVisible(false);
 			return;
 		}
@@ -97,8 +83,7 @@ public class UmGCRFTestMyModelForGUI extends Thread {
 				} catch (IOException e1) {
 				}
 				cancelTrain = true;
-				JOptionPane.showMessageDialog(frame,
-						"Testing process is canceled.", "Error",
+				JOptionPane.showMessageDialog(frame, "Testing process is canceled.", "Error",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		});
@@ -108,17 +93,11 @@ public class UmGCRFTestMyModelForGUI extends Thread {
 		if (!cancelTrain) {
 			double r2 = BasicCalcs.rSquared(outputs, y);
 			if (outputs == null) {
-				JOptionPane.showMessageDialog(mainFrame,
-						"An internal MATLAB exception occurred.", "Results",
+				JOptionPane.showMessageDialog(mainFrame, "An internal MATLAB exception occurred.", "Results",
 						JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
-			if (panel != null) {
-				createTable(r2);
-				exportResults(r2, "test");
-			} else {
-				exportResults(r2, "predict");
-			}
+			exportResults(r2, "test");
 
 			mainFrame.setEnabled(true);
 			frame.setVisible(false);
@@ -130,29 +109,13 @@ public class UmGCRFTestMyModelForGUI extends Thread {
 		return Double.parseDouble(txt[0].substring(txt[0].indexOf("=") + 1));
 	}
 
-	public JTable createTable(double resultS) {
-		JTable table = null;
-		String[] columnNames = { "R^2 UmGCRF" };
-		Object[][] data = new Object[1][1];
-		data[0][0] = df.format(resultS);
-		table = new JTable(data, columnNames);
-
-		table.setBackground(new Color(240, 240, 240));
-		JScrollPane scrollPane = new JScrollPane(table);
-		Style.resultTable(table, -1);
-		panel.add(scrollPane);
-		scrollPane.setBounds(10, 10, 700, 200);
-		return table;
-	}
-
 	private void exportResults(double result, String folder) {
 		Writer.createFolder(modelFolder + "/" + folder);
 		String fileName = modelFolder + "/" + folder + "/results.txt";
 		String[] text = exportTxt(result, folder);
 		Writer.write(text, fileName);
-		JOptionPane.showMessageDialog(mainFrame,
-				"Export successfully completed. \nFile location: "
-						+ modelFolder + "/" + folder + ".");
+		JOptionPane.showMessageDialog(mainFrame, "R^2 UmGCRF: " + df.format(result)
+				+ "\nExport successfully completed. \nFile location: " + modelFolder + "/" + folder + ".");
 	}
 
 	public String[] exportTxt(double resultS, String type) {

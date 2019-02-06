@@ -22,14 +22,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Stack;
 
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
 
-import gcrf_tool.data.generators.ArrayGenerator;
-import gcrf_tool.data.generators.GraphGenerator;
 import gcrf_tool.predictors.linearregression.TemporalData;
 
 public class Helper {

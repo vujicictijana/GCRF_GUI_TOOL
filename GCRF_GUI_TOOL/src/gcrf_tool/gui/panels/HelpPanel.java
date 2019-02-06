@@ -34,7 +34,6 @@ public class HelpPanel extends JPanel {
 
 	private static final long serialVersionUID = 7542338256284881226L;
 	private JPanel panel;
-	private JFrame mainFrame;
 	private JLabel lblText;
 
 	public HelpPanel(JFrame mainFrame, String fileName) {
@@ -43,7 +42,6 @@ public class HelpPanel extends JPanel {
 
 		setBackground(UIManager.getColor("Button.background"));
 
-		this.mainFrame = mainFrame;
 
 		panel = this;
 		GridBagLayout gridBagLayout = new GridBagLayout();
