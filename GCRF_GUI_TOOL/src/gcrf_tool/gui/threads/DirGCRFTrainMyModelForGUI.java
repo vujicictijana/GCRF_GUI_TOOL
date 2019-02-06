@@ -45,20 +45,23 @@ public class DirGCRFTrainMyModelForGUI extends Thread {
 	private double beta;
 	private double lr;
 	private int maxIter;
-	// private JPanel panel;
 	private boolean both;
 	private String modelFolder;
-	// private int xTable;
-	// private int yTable;
-	// private JLabel timeLabel;
 	private String time;
 	private Thread thisThread;
 	DecimalFormat df = new DecimalFormat("#.##");
-	
 
-	public DirGCRFTrainMyModelForGUI(String modelFolder, ProgressBar frame,
-			JFrame mainFrame, double[][] s, double[] r, double[] y,
-			double alpha, double beta, double lr, int maxIter, boolean both) {
+	DecimalFormat df1 = new DecimalFormat("#.####");
+
+	private double[][] sTest;
+	private double[] rTest;
+	private double[] yTest;
+	public double[] outputs;
+	public double[] outputsS;
+
+	public DirGCRFTrainMyModelForGUI(String modelFolder, ProgressBar frame, JFrame mainFrame, double[][] s, double[] r,
+			double[] y, double alpha, double beta, double lr, int maxIter, boolean both, double[][] sTest, double[] rTest,
+			double[] yTest) {
 		super();
 		this.frame = frame;
 		this.mainFrame = mainFrame;
@@ -69,14 +72,13 @@ public class DirGCRFTrainMyModelForGUI extends Thread {
 		this.beta = beta;
 		this.lr = lr;
 		this.maxIter = maxIter;
-		// this.panel = panel;
 		this.both = both;
 		this.modelFolder = modelFolder;
-		// this.xTable = xTable;
-		// this.yTable = yTable;
-		// this.timeLabel = timeLabel;
 		time = "Time in seconds: ";
 		this.thisThread = this;
+		this.sTest = sTest;
+		this.rTest = rTest;
+		this.yTest = yTest;
 	}
 
 	public void run() {
@@ -94,20 +96,19 @@ public class DirGCRFTrainMyModelForGUI extends Thread {
 				frame.setVisible(false);
 				Reader.deleteDir(new File(modelFolder));
 				thisThread.stop();
-				JOptionPane.showMessageDialog(frame,
-						"Training process is canceled.", "Error",
+				JOptionPane.showMessageDialog(frame, "Training process is canceled.", "Error",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		try {
 			long start = System.currentTimeMillis();
-			
+
 			Parameters p = new Parameters(alpha, beta, maxIter, lr, false, frame.getCurrent());
 			Dataset d = new Dataset(s, r, y);
-			DirGCRF alg = new DirGCRF(p,d);
+			DirGCRF alg = new DirGCRF(p, d);
 			double r2 = alg.rSquared();
 			double[] res = alg.getParameters();
-	
+
 			long elapsedTime = System.currentTimeMillis() - start;
 			time += "\n* DirGCRF: " + df.format((double) elapsedTime / 1000);
 			double[] resS = null;
@@ -117,32 +118,37 @@ public class DirGCRFTrainMyModelForGUI extends Thread {
 				frame.setTitle("Progress standard GCRF");
 				start = System.currentTimeMillis();
 				double[][] sS = GraphGenerator.converteGraphToUndirected(s);
-	
+
 				Parameters p1 = new Parameters(alpha, beta, maxIter, lr, false, frame.getCurrent());
-				Dataset d1 = new Dataset(sS, r, y);	
+				Dataset d1 = new Dataset(sS, r, y);
 				GCRF algS = new GCRF(p1, d1);
 				r2S = algS.rSquared();
 				resS = algS.getParameters();
 				elapsedTime = System.currentTimeMillis() - start;
 				time += "\n* GCRF: " + df.format((double) elapsedTime / 1000);
 			}
-			// createTable(res, r2, resS, r2S);
 			createFile("DirGCRF.txt", res);
 			if (resS != null) {
 				createFile("GCRF.txt", resS);
 			}
-			// timeLabel.setText(time);
-			// timeLabel.setVisible(true);
-			DecimalFormat df1 = new DecimalFormat("#.####");
-			String message = "Testing with same data:\n* R^2 value for DirGCRF is: "
-					+ df1.format(r2);
+			String message = "Testing with same data:\n* R^2 value for DirGCRF is: " + df1.format(r2);
 			if (resS != null) {
-				message += "\n* R^2 value for standard GCRF is: "
-						+ df1.format(r2S);
+				message += "\n* R^2 value for standard GCRF is: " + df1.format(r2S);
 			}
 			message += "\n" + time;
-			JOptionPane.showMessageDialog(mainFrame, message, "Results",
-					JOptionPane.INFORMATION_MESSAGE);
+
+			double[] param = read(modelFolder + "/parameters/DirGCRF.txt");
+			double result = resultAsymmetric(param[0], param[1]);
+			double[] paramS = read(modelFolder + "/parameters/GCRF.txt");
+			double resultS = -1;
+
+			if (paramS != null) {
+				resultS = resultSymmetric(paramS[0], paramS[1]);
+
+			}
+			message += "\n\nTesting with test data:" +  exportResults(result, resultS, "test");
+
+			JOptionPane.showMessageDialog(mainFrame, message, "Results", JOptionPane.INFORMATION_MESSAGE);
 			mainFrame.setEnabled(true);
 			frame.setVisible(false);
 		} catch (Exception e) {
@@ -151,28 +157,79 @@ public class DirGCRFTrainMyModelForGUI extends Thread {
 
 	}
 
-	// public JTable createTable(double[] res, double r2, double[] resS, double
-	// r2S) {
-	// String[] columnNames = { "Alg. ", "Alpha", "Beta",
-	// "R^2 (with same data)" };
-	// Object[][] data = fillData(res, r2, resS, r2S);
-	//
-	// JTable table = new JTable(data, columnNames);
-	//
-	// table.setBackground(new Color(240, 240, 240));
-	// panel.removeAll();
-	// panel.repaint();
-	// panel.revalidate();
-	// JScrollPane scrollPane = new JScrollPane(table);
-	// Style.resultTable(table, -1);
-	// panel.add(scrollPane);
-	// if (resS == null) {
-	// scrollPane.setBounds(xTable, yTable, 700, 50);
-	// } else {
-	// scrollPane.setBounds(xTable, yTable, 700, 75);
-	// }
-	// return table;
-	// }
+	public double[] read(String file) {
+		String[] txt = Reader.read(file);
+		if (txt != null) {
+			double[] params = new double[txt.length];
+			for (int i = 0; i < txt.length; i++) {
+				params[i] = Double.parseDouble(txt[i].substring(txt[i].indexOf("=") + 1));
+			}
+			return params;
+		}
+		return null;
+	}
+
+	public double resultAsymmetric(double alpha, double beta) {
+		Dataset d = new Dataset(sTest, rTest, yTest);
+		DirGCRF alg = new DirGCRF(alpha, beta, d);
+		outputs = alg.predictOutputs();
+		return alg.rSquared();
+	}
+
+	public double resultSymmetric(double alpha, double beta) {
+		Dataset d = new Dataset(sTest, rTest, yTest);
+		GCRF alg = new GCRF(alpha, beta, d);
+		outputsS = alg.predictOutputs();
+		return alg.rSquared();
+	}
+
+	public String[] exportTxt(double[] array, double result, String method, String type) {
+		String[] txt = new String[array.length + 1];
+
+		for (int i = 0; i < array.length; i++) {
+			txt[i] = array[i] + "";
+		}
+		if (type.equalsIgnoreCase("test")) {
+			txt[outputs.length] = "R^2 " + method + ": " + df1.format(result);
+		} else {
+			txt[outputs.length] = "";
+		}
+		return txt;
+	}
+
+	private String exportResults(double result, double resultS, String folder) {
+		Writer.createFolder(modelFolder + "/" + folder);
+		String fileName = modelFolder + "/" + folder + "/resultsDirGCRF.txt";
+		String[] text = exportTxt(outputs, result, "DirGCRF", folder);
+		Writer.write(text, fileName);
+		if (resultS != -1) {
+			String fileName1 = modelFolder + "/" + folder + "/resultsGCRF.txt";
+			String[] text1 = exportTxt(outputsS, resultS, "GCRF", folder);
+			Writer.write(text1, fileName1);
+		}
+		String textDialog = "";
+		if (resultS != -1) {
+			textDialog += ""
+					+ "\n*R^2 DirGCRF: " + df1.format(result) + "\nR^2 GCRF: " + df1.format(resultS);
+		} else {
+			textDialog += "\n*R^2 DirGCRF: " + df1.format(result);
+		}
+		return textDialog + "\nPredicted values for test data successfully exported.\nFile location: " + modelFolder + "/" + folder + ".";
+	}
+
+	public Object[][] fillData(double result, double resultS) {
+		Object[][] data;
+		if (resultS != -1) {
+			data = new Object[1][2];
+			data[0][0] = df1.format(result);
+			data[0][1] = df1.format(resultS);
+
+		} else {
+			data = new Object[1][1];
+			data[0][0] = df1.format(result);
+		}
+		return data;
+	}
 
 	public void createFile(String symmetric, double[] results) {
 		Writer.createFolder(modelFolder + "/parameters");
@@ -181,26 +238,4 @@ public class DirGCRFTrainMyModelForGUI extends Thread {
 		Writer.write(resultsS, fileName);
 	}
 
-	public Object[][] fillData(double[] res, double r2, double[] resS,
-			double r2S) {
-		Object[][] data = null;
-		if (resS == null) {
-			data = new Object[1][4];
-			data[0][0] = "DirGCRF";
-			data[0][1] = res[0];
-			data[0][2] = res[1];
-			data[0][3] = r2;
-		} else {
-			data = new Object[2][4];
-			data[0][0] = "DirGCRF";
-			data[0][1] = res[0];
-			data[0][2] = res[1];
-			data[0][3] = r2;
-			data[1][0] = "GCRF";
-			data[1][1] = resS[0];
-			data[1][2] = resS[1];
-			data[1][3] = r2S;
-		}
-		return data;
-	}
 }

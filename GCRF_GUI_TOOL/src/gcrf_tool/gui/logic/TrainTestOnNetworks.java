@@ -23,10 +23,11 @@ public class TrainTestOnNetworks {
 	
 	public static  String callMethodTrain(String method, String path, int noOfNodes,
 			double alpha, double beta, double lr, int maxIter, double[] y,
-			double[] r, double[][] s, JFrame mainFrame, boolean chckbxStandard, String matlabPath,long proxy) {
+			double[] r, double[][] s, JFrame mainFrame, boolean chckbxStandard, String matlabPath,long proxy,double[][] sTest, double[] rTest,
+			double[] yTest) {
 		switch (method) {
 		case "DirGCRF":
-			trainDirGCRF(noOfNodes, path, maxIter, alpha, beta, lr, r, y, s, mainFrame,chckbxStandard);
+			trainDirGCRF(noOfNodes, path, maxIter, alpha, beta, lr, r, y, s, mainFrame,chckbxStandard,sTest,rTest,yTest);
 			break;
 		case "GCRF":
 			if (BasicCalcs.isSymmetric(s)) {
@@ -51,7 +52,8 @@ public class TrainTestOnNetworks {
 
 	public static void trainDirGCRF(int noOfNodes, String modelFolder, int maxIter,
 			double alpha, double beta, double lr, double[] r, double[] y,
-			double[][] s, JFrame mainFrame, boolean chckbxStandard) {
+			double[][] s, JFrame mainFrame, boolean chckbxStandard,double[][] sTest, double[] rTest,
+			double[] yTest) {
 
 		ProgressBar frame = new ProgressBar(maxIter);
 		frame.pack();
@@ -64,7 +66,7 @@ public class TrainTestOnNetworks {
 		}
 		DirGCRFTrainMyModelForGUI t = new DirGCRFTrainMyModelForGUI(
 				modelFolder, frame, mainFrame, s, r, y, alpha, beta, lr,
-				maxIter, both);
+				maxIter, both,sTest,rTest,yTest);
 		// 10, 10
 		t.start();
 

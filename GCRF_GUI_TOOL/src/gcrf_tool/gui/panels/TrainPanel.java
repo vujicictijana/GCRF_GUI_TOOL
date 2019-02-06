@@ -112,7 +112,6 @@ public class TrainPanel extends JPanel {
 	private JButton btnQuestionPredictors;
 	private JButton btnQuestionApplyStandard;
 
-	
 	public TrainPanel(JFrame mainFrame) {
 		setBounds(new Rectangle(0, 0, 900, 650));
 		setMinimumSize(new Dimension(500, 500));
@@ -120,42 +119,41 @@ public class TrainPanel extends JPanel {
 
 			String result = readParametersFromCfg();
 			if (result != null) {
-				JOptionPane
-						.showMessageDialog(
-								mainFrame,
-								result
-										+ " Please configure parameters values in Settings->Configuration.",
-								"Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(mainFrame,
+						result + " Please configure parameters values in Settings->Configuration.", "Error",
+						JOptionPane.ERROR_MESSAGE);
 			} else {
 
 				setBackground(UIManager.getColor("Button.background"));
 				GridBagLayout gridBagLayout = new GridBagLayout();
-				gridBagLayout.columnWidths = new int[]{169, 3, 227, 2, 43, 112, 266, 0};
-				gridBagLayout.rowHeights = new int[]{30, 33, 33, 30, 50, 30, 30, 31, 38, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0};
-				gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-				gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				gridBagLayout.columnWidths = new int[] { 169, 3, 227, 2, 43, 112, 266, 0 };
+				gridBagLayout.rowHeights = new int[] { 30, 33, 33, 30, 50, 30, 30, 31, 38, 30, 30, 0, 0, 0, 0, 0, 0, 0,
+						0, 30, 0, 0 };
+				gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+						0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 				setLayout(gridBagLayout);
-								GridBagConstraints gbc_lblData = new GridBagConstraints();
-								gbc_lblData.fill = GridBagConstraints.BOTH;
-								gbc_lblData.insets = new Insets(0, 0, 5, 0);
-								gbc_lblData.gridwidth = 10;
-								gbc_lblData.gridx = 0;
-								gbc_lblData.gridy = 0;
-								add(getLblData(), gbc_lblData);
-								GridBagConstraints gbc_lblDataset = new GridBagConstraints();
-								gbc_lblDataset.fill = GridBagConstraints.BOTH;
-								gbc_lblDataset.insets = new Insets(0, 0, 5, 5);
-								gbc_lblDataset.gridx = 0;
-								gbc_lblDataset.gridy = 2;
-								add(getLblDataset(), gbc_lblDataset);
-				
-								GridBagConstraints gbc_cmbDataset = new GridBagConstraints();
-								gbc_cmbDataset.fill = GridBagConstraints.BOTH;
-								gbc_cmbDataset.insets = new Insets(0, 0, 5, 5);
-								gbc_cmbDataset.gridwidth = 4;
-								gbc_cmbDataset.gridx = 1;
-								gbc_cmbDataset.gridy = 2;
-								add(getCmbDataset(), gbc_cmbDataset);
+				GridBagConstraints gbc_lblData = new GridBagConstraints();
+				gbc_lblData.fill = GridBagConstraints.BOTH;
+				gbc_lblData.insets = new Insets(0, 0, 5, 0);
+				gbc_lblData.gridwidth = 10;
+				gbc_lblData.gridx = 0;
+				gbc_lblData.gridy = 0;
+				add(getLblData(), gbc_lblData);
+				GridBagConstraints gbc_lblDataset = new GridBagConstraints();
+				gbc_lblDataset.fill = GridBagConstraints.BOTH;
+				gbc_lblDataset.insets = new Insets(0, 0, 5, 5);
+				gbc_lblDataset.gridx = 0;
+				gbc_lblDataset.gridy = 2;
+				add(getLblDataset(), gbc_lblDataset);
+
+				GridBagConstraints gbc_cmbDataset = new GridBagConstraints();
+				gbc_cmbDataset.fill = GridBagConstraints.BOTH;
+				gbc_cmbDataset.insets = new Insets(0, 0, 5, 5);
+				gbc_cmbDataset.gridwidth = 4;
+				gbc_cmbDataset.gridx = 1;
+				gbc_cmbDataset.gridy = 2;
+				add(getCmbDataset(), gbc_cmbDataset);
 				GridBagConstraints gbc_btnQuestionDataset = new GridBagConstraints();
 				gbc_btnQuestionDataset.anchor = GridBagConstraints.WEST;
 				gbc_btnQuestionDataset.insets = new Insets(0, 0, 5, 5);
@@ -168,7 +166,6 @@ public class TrainPanel extends JPanel {
 				gbc_btnQuestionPredictors.gridy = 6;
 				add(getBtnQuestionPredictors(), gbc_btnQuestionPredictors);
 				GridBagConstraints gbc_btnTestPredictr = new GridBagConstraints();
-				gbc_btnTestPredictr.fill = GridBagConstraints.HORIZONTAL;
 				gbc_btnTestPredictr.anchor = GridBagConstraints.NORTHWEST;
 				gbc_btnTestPredictr.insets = new Insets(0, 0, 5, 5);
 				gbc_btnTestPredictr.gridx = 6;
@@ -211,7 +208,7 @@ public class TrainPanel extends JPanel {
 				gbc_lblPredictor_1.gridx = 0;
 				gbc_lblPredictor_1.gridy = 6;
 				add(getLblPredictor_1(), gbc_lblPredictor_1);
-				
+
 				GridBagConstraints gbc_txtHidden = new GridBagConstraints();
 				gbc_txtHidden.anchor = GridBagConstraints.WEST;
 				gbc_txtHidden.fill = GridBagConstraints.BOTH;
@@ -242,14 +239,14 @@ public class TrainPanel extends JPanel {
 				gbc_lblModel.gridx = 0;
 				gbc_lblModel.gridy = 11;
 				add(getLblModel(), gbc_lblModel);
-				
-						GridBagConstraints gbc_lblMethod = new GridBagConstraints();
-						gbc_lblMethod.gridwidth = 2;
-						gbc_lblMethod.fill = GridBagConstraints.BOTH;
-						gbc_lblMethod.insets = new Insets(0, 0, 5, 5);
-						gbc_lblMethod.gridx = 0;
-						gbc_lblMethod.gridy = 12;
-						add(getLblMethod(), gbc_lblMethod);
+
+				GridBagConstraints gbc_lblMethod = new GridBagConstraints();
+				gbc_lblMethod.gridwidth = 2;
+				gbc_lblMethod.fill = GridBagConstraints.BOTH;
+				gbc_lblMethod.insets = new Insets(0, 0, 5, 5);
+				gbc_lblMethod.gridx = 0;
+				gbc_lblMethod.gridy = 12;
+				add(getLblMethod(), gbc_lblMethod);
 				GridBagConstraints gbc_cmbMethod = new GridBagConstraints();
 				gbc_cmbMethod.gridwidth = 3;
 				gbc_cmbMethod.anchor = GridBagConstraints.NORTH;
@@ -343,8 +340,7 @@ public class TrainPanel extends JPanel {
 				gbc_cmbPredictor.gridy = 6;
 				add(getCmbPredictor(), gbc_cmbPredictor);
 				fc = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter(
-						"TEXT FILES", "txt", "text");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
 				fc.setFileFilter(filter);
 				fc.setCurrentDirectory(Reader.jarFile());
 
@@ -366,11 +362,8 @@ public class TrainPanel extends JPanel {
 
 			}
 		} else {
-			JOptionPane
-					.showMessageDialog(
-							mainFrame,
-							"Please configure parameters values in Settings->Configuration.",
-							"Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(mainFrame, "Please configure parameters values in Settings->Configuration.",
+					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -390,14 +383,11 @@ public class TrainPanel extends JPanel {
 			btnQuestionDataset.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 
-					JOptionPane
-							.showMessageDialog(
-									mainFrame,
-									"Dataset samples are provided by default."
-											+ "\nUse samples or add your own dataset in Datasets -> Add dataset menu item."
-											+ "\nInformation for datasets samples can be found in Help -> Datasets menu item.",
-									"Help", JOptionPane.QUESTION_MESSAGE,
-									Style.questionIcon());
+					JOptionPane.showMessageDialog(mainFrame,
+							"Dataset samples are provided by default."
+									+ "\nUse samples or add your own dataset in Datasets -> Add dataset menu item."
+									+ "\nInformation for datasets samples can be found in Help -> Datasets menu item.",
+							"Help", JOptionPane.QUESTION_MESSAGE, Style.questionIcon());
 				}
 			});
 		}
@@ -485,130 +475,23 @@ public class TrainPanel extends JPanel {
 
 	private JButton getBtnTrain() {
 		if (btnTrain == null) {
-			btnTrain = new JButton("TRAIN");
+			btnTrain = new JButton("TRAIN and TEST");
 			btnTrain.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-
-					String message = validateData();
+					String message = train();
 					if (message != null) {
-						JOptionPane.showMessageDialog(mainFrame, message,
-								"Error", JOptionPane.ERROR_MESSAGE);
-					} else {
-
-						String mainPath = Reader.jarFile()
-								+ "/Datasets/Networks/";
-
-						xPath = mainPath + "/"
-								+ cmbDataset.getSelectedItem().toString()
-								+ "/xTrain.txt";
-						yPath = mainPath + "/"
-								+ cmbDataset.getSelectedItem().toString()
-								+ "/yTrain.txt";
-						sPath = mainPath + "/"
-								+ cmbDataset.getSelectedItem().toString()
-								+ "/sTrain.txt";
-
-						String readme = mainPath + "/"
-								+ cmbDataset.getSelectedItem().toString()
-								+ "/readme.txt";
-						int noOfNodes = 0;
-						try {
-							String nodesTrain = Reader.read(readme)[0];
-							noOfNodes = Integer.parseInt(nodesTrain
-									.substring(nodesTrain.indexOf(":") + 2));
-							if (noOfNodes <= 0) {
-								JOptionPane
-										.showMessageDialog(
-												mainFrame,
-												"No. of nodes should be greater than 0.",
-												"Error",
-												JOptionPane.ERROR_MESSAGE);
-								return;
-							}
-						} catch (NumberFormatException e1) {
-							JOptionPane.showMessageDialog(mainFrame,
-									"Reading dataset error.", "Error",
-									JOptionPane.ERROR_MESSAGE);
-							return;
-						}
-
-						// System.out.println(xPath);
-						// System.out.println(yPath);
-						// System.out.println(sPath);
-						// System.out.println(noOfNodes);
-
-						String method = cmbMethod.getSelectedItem().toString();
-
-						double alpha = Double.parseDouble(txtAlpha.getText());
-						double beta = Double.parseDouble(txtBeta.getText());
-						double lr = Double.parseDouble(txtLR.getText());
-						int maxIter = Integer.parseInt(txtIter.getText());
-
-						String[] x = Reader.read(xPath);
-						double[] y = Reader.readArray(yPath, noOfNodes);
-						double[][] s = Reader.readGraph(sPath, noOfNodes);
-
-						String path = createFolderAndSaveData(method);
-						double result = TrainTestOnNetworks.callPredictorTrain(cmbPredictor.getSelectedItem().toString(), path, x, y,txtHidden.getText(),txtIterNN.getText());
-
-						if (result == -7000) {
-							JOptionPane.showMessageDialog(mainFrame,
-									"Unknown predictor.", "Error",
-									JOptionPane.ERROR_MESSAGE);
-							return;
-						}
-						boolean ok = true;
-						if (result == -3000) {
-							JOptionPane
-									.showMessageDialog(
-											mainFrame,
-											cmbPredictor.getSelectedItem()
-													.toString()
-													+ " cannot be applied to your data. Choose different predictor.",
-											"Error", JOptionPane.ERROR_MESSAGE);
-							ok = false;
-						}
-						if (result == -5000) {
-							JOptionPane
-									.showMessageDialog(
-											mainFrame,
-											"File with attributes is not in correct format.",
-											"Error", JOptionPane.ERROR_MESSAGE);
-							ok = false;
-						}
-
-
-						if (ok) {
-
-							double[] r = Reader.readArray(path + "/data/r.txt",
-									noOfNodes);
-							String okMethod = TrainTestOnNetworks.callMethodTrain(method, path,
-									noOfNodes, alpha, beta, lr, maxIter, y, r,
-									s,mainFrame,chckbxStandard.isSelected(), matlabPath,proxy);
-
-							if (okMethod != null) {
-								JOptionPane.showMessageDialog(mainFrame,
-										okMethod, "Error",
-										JOptionPane.ERROR_MESSAGE);
-								ok = false;
-							}
-						}
-						if (!ok) {
-							String delPath = Reader.jarFile() + "/MyModels" + method + "/"
-									+ txtModelName.getText();
-							Reader.deleteDir(new File(delPath));
-						}
-
+						JOptionPane.showMessageDialog(mainFrame, message, "Error", JOptionPane.ERROR_MESSAGE);
+						return;
 					}
+				
 				}
 
 			});
 			Style.buttonStyle(btnTrain);
 		}
 		return btnTrain;
+
 	}
-
-
 
 	private String createFolderAndSaveData(String method) {
 		File matrixFile = new File(xPath);
@@ -616,12 +499,10 @@ public class TrainPanel extends JPanel {
 		File yFile = new File(sPath);
 
 		Writer.createFolder(Reader.jarFile() + "/MyModels" + method);
-		String path = Reader.jarFile() + "/MyModels" + method + "/"
-				+ txtModelName.getText();
+		String path = Reader.jarFile() + "/MyModels" + method + "/" + txtModelName.getText();
 		Writer.createFolder(path);
 
-		String dataPath = Reader.jarFile() + "/MyModels" + method + "/"
-				+ txtModelName.getText() + "/data";
+		String dataPath = Reader.jarFile() + "/MyModels" + method + "/" + txtModelName.getText() + "/data";
 		Writer.createFolder(dataPath);
 		Writer.copyFile(matrixFile, dataPath + "/matrix.txt");
 		Writer.copyFile(xFile, dataPath + "/x.txt");
@@ -630,10 +511,6 @@ public class TrainPanel extends JPanel {
 		Writer.createFolder(path);
 		return path;
 	}
-
-
-
-
 
 	private JLabel getLblMaxIterations() {
 		if (lblMaxIterations == null) {
@@ -662,10 +539,8 @@ public class TrainPanel extends JPanel {
 		}
 		String method = cmbMethod.getSelectedItem().toString();
 
-		if (Writer.checkFolder(Reader.jarFile() + "/MyModels" + method + "/"
-				+ txtModelName.getText())) {
-			return "Model with name " + txtModelName.getText()
-					+ " already exists.";
+		if (Writer.checkFolder(Reader.jarFile() + "/MyModels" + method + "/" + txtModelName.getText())) {
+			return "Model with name " + txtModelName.getText() + " already exists.";
 		}
 		try {
 			Double.parseDouble(txtAlpha.getText());
@@ -790,11 +665,9 @@ public class TrainPanel extends JPanel {
 				alpha = Integer.parseInt(params.get("Alpha").toString());
 				beta = Integer.parseInt(params.get("Beta").toString());
 				lr = Double.parseDouble(params.get("LR").toString());
-				iterations = Integer.parseInt(params.get("Iterations")
-						.toString());
+				iterations = Integer.parseInt(params.get("Iterations").toString());
 				hidden = Integer.parseInt(params.get("NN hidden").toString());
-				iterNN = Integer.parseInt(params.get("Iterations NN")
-						.toString());
+				iterNN = Integer.parseInt(params.get("Iterations NN").toString());
 				proxy = Integer.parseInt(params.get("Proxy").toString());
 			} catch (NumberFormatException e) {
 				return "Configuration file reading failed. File has wrong format.";
@@ -870,8 +743,7 @@ public class TrainPanel extends JPanel {
 			cmbPredictor = new JComboBox<String>();
 			cmbPredictor.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent arg0) {
-					if (cmbPredictor.getSelectedItem().toString()
-							.contains("neural")) {
+					if (cmbPredictor.getSelectedItem().toString().contains("neural")) {
 						lblNoOfHidden.setVisible(true);
 						txtHidden.setVisible(true);
 						lblNoOfIterations.setVisible(true);
@@ -899,43 +771,27 @@ public class TrainPanel extends JPanel {
 				public void actionPerformed(ActionEvent arg0) {
 					String message = validateDataForTestPredictor();
 					if (message != null) {
-						JOptionPane.showMessageDialog(mainFrame, message,
-								"Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(mainFrame, message, "Error", JOptionPane.ERROR_MESSAGE);
 					} else {
 
-						String mainPath = Reader.jarFile()
-								+ "/Datasets/Networks/";
+						String mainPath = Reader.jarFile() + "/Datasets/Networks/";
 
-						xPath = mainPath + "/"
-								+ cmbDataset.getSelectedItem().toString()
-								+ "/xTrain.txt";
-						yPath = mainPath + "/"
-								+ cmbDataset.getSelectedItem().toString()
-								+ "/yTrain.txt";
-						sPath = mainPath + "/"
-								+ cmbDataset.getSelectedItem().toString()
-								+ "/sTrain.txt";
+						xPath = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/xTrain.txt";
+						yPath = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/yTrain.txt";
+						sPath = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/sTrain.txt";
 
-						String readme = mainPath + "/"
-								+ cmbDataset.getSelectedItem().toString()
-								+ "/readme.txt";
+						String readme = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/readme.txt";
 						int noOfNodes = 0;
 						try {
 							String nodesTrain = Reader.read(readme)[0];
-							noOfNodes = Integer.parseInt(nodesTrain
-									.substring(nodesTrain.indexOf(":") + 2));
+							noOfNodes = Integer.parseInt(nodesTrain.substring(nodesTrain.indexOf(":") + 2));
 							if (noOfNodes <= 0) {
-								JOptionPane
-										.showMessageDialog(
-												mainFrame,
-												"No. of nodes should be greater than 0.",
-												"Error",
-												JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(mainFrame, "No. of nodes should be greater than 0.",
+										"Error", JOptionPane.ERROR_MESSAGE);
 								return;
 							}
 						} catch (NumberFormatException e1) {
-							JOptionPane.showMessageDialog(mainFrame,
-									"Reading dataset error.", "Error",
+							JOptionPane.showMessageDialog(mainFrame, "Reading dataset error.", "Error",
 									JOptionPane.ERROR_MESSAGE);
 							return;
 						}
@@ -943,38 +799,30 @@ public class TrainPanel extends JPanel {
 						String[] x = Reader.read(xPath);
 						double[] y = Reader.readArray(yPath, noOfNodes);
 
-						double result = TrainTestOnNetworks.callPredictorTrain(cmbPredictor.getSelectedItem().toString(), null, x, y,txtHidden.getText(),txtIterNN.getText());
+						double result = TrainTestOnNetworks.callPredictorTrain(
+								cmbPredictor.getSelectedItem().toString(), null, x, y, txtHidden.getText(),
+								txtIterNN.getText());
 						if (result == -7000) {
-							JOptionPane.showMessageDialog(mainFrame,
-									"Unknown predictor.", "Error",
+							JOptionPane.showMessageDialog(mainFrame, "Unknown predictor.", "Error",
 									JOptionPane.ERROR_MESSAGE);
 							return;
 						}
 						if (result == -3000) {
-							JOptionPane
-									.showMessageDialog(
-											mainFrame,
-											cmbPredictor.getSelectedItem()
-													.toString()
-													+ " cannot be applied to your data. Choose different predictor.",
-											"Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(mainFrame,
+									cmbPredictor.getSelectedItem().toString()
+											+ " cannot be applied to your data. Choose different predictor.",
+									"Error", JOptionPane.ERROR_MESSAGE);
 							return;
 						}
 						if (result == -5000) {
-							JOptionPane
-									.showMessageDialog(
-											mainFrame,
-											"File with attributes is not in correct format.",
-											"Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(mainFrame, "File with attributes is not in correct format.",
+									"Error", JOptionPane.ERROR_MESSAGE);
 						} else {
 							DecimalFormat df = new DecimalFormat("#.####");
 							JOptionPane.showMessageDialog(
-									mainFrame,
-									"Testing with same data\nR^2 value for "
-											+ cmbPredictor.getSelectedItem()
-													.toString() + " is: "
-											+ df.format(result), "Results",
-									JOptionPane.INFORMATION_MESSAGE);
+									mainFrame, "Testing with same data\nR^2 value for "
+											+ cmbPredictor.getSelectedItem().toString() + " is: " + df.format(result),
+									"Results", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
 				}
@@ -1043,8 +891,7 @@ public class TrainPanel extends JPanel {
 						lblStandard.setVisible(false);
 						chckbxStandard.setVisible(false);
 					}
-					if (method.equalsIgnoreCase("DirGCRF")
-							|| method.equalsIgnoreCase("GCRF")) {
+					if (method.equalsIgnoreCase("DirGCRF") || method.equalsIgnoreCase("GCRF")) {
 						showGradientDescentParams();
 					} else {
 						hideGradientDescentParams();
@@ -1090,14 +937,14 @@ public class TrainPanel extends JPanel {
 		if (cmbDataset == null) {
 			cmbDataset = new JComboBox<String>();
 			cmbDataset.addItem("choose dataset");
-			String[] files = Reader.getAllFolders(Reader.jarFile()
-					+ "/Datasets/Networks");
+			String[] files = Reader.getAllFolders(Reader.jarFile() + "/Datasets/Networks");
 			for (int i = 0; i < files.length; i++) {
 				cmbDataset.addItem(files[i]);
 			}
 		}
 		return cmbDataset;
 	}
+
 	private JButton getBtnQuestionMethods() {
 		if (btnQuestionMethods == null) {
 			btnQuestionMethods = new JButton("");
@@ -1106,22 +953,19 @@ public class TrainPanel extends JPanel {
 				public void actionPerformed(ActionEvent arg0) {
 					String text = "Standard GCRF - incorporates the outputs of unstructured predictors and the correlation between output variables. "
 							+ "\nDirected GCRF (DirGCRF) – extends the GCRF to allow modeling asymmetric relationships (directed graphs).";
-					
+
 					if (useMatlab) {
 						text += "\nUnimodal GCRF (UmGCRF) – method that extends the GCRF parameter space to include negative values. ";
 					}
 
-					JOptionPane
-							.showMessageDialog(
-									mainFrame,
-									text,
-									"Help", JOptionPane.QUESTION_MESSAGE,
-									Style.questionIcon());
+					JOptionPane.showMessageDialog(mainFrame, text, "Help", JOptionPane.QUESTION_MESSAGE,
+							Style.questionIcon());
 				}
 			});
 		}
 		return btnQuestionMethods;
 	}
+
 	private JButton getBtnQuestionPredictors() {
 		if (btnQuestionPredictors == null) {
 			btnQuestionPredictors = new JButton("");
@@ -1129,25 +973,23 @@ public class TrainPanel extends JPanel {
 			btnQuestionPredictors.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 
-					JOptionPane
-							.showMessageDialog(
-									mainFrame,
-									"Neural network - Neurons in an artificial neural network are grouped in three layers: input, output, and hidden layer. "
+					JOptionPane.showMessageDialog(mainFrame,
+							"Neural network - Neurons in an artificial neural network are grouped in three layers: input, output, and hidden layer. "
 									+ "\nThe number of neurons in the input layer is same as the number of attributes in the chosen dataset. "
 									+ "\nThe number of neurons in the output layer is 1 (all datasets have one predicted variable). "
 									+ "\nYou have to insert the number of neurons"
 									+ " in the hidden layer and number of iterations for training."
-											+ "\n\nLinear Regression - Approach for modeling the relationship between a dependent variable y and one or more explanatory variables x. "
-											+ "\nThis relationship is modeled using linear predictor functions whose "
+									+ "\n\nLinear Regression - Approach for modeling the relationship between a dependent variable y and one or more explanatory variables x. "
+									+ "\nThis relationship is modeled using linear predictor functions whose "
 									+ " parameters are estimated from the data. "
 									+ "\nStandard or multivariate linear regression is used depending on the number of attributes in the dataset.",
-									"Help", JOptionPane.QUESTION_MESSAGE,
-									Style.questionIcon());
+							"Help", JOptionPane.QUESTION_MESSAGE, Style.questionIcon());
 				}
 			});
 		}
 		return btnQuestionPredictors;
 	}
+
 	private JButton getBtnQuestionApplyStandard() {
 		if (btnQuestionApplyStandard == null) {
 			btnQuestionApplyStandard = new JButton("");
@@ -1156,15 +998,147 @@ public class TrainPanel extends JPanel {
 			btnQuestionApplyStandard.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 
-					JOptionPane
-							.showMessageDialog(
-									mainFrame,
-									"If you check this option the similarity matrix will be automatically converted from asymmetric to symmetric in order to apply standard GCRF and get its accuracy for comparison.",
-									"Help", JOptionPane.QUESTION_MESSAGE,
-									Style.questionIcon());
+					JOptionPane.showMessageDialog(mainFrame,
+							"If you check this option the similarity matrix will be automatically converted from asymmetric to symmetric in order to apply standard GCRF and get its accuracy for comparison.",
+							"Help", JOptionPane.QUESTION_MESSAGE, Style.questionIcon());
 				}
 			});
 		}
 		return btnQuestionApplyStandard;
 	}
+
+	private String train() {
+		String validation = validateData();
+		if (validation != null) {
+			return validation;
+		} else {
+
+			String mainPath = Reader.jarFile() + "/Datasets/Networks/";
+
+			xPath = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/xTrain.txt";
+			yPath = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/yTrain.txt";
+			sPath = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/sTrain.txt";
+
+			String readme = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/readme.txt";
+			int noOfNodes = 0;
+			try {
+				String nodesTrain = Reader.read(readme)[0];
+				noOfNodes = Integer.parseInt(nodesTrain.substring(nodesTrain.indexOf(":") + 2));
+				if (noOfNodes <= 0) {
+					return "No. of nodes should be greater than 0.";
+				}
+			} catch (NumberFormatException e1) {
+				return "Reading dataset error.";
+			}
+
+			String method = cmbMethod.getSelectedItem().toString();
+
+			double alpha = Double.parseDouble(txtAlpha.getText());
+			double beta = Double.parseDouble(txtBeta.getText());
+			double lr = Double.parseDouble(txtLR.getText());
+			int maxIter = Integer.parseInt(txtIter.getText());
+
+			String[] x = Reader.read(xPath);
+			double[] y = Reader.readArray(yPath, noOfNodes);
+			double[][] s = Reader.readGraph(sPath, noOfNodes);
+
+			String path = createFolderAndSaveData(method);
+			String message = null;
+			double result = TrainTestOnNetworks.callPredictorTrain(cmbPredictor.getSelectedItem().toString(), path, x,
+					y, txtHidden.getText(), txtIterNN.getText());
+
+			if (result == -7000) {
+				message = "Unknown predictor.";
+			}
+
+			if (result == -3000) {
+				message = cmbPredictor.getSelectedItem().toString()
+						+ " cannot be applied to your data. Choose different predictor.";
+			}
+			if (result == -5000) {
+				message = "File with attributes is not in correct format.";
+			}
+			
+			// test data
+			
+
+			String xTestPath = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/xTest.txt";
+			String yTestPath = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/yTest.txt";
+			String sTestPath = mainPath + "/" + cmbDataset.getSelectedItem().toString() + "/sTest.txt";
+
+			int noOfNodesTest = 0;
+			try {
+				String nodesTest = Reader.read(readme)[1];
+				noOfNodesTest = Integer.parseInt(nodesTest.substring(nodesTest.indexOf(":") + 2));
+				if (noOfNodesTest <= 0) {
+					return "No. of nodes should be greater than 0.";
+				}
+			} catch (NumberFormatException e1) {
+				return "Reading dataset error.";
+			}
+
+			Writer.createFolder(Reader.jarFile() + "/MyModels" + method);
+			String dataPath = Reader.jarFile() + "/MyModels" + method + "/" + txtModelName.getText();
+			File matrixFile = new File(sTestPath);
+			Writer.copyFile(matrixFile, dataPath + "/data/matrixTest.txt");
+			File xFile = new File(xTestPath);
+			Writer.copyFile(xFile, dataPath + "/data/xTest.txt");
+			File yFile = new File(yTestPath);
+			Writer.copyFile(yFile, dataPath + "/data/yTest.txt");
+
+			String[] xTest = Reader.read(xTestPath);
+			if (xTest == null) {
+				return "Reading file error.";
+			}
+
+			if (xTest.length != noOfNodesTest) {
+				return "Number of lines in the file with attributes should be " + noOfNodesTest + ".";
+			}
+			double[] yTest = Reader.readArray(yTestPath, noOfNodesTest);
+			if (yTest == null) {
+				return "Number of lines in in the file with outputs should be " + noOfNodesTest + ".";
+			}
+			double resultTest = TrainTestOnNetworks.callPredictorTest(dataPath, xTest, yTest);
+			if (resultTest == -9000) {
+				return "Selected dataset is not suitable for this model.";
+			}
+			if (resultTest == -7000) {
+				return "Unknown predictor.";
+			}
+			if (resultTest == -3000) {
+				return "Predictor cannot be applied to your data. Choose different predictor.";
+			}
+			if (resultTest == -5000) {
+				return "File with attributes is not in correct format.";
+			}
+
+			double[] rTest = Reader.readArray(dataPath + "/data/rTest.txt", noOfNodesTest);
+			double[][] sTest = Reader.readGraph(sTestPath, noOfNodesTest);
+
+			if (message == null) {
+
+				double[] r = Reader.readArray(path + "/data/r.txt", noOfNodes);
+				
+				
+				if (s == null) {
+					return "Ordinal number of node can be between 1 and " + noOfNodes + ".";
+				}
+
+				String okMethod = TrainTestOnNetworks.callMethodTrain(method, path, noOfNodes, alpha, beta, lr, maxIter,
+						y, r, s, mainFrame, chckbxStandard.isSelected(), matlabPath, proxy,sTest,rTest,yTest);
+
+				if (okMethod != null) {
+					message = okMethod;
+				}
+			}
+			if (message != null) {
+				String delPath = Reader.jarFile() + "/MyModels" + method + "/" + txtModelName.getText();
+				Reader.deleteDir(new File(delPath));
+			}
+			return message;
+		}
+
+	}
+
+
 }

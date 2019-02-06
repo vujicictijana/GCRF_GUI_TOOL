@@ -29,20 +29,20 @@ import gcrf_tool.methods.GCRF;
 public class DirGCRFTestMyModelForGUI extends Thread {
 	private JFrame mainFrame;
 	private String modelFolder;
-	private double[][] s;
-	private double[] r;
-	private double[] y;
+	private double[][] sTest;
+	private double[] rTest;
+	private double[] yTest;
 	public double[] outputs;
 	public double[] outputsS;
-	DecimalFormat df = new DecimalFormat("#.######");
+	DecimalFormat df1 = new DecimalFormat("#.######");
 
 	public DirGCRFTestMyModelForGUI(JFrame mainFrame, String modelFolder, double[][] s, double[] r, double[] y) {
 		super();
 		this.mainFrame = mainFrame;
 		this.modelFolder = modelFolder;
-		this.s = s;
-		this.r = r;
-		this.y = y;
+		this.sTest = s;
+		this.rTest = r;
+		this.yTest = y;
 	}
 
 	public void run() {
@@ -75,7 +75,7 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 	}
 
 	public double resultAsymmetric(double alpha, double beta) {
-		Dataset d = new Dataset(s, r, y);
+		Dataset d = new Dataset(sTest, rTest, yTest);
 		DirGCRF alg = new DirGCRF(alpha, beta, d);
 		// System.out.println(alg.rSquared());
 		outputs = alg.predictOutputs();
@@ -83,7 +83,7 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 	}
 
 	public double resultSymmetric(double alpha, double beta) {
-		Dataset d = new Dataset(s, r, y);
+		Dataset d = new Dataset(sTest, rTest, yTest);
 		GCRF alg = new GCRF(alpha, beta, d);
 		outputsS = alg.predictOutputs();
 		return alg.rSquared();
@@ -97,7 +97,7 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 			txt[i] = array[i] + "";
 		}
 		if (type.equalsIgnoreCase("test")) {
-			txt[outputs.length] = "R^2 " + method + ": " + df.format(result);
+			txt[outputs.length] = "R^2 " + method + ": " + df1.format(result);
 		} else {
 			txt[outputs.length] = "";
 		}
@@ -116,9 +116,9 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 		}
 		String textDialog = "";
 		if (resultS != -1) {
-			textDialog += "R^2 DirGCRF: "  +  df.format(result) + "\nR^2 GCRF: " +   df.format(resultS);
+			textDialog += "R^2 DirGCRF: "  +  df1.format(result) + "\nR^2 GCRF: " +   df1.format(resultS);
 		} else {
-			textDialog += "R^2 DirGCRF: "  +  df.format(result);
+			textDialog += "R^2 DirGCRF: "  +  df1.format(result);
 		}
 		JOptionPane.showMessageDialog(mainFrame,
 				textDialog +  "\nExport successfully completed.\nFile location: " + modelFolder + "/" + folder + ".");
@@ -128,12 +128,12 @@ public class DirGCRFTestMyModelForGUI extends Thread {
 		Object[][] data;
 		if (resultS != -1) {
 			data = new Object[1][2];
-			data[0][0] = df.format(result);
-			data[0][1] = df.format(resultS);
+			data[0][0] = df1.format(result);
+			data[0][1] = df1.format(resultS);
 
 		} else {
 			data = new Object[1][1];
-			data[0][0] = df.format(result);
+			data[0][0] = df1.format(result);
 		}
 		return data;
 	}
