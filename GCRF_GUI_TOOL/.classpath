@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="resources/ojalgo-biz-40.0.0.jar"/>
 	<classpathentry kind="lib" path="resources/ojalgo-ext-40.0.0.jar"/>
 	<classpathentry kind="lib" path="resources/Jama-1.0.3.jar"/>
+	<classpathentry kind="lib" path="resources/swingx-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

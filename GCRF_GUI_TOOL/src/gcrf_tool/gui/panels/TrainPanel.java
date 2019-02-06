@@ -56,6 +56,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JComboBox;
 
+import org.jdesktop.swingx.prompt.PromptSupport;
 import org.neuroph.core.data.DataSet;
 
 import java.awt.event.ItemListener;
@@ -116,21 +117,25 @@ public class TrainPanel extends JPanel {
 	private String xPath = "";
 	private String yPath = "";
 	private String sPath = "";
+	private JButton btnQuestionMethods;
+	private JButton btnQuestionPredictors;
+	private JButton btnQuestionApplyStandard;
 
+	
 	public TrainPanel(JFrame mainFrame) {
 		setBounds(new Rectangle(0, 0, 900, 650));
 		setMinimumSize(new Dimension(500, 500));
-		if (Reader.checkFile(Reader.jarFile() + "/cfg.txt")) {
-
-			String result = readParametersFromCfg();
-			if (result != null) {
-				JOptionPane
-						.showMessageDialog(
-								mainFrame,
-								result
-										+ " Please configure parameters values in Settings->Configuration.",
-								"Error", JOptionPane.ERROR_MESSAGE);
-			} else {
+//		if (Reader.checkFile(Reader.jarFile() + "/cfg.txt")) {
+//
+//			String result = readParametersFromCfg();
+//			if (result != null) {
+//				JOptionPane
+//						.showMessageDialog(
+//								mainFrame,
+//								result
+//										+ " Please configure parameters values in Settings->Configuration.",
+//								"Error", JOptionPane.ERROR_MESSAGE);
+//			} else {
 
 				setBackground(UIManager.getColor("Button.background"));
 				GridBagLayout gridBagLayout = new GridBagLayout();
@@ -162,15 +167,20 @@ public class TrainPanel extends JPanel {
 								add(getCmbDataset(), gbc_cmbDataset);
 				GridBagConstraints gbc_btnQuestionDataset = new GridBagConstraints();
 				gbc_btnQuestionDataset.anchor = GridBagConstraints.WEST;
-				gbc_btnQuestionDataset.fill = GridBagConstraints.VERTICAL;
 				gbc_btnQuestionDataset.insets = new Insets(0, 0, 5, 5);
 				gbc_btnQuestionDataset.gridx = 5;
 				gbc_btnQuestionDataset.gridy = 2;
+				GridBagConstraints gbc_btnQuestionPredictors = new GridBagConstraints();
+				gbc_btnQuestionPredictors.anchor = GridBagConstraints.WEST;
+				gbc_btnQuestionPredictors.insets = new Insets(0, 0, 5, 5);
+				gbc_btnQuestionPredictors.gridx = 5;
+				gbc_btnQuestionPredictors.gridy = 6;
+				add(getBtnQuestionPredictors(), gbc_btnQuestionPredictors);
 				GridBagConstraints gbc_btnTestPredictr = new GridBagConstraints();
 				gbc_btnTestPredictr.fill = GridBagConstraints.HORIZONTAL;
 				gbc_btnTestPredictr.anchor = GridBagConstraints.NORTHWEST;
 				gbc_btnTestPredictr.insets = new Insets(0, 0, 5, 5);
-				gbc_btnTestPredictr.gridx = 5;
+				gbc_btnTestPredictr.gridx = 6;
 				gbc_btnTestPredictr.gridy = 6;
 				add(getBtnTestPredictr(), gbc_btnTestPredictr);
 				GridBagConstraints gbc_lblNoOfHidden = new GridBagConstraints();
@@ -250,12 +260,19 @@ public class TrainPanel extends JPanel {
 						gbc_lblMethod.gridy = 12;
 						add(getLblMethod(), gbc_lblMethod);
 				GridBagConstraints gbc_cmbMethod = new GridBagConstraints();
+				gbc_cmbMethod.gridwidth = 3;
 				gbc_cmbMethod.anchor = GridBagConstraints.NORTH;
 				gbc_cmbMethod.fill = GridBagConstraints.BOTH;
 				gbc_cmbMethod.insets = new Insets(0, 0, 5, 5);
 				gbc_cmbMethod.gridx = 2;
 				gbc_cmbMethod.gridy = 12;
 				add(getCmbMethod(), gbc_cmbMethod);
+				GridBagConstraints gbc_btnQuestionMethods = new GridBagConstraints();
+				gbc_btnQuestionMethods.anchor = GridBagConstraints.WEST;
+				gbc_btnQuestionMethods.insets = new Insets(0, 0, 5, 5);
+				gbc_btnQuestionMethods.gridx = 5;
+				gbc_btnQuestionMethods.gridy = 12;
+				add(getBtnQuestionMethods(), gbc_btnQuestionMethods);
 				GridBagConstraints gbc_lblAlpha = new GridBagConstraints();
 				gbc_lblAlpha.gridwidth = 2;
 				gbc_lblAlpha.fill = GridBagConstraints.BOTH;
@@ -328,6 +345,7 @@ public class TrainPanel extends JPanel {
 				gbc_chckbxStandard.gridy = 17;
 				add(getChckbxStandard(), gbc_chckbxStandard);
 				GridBagConstraints gbc_cmbPredictor = new GridBagConstraints();
+				gbc_cmbPredictor.gridwidth = 3;
 				gbc_cmbPredictor.fill = GridBagConstraints.BOTH;
 				gbc_cmbPredictor.insets = new Insets(0, 0, 5, 5);
 				gbc_cmbPredictor.gridx = 2;
@@ -341,6 +359,12 @@ public class TrainPanel extends JPanel {
 				fc.setCurrentDirectory(Reader.jarFile());
 
 				this.mainFrame = mainFrame;
+				GridBagConstraints gbc_btnQuestionApplyStandard = new GridBagConstraints();
+				gbc_btnQuestionApplyStandard.anchor = GridBagConstraints.WEST;
+				gbc_btnQuestionApplyStandard.insets = new Insets(0, 0, 5, 5);
+				gbc_btnQuestionApplyStandard.gridx = 5;
+				gbc_btnQuestionApplyStandard.gridy = 17;
+				add(getBtnQuestionApplyStandard(), gbc_btnQuestionApplyStandard);
 				GridBagConstraints gbc_btnTrain = new GridBagConstraints();
 				gbc_btnTrain.insets = new Insets(0, 0, 5, 5);
 				gbc_btnTrain.fill = GridBagConstraints.HORIZONTAL;
@@ -350,14 +374,14 @@ public class TrainPanel extends JPanel {
 				add(getBtnTrain(), gbc_btnTrain);
 				setTxtValues();
 
-			}
-		} else {
-			JOptionPane
-					.showMessageDialog(
-							mainFrame,
-							"Please configure parameters values in Settings->Configuration.",
-							"Error", JOptionPane.ERROR_MESSAGE);
-		}
+//			}
+//		} else {
+//			JOptionPane
+//					.showMessageDialog(
+//							mainFrame,
+//							"Please configure parameters values in Settings->Configuration.",
+//							"Error", JOptionPane.ERROR_MESSAGE);
+//		}
 	}
 
 	private JLabel getLblDataset() {
@@ -404,6 +428,7 @@ public class TrainPanel extends JPanel {
 			txtModelName = new JTextField();
 			txtModelName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			txtModelName.setColumns(10);
+			PromptSupport.setPrompt("Insert the name of your model", txtModelName);
 		}
 		return txtModelName;
 	}
@@ -1108,6 +1133,7 @@ public class TrainPanel extends JPanel {
 					String method = cmbMethod.getSelectedItem().toString();
 					if (method.contains("Dir")) {
 						lblStandard.setVisible(true);
+						btnQuestionApplyStandard.setVisible(true);
 						chckbxStandard.setVisible(true);
 					} else {
 						lblStandard.setVisible(false);
@@ -1167,5 +1193,69 @@ public class TrainPanel extends JPanel {
 			}
 		}
 		return cmbDataset;
+	}
+	private JButton getBtnQuestionMethods() {
+		if (btnQuestionMethods == null) {
+			btnQuestionMethods = new JButton("");
+			Style.questionButtonStyle(btnQuestionMethods);
+			btnQuestionMethods.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
+					JOptionPane
+							.showMessageDialog(
+									mainFrame,
+									"Standard GCRF - incorporates the outputs of unstructured predictors and the correlation between output variables. "
+											+ "\nDirected GCRF (DirGCRF) – extends the GCRF to allow modeling asymmetric relationships (directed graphs).",
+									"Help", JOptionPane.QUESTION_MESSAGE,
+									Style.questionIcon());
+				}
+			});
+		}
+		return btnQuestionMethods;
+	}
+	private JButton getBtnQuestionPredictors() {
+		if (btnQuestionPredictors == null) {
+			btnQuestionPredictors = new JButton("");
+			Style.questionButtonStyle(btnQuestionPredictors);
+			btnQuestionPredictors.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
+					JOptionPane
+							.showMessageDialog(
+									mainFrame,
+									"Neural network - Neurons in an artificial neural network are grouped in three layers: input, output, and hidden layer. "
+									+ "\nThe number of neurons in the input layer is same as the number of attributes in the chosen dataset. "
+									+ "\nThe number of neurons in the output layer is 1 (all datasets have one predicted variable). "
+									+ "\nYou have to insert the number of neurons"
+									+ " in the hidden layer and number of iterations for training."
+											+ "\n\nLinear Regression - Approach for modeling the relationship between a dependent variable y and one or more explanatory variables x. "
+											+ "\nThis relationship is modeled using linear predictor functions whose "
+									+ " parameters are estimated from the data. "
+									+ "\nStandard or multivariate linear regression is used depending on the number of attributes in the dataset.",
+									"Help", JOptionPane.QUESTION_MESSAGE,
+									Style.questionIcon());
+				}
+			});
+		}
+		return btnQuestionPredictors;
+	}
+	private JButton getBtnQuestionApplyStandard() {
+		if (btnQuestionApplyStandard == null) {
+			btnQuestionApplyStandard = new JButton("");
+			Style.questionButtonStyle(btnQuestionApplyStandard);
+			btnQuestionApplyStandard.setVisible(false);
+			btnQuestionApplyStandard.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
+					JOptionPane
+							.showMessageDialog(
+									mainFrame,
+									"If you check this option the similarity matrix will be automatically converted from asymmetric to symmetric in order to apply standard GCRF and get its accuracy for comparison.",
+									"Help", JOptionPane.QUESTION_MESSAGE,
+									Style.questionIcon());
+				}
+			});
+		}
+		return btnQuestionApplyStandard;
 	}
 }
