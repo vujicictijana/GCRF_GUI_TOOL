@@ -38,8 +38,6 @@ import gcrf_tool.gui.panels.AddDatasetPanel;
 import gcrf_tool.gui.panels.ConfigurePanel;
 import gcrf_tool.gui.panels.HelpPanel;
 import gcrf_tool.gui.panels.ManageDatasetPanel;
-import gcrf_tool.gui.panels.TestPanel;
-import gcrf_tool.gui.panels.TestRandomPanel;
 import gcrf_tool.gui.panels.TrainPanel;
 import gcrf_tool.gui.panels.TrainRandomPanel;
 import gcrf_tool.gui.panels.TrainTemporalPanel;
@@ -56,9 +54,6 @@ public class MainFrame extends JFrame {
 	private JMenu mnTrain;
 	private JMenuItem menuTrain;
 	private JMenuItem menuTrainRandom;
-	private JMenu mnTest;
-	private JMenuItem menuTest;
-	private JMenuItem menuTestRandom;
 	private JMenu mnSettings;
 	private JMenuItem menuParameters;
 	private JFrame frame;
@@ -150,8 +145,6 @@ public class MainFrame extends JFrame {
 			menuBar.setBackground(Color.WHITE);
 			menuBar.setBounds(0, 0, 900, 59);
 			menuBar.add(getMnTrain());
-			menuBar.add(getMnTest());
-//			menuBar.add(getMnPredict());
 			menuBar.add(getMnDatasets());
 			menuBar.add(getMnSettings());
 			menuBar.add(getMnHelp());
@@ -161,7 +154,7 @@ public class MainFrame extends JFrame {
 
 	private JMenu getMnTrain() {
 		if (mnTrain == null) {
-			mnTrain = new JMenu("Train");
+			mnTrain = new JMenu("Train and test");
 			mnTrain.setIcon(new ImageIcon(Reader.jarFile() + "/images/train.png"));
 			mnTrain.setFont(new Font("Segoe UI", Font.BOLD, 17));
 			mnTrain.add(getMenuTrain());
@@ -175,7 +168,7 @@ public class MainFrame extends JFrame {
 
 	private JMenuItem getMenuTrain() {
 		if (menuTrain == null) {
-			menuTrain = new JMenuItem("Train on networks");
+			menuTrain = new JMenuItem("Train and test on networks");
 			menuTrain.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 			menuTrain.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,7 +197,7 @@ public class MainFrame extends JFrame {
 
 	private JMenuItem getMenuTrainRandom() {
 		if (menuTrainRandom == null) {
-			menuTrainRandom = new JMenuItem("Train on random networks");
+			menuTrainRandom = new JMenuItem("Train and test on random networks");
 			menuTrainRandom.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 			menuTrainRandom
 					.addActionListener(new java.awt.event.ActionListener() {
@@ -232,75 +225,37 @@ public class MainFrame extends JFrame {
 		return menuTrainRandom;
 	}
 
-	private JMenu getMnTest() {
-		if (mnTest == null) {
-			mnTest = new JMenu("Test");
-			mnTest.setFont(new Font("Segoe UI", Font.BOLD, 17));
-			mnTest.setIcon(new ImageIcon(Reader.jarFile() +"/images/test.png"));
-			mnTest.add(getMenuTest());
-			mnTest.add(new JSeparator());
-			mnTest.add(getMenuTestRandom());
-		}
-		return mnTest;
-	}
 
-	private JMenuItem getMenuTest() {
-		if (menuTest == null) {
-			menuTest = new JMenuItem("Test on networks");
-			menuTest.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-			menuTest.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent evt) {
-					TestPanel t = new TestPanel(frame);
-					if (mainPanel1 != null) {
-						contentPane.removeAll();
-						contentPane.repaint();
-						contentPane.revalidate();
-					}
-					mainPanel1 = t;
-					scrollPane = new JScrollPane();
-					GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-					gbc_scrollPane.fill = GridBagConstraints.BOTH;
-					gbc_scrollPane.gridx = 0;
-					gbc_scrollPane.gridy = 0;
-					scrollPane.setViewportView(mainPanel1);
-					contentPane.add(getScrollPane(), gbc_scrollPane);
-					contentPane.repaint();
-					contentPane.revalidate();
-				}
-			});
-		}
-		return menuTest;
-	}
 
-	private JMenuItem getMenuTestRandom() {
-		if (menuTestRandom == null) {
-			menuTestRandom = new JMenuItem("Test on random networks");
-			menuTestRandom.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-			menuTestRandom
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(
-								java.awt.event.ActionEvent evt) {
-							TestRandomPanel t = new TestRandomPanel(frame);
-							if (mainPanel1 != null) {
-								contentPane.removeAll();
-								contentPane.repaint();
-								contentPane.revalidate();
-							}
-							mainPanel1 = t;
-							scrollPane = new JScrollPane();
-							GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-							gbc_scrollPane.fill = GridBagConstraints.BOTH;
-							gbc_scrollPane.gridx = 0;
-							gbc_scrollPane.gridy = 0;
-							scrollPane.setViewportView(mainPanel1);
-							contentPane.add(getScrollPane(), gbc_scrollPane);
-							contentPane.repaint();
-							contentPane.revalidate();
-						}
-					});
-		}
-		return menuTestRandom;
-	}
+//	private JMenuItem getMenuTestRandom() {
+//		if (menuTestRandom == null) {
+//			menuTestRandom = new JMenuItem("Test on random networks");
+//			menuTestRandom.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+//			menuTestRandom
+//					.addActionListener(new java.awt.event.ActionListener() {
+//						public void actionPerformed(
+//								java.awt.event.ActionEvent evt) {
+//							TestRandomPanel t = new TestRandomPanel(frame);
+//							if (mainPanel1 != null) {
+//								contentPane.removeAll();
+//								contentPane.repaint();
+//								contentPane.revalidate();
+//							}
+//							mainPanel1 = t;
+//							scrollPane = new JScrollPane();
+//							GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+//							gbc_scrollPane.fill = GridBagConstraints.BOTH;
+//							gbc_scrollPane.gridx = 0;
+//							gbc_scrollPane.gridy = 0;
+//							scrollPane.setViewportView(mainPanel1);
+//							contentPane.add(getScrollPane(), gbc_scrollPane);
+//							contentPane.repaint();
+//							contentPane.revalidate();
+//						}
+//					});
+//		}
+//		return menuTestRandom;
+//	}
 
 	private JMenu getMnSettings() {
 		if (mnSettings == null) {
@@ -372,7 +327,7 @@ public class MainFrame extends JFrame {
 
 	private JMenuItem getMntmNewMenuItem() {
 		if (mntmNewMenuItem == null) {
-			mntmNewMenuItem = new JMenuItem("Train on temporal networks");
+			mntmNewMenuItem = new JMenuItem("Train and test on temporal networks");
 			mntmNewMenuItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					TrainTemporalPanel t = new TrainTemporalPanel(frame);

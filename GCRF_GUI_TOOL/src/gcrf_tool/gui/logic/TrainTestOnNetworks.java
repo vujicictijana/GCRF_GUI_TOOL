@@ -6,11 +6,8 @@ import org.neuroph.core.data.DataSet;
 import gcrf_tool.calculations.BasicCalcs;
 import gcrf_tool.file.Writer;
 import gcrf_tool.gui.frames.ProgressBar;
-import gcrf_tool.gui.threads.DirGCRFTestMyModelForGUI;
 import gcrf_tool.gui.threads.DirGCRFTrainMyModelForGUI;
-import gcrf_tool.gui.threads.GCRFTestMyModelForGUI;
 import gcrf_tool.gui.threads.GCRFTrainMyModelForGUI;
-import gcrf_tool.gui.threads.UmGCRFTestMyModelForGUI;
 import gcrf_tool.gui.threads.UmGCRFTrainMyModelForGUI;
 import gcrf_tool.predictors.helper.Helper;
 import gcrf_tool.predictors.linearregression.LinearRegression;
@@ -31,14 +28,14 @@ public class TrainTestOnNetworks {
 			break;
 		case "GCRF":
 			if (BasicCalcs.isSymmetric(s)) {
-				trainGCRF(noOfNodes, path, maxIter, alpha, beta, lr, r, y, s,mainFrame);
+				trainGCRF(noOfNodes, path, maxIter, alpha, beta, lr, r, y, s,mainFrame,sTest,rTest,yTest);
 			} else {
 				return "For GCRF method matrix should be symmetric.";
 			}
 			break;
 		case "UmGCRF":
 			if (BasicCalcs.isSymmetric(s)) {
-				trainUmGCRF(path, r, y, s,mainFrame, matlabPath, proxy);
+				trainUmGCRF(path, r, y, s,mainFrame, matlabPath, proxy,sTest,rTest,yTest);
 			} else {
 				return "For UmGCRF method matrix should be symmetric.";
 			}
@@ -74,7 +71,8 @@ public class TrainTestOnNetworks {
 
 	public static void trainGCRF(int noOfNodes, String modelFolder, int maxIter,
 			double alpha, double beta, double lr, double[] r, double[] y,
-			double[][] s,JFrame mainFrame) {
+			double[][] s,JFrame mainFrame,double[][] sTest, double[] rTest,
+			double[] yTest) {
 
 		ProgressBar frame = new ProgressBar(maxIter);
 		frame.pack();
@@ -82,20 +80,21 @@ public class TrainTestOnNetworks {
 		frame.setLocationRelativeTo(null);
 
 		GCRFTrainMyModelForGUI t = new GCRFTrainMyModelForGUI(modelFolder,
-				frame, mainFrame, s, r, y, alpha, beta, lr, maxIter);
+				frame, mainFrame, s, r, y, alpha, beta, lr, maxIter,sTest,rTest,yTest);
 
 		t.start();
 	}
 
 	public static void trainUmGCRF(String modelFolder, double[] r, double[] y,
-			double[][] s,JFrame mainFrame,String matlabPath,long proxy) {
+			double[][] s,JFrame mainFrame,String matlabPath,long proxy,double[][] sTest, double[] rTest,
+			double[] yTest) {
 		ProgressBar frame = new ProgressBar("Training");
 		frame.pack();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
 
 		UmGCRFTrainMyModelForGUI t = new UmGCRFTrainMyModelForGUI(matlabPath,
-				modelFolder, frame, mainFrame, s, r, y, proxy);
+				modelFolder, frame, mainFrame, s, r, y, proxy,sTest,rTest,yTest);
 
 		t.start();
 	}
@@ -115,50 +114,8 @@ public class TrainTestOnNetworks {
 
 	}
 	
-	public static String callMethodTest(int noOfNodes, String method, String dataPath, double[] y, double[] r, double[][] s, JFrame mainFrame,String matlabPath,long proxy) {
-		switch (method) {
-		case "DirGCRF":
-			testDirGCRF(noOfNodes, dataPath, r, y, s,mainFrame);
-			break;
-		case "GCRF":
-			if (BasicCalcs.isSymmetric(s)) {
-				testGCRF(noOfNodes, dataPath, r, y, s,mainFrame);
-			} else {
-				return "For GCRF method matrix should be symmetric.";
-			}
-			break;
-		case "UmGCRF":
-			if (BasicCalcs.isSymmetric(s)) {
-				testUmGCRF(dataPath, r, y, s,mainFrame,matlabPath,proxy);
-			} else {
-				return "For UmGCRF method matrix should be symmetric.";
-			}
-			break;
-		default:
-			return "Unknown method.";
-		}
-		return null;
-	}
 	
-	private static void testDirGCRF(int noOfNodes, String modelFolder, double[] r, double[] y, double[][] s, JFrame mainFrame) {
-		DirGCRFTestMyModelForGUI test = new DirGCRFTestMyModelForGUI(mainFrame, modelFolder, s, r, y);
-		test.start();
-	}
 
-	private static void testGCRF(int noOfNodes, String modelFolder, double[] r, double[] y, double[][] s, JFrame mainFrame) {
-		GCRFTestMyModelForGUI test = new GCRFTestMyModelForGUI(mainFrame, modelFolder, s, r, y);
-		test.start();
-	}
-
-	private static void testUmGCRF(String modelFolder, double[] r, double[] y, double[][] s, JFrame mainFrame,String matlabPath,long proxy) {
-		ProgressBar frame = new ProgressBar("Testing");
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-
-		UmGCRFTestMyModelForGUI test = new UmGCRFTestMyModelForGUI(matlabPath, mainFrame, modelFolder, s, r, y, frame, proxy);
-		test.start();
-	}
 
 	public static double callPredictorTest(String path, String[] x, double[] y) {
 

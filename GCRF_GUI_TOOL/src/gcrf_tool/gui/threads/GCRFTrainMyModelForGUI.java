@@ -48,10 +48,20 @@ public class GCRFTrainMyModelForGUI extends Thread {
 	private String time;
 	private Thread thisThread;
 	DecimalFormat df = new DecimalFormat("#.##");
+	
+
+	DecimalFormat df1 = new DecimalFormat("#.####");
+
+	private double[][] sTest;
+	private double[] rTest;
+	private double[] yTest;
+	public double[] outputs;
+	public double[] outputsS;
 
 	public GCRFTrainMyModelForGUI(String modelFolder, ProgressBar frame,
 			JFrame mainFrame, double[][] s, double[] r, double[] y,
-			double alpha, double beta, double lr, int maxIter) {
+			double alpha, double beta, double lr, int maxIter,double[][] sTest, double[] rTest,
+			double[] yTest) {
 		super();
 		this.frame = frame;
 		this.mainFrame = mainFrame;
@@ -65,6 +75,9 @@ public class GCRFTrainMyModelForGUI extends Thread {
 		this.modelFolder = modelFolder;
 		time = "Time in seconds: ";
 		this.thisThread = this;
+		this.sTest = sTest;
+		this.rTest = rTest;
+		this.yTest = yTest;
 	}
 
 	public void run() {
@@ -104,6 +117,14 @@ public class GCRFTrainMyModelForGUI extends Thread {
 			String message = "Testing with same data:\n* R^2 value for standard GCRF is: "
 					+ df1.format(r2S);
 			message += "\n" + time;
+			
+			double[] paramS = read(modelFolder + "/parameters/GCRF.txt");
+
+			double resultS = resultSymmetric(paramS[0], paramS[1]);
+
+		
+			message += "\n\nTesting with test data:" +  exportResults( resultS, "test");
+			
 			JOptionPane.showMessageDialog(mainFrame, message, "Results",
 					JOptionPane.INFORMATION_MESSAGE);
 			mainFrame.setEnabled(true);
@@ -114,11 +135,55 @@ public class GCRFTrainMyModelForGUI extends Thread {
 
 	}
 
+
 	public void createFile(String symmetric, double[] results) {
 		Writer.createFolder(modelFolder + "/parameters");
 		String fileName = modelFolder + "/parameters/" + symmetric;
 		String[] resultsS = { "Alpha=" + results[0], "Beta=" + results[1] };
 		Writer.write(resultsS, fileName);
+	}
+	
+	public double[] read(String file) {
+		String[] txt = Reader.read(file);
+		if (txt != null) {
+			double[] params = new double[txt.length];
+			for (int i = 0; i < txt.length; i++) {
+				params[i] = Double.parseDouble(txt[i].substring(txt[i].indexOf("=") + 1));
+			}
+			return params;
+		}
+		return null;
+	}
+
+	public double resultSymmetric(double alpha, double beta) {
+		Dataset d = new Dataset(sTest, rTest, yTest);
+		GCRF alg = new GCRF(alpha, beta, d);
+		outputs = alg.predictOutputs();
+		return alg.rSquared();
+	}
+
+
+	private String exportResults(double resultS, String folder) {
+		Writer.createFolder(modelFolder + "/" + folder);
+		String fileName = modelFolder + "/" + folder + "/results.txt";
+		String[] text = exportTxt(resultS, folder);
+		Writer.write(text, fileName);
+		return "\nR^2 GCRF: " + df1.format(resultS) + "\nExport successfully completed. \nFile location: " + modelFolder + "/" + folder + ".";
+	}
+
+	public String[] exportTxt(double resultS, String type) {
+		String[] txt = new String[outputs.length + 1];
+
+		for (int i = 0; i < outputs.length; i++) {
+			txt[i] = outputs[i] + "";
+		}
+
+		if (type.equalsIgnoreCase("test")) {
+			txt[outputs.length] = "R^2 GCRF: " + df1.format(resultS);
+		} else {
+			txt[outputs.length] = "";
+		}
+		return txt;
 	}
 
 }
