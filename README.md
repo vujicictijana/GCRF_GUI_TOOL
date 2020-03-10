@@ -4,6 +4,7 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
 
 <ul>
   <li> <a href="#m">Methods included</a></li> 
+   <li> <a href="# Contibutors">Contibutors</a></li> 
 </ul>
 
 # Methods included
