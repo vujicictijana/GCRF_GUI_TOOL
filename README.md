@@ -52,7 +52,8 @@ Tool provides x dataset samples.
        <li>Similarity is converted from asymmetric to symmetric </li>
 
  <li>Note:
-Linear regression cannot be applied to this data.</li>
+Linear regression cannot be applied to this data.</li></ul>
+ </li>
  <li>Teen Asymmetric 1 x: 
   <ul>
 <li>Nodes: 50 teenagers </li>
@@ -82,7 +83,7 @@ Linear regression cannot be applied to this data.</li>
 <li>Time points: 1600  </li>
 
 </ul></li>
-<li>Rain up-GCRF: <ul><li>
+<li>Rain up-GCRF: <ul>
 <li>Nodes: 100 </li>
 
 <li>Network: no network (method should learn similarity) </li>
@@ -95,7 +96,7 @@ Linear regression cannot be applied to this data.</li>
 
 </ul></li>
 <li>Random m-GCRF: 
-<ul><li>
+<ul>
 <li>Randomly generated data</li>
 
 <li>Nodes: 20</li>
