@@ -1,9 +1,14 @@
 # GCRFs tool
 
-The GCRFs tool is an open-source software that integrates vari-ous GCRF methods and supports training and testing of those methods on synthetic andreal-world  datasets.   
+Structured regression  models are designed to use relationships between objects for predicting output variables.  In other words, structured regression models consider the attributes of objects and dependencies between the objects to make predictions. 
+
+The Gaussian Conditional Random Fields (GCRF) model is one type of structured regression models that incorporate the outputs of unstructured predictors (based on the given attributes values) and the correlation between output variables in order to achieve a higher prediction accuracy. 
+
+The GCRFs tool is an open-source software that integrates vari-ous GCRF methods and supports training and testing of those methods on synthetic and real-world  datasets.   
 
 <ul>
   <li> <a href="#m">Methods included</a></li> 
+  
    <li> <a href="#c">Contibutors</a></li> 
 </ul>
 
@@ -23,8 +28,13 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
 
 - Representation  Learning  based  Structured  Regression  (RLSR) simultaneously learns hidden representation of objects and relationships among outputs.
 
-# Contibutors
+# Accuary measure
+
+R<sup>2</sup>  coefficient of determination is used to calculate the regression accuracy of all methods. R<sup>2</sup>  measures how closely the output of the model matches the actual value of the data. A score of 0 indicates a very poor matching, while a score of 1 indicates a perfect match. 
+
+
 <a id="c" class="anchor" aria-hidden="true" href="#c"></a>
+# Contibutors
 - Tijana (Vujicic) Markovic
 - Vladan Devedzic
 - Fang Zhou
