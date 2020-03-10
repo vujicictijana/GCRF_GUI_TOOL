@@ -119,22 +119,22 @@ R<sup>2</sup>  coefficient of determination is used to calculate the regression 
 # References
 <ul>
 <li>
-GCRF: Vladan  Radosavljevic,  Slobodan  Vucetic,  and  Zoran  Obradovic.   Continuous  conditionalrandom fields for regression in remote sensing. InProccedings of European Conference onArtificial Intelligence (ECAI), pages 809–814, 2010.</p>
+GCRF: Vladan  Radosavljevic,  Slobodan  Vucetic,  and  Zoran  Obradovic.   Continuous  conditional random fields for regression in remote sensing. In Proccedings of European Conference on Artificial Intelligence (ECAI), pages 809–814, 2010. (<a href="http://www.ist.temple.edu/~zoran/papers/ECAI125.pdf"> PDF</a>)</p>
 </li>
 <li>
-DirGCRF: Tijana Vujicic, Jesse Glass, Fang Zhou, and Zoran Obradovic. Gaussian conditional randomfields extended for directed graphs.Machine Learning, 106(9-10):1271–1288, 2017.
+DirGCRF: Tijana Vujicic, Jesse Glass, Fang Zhou, and Zoran Obradovic. Gaussian conditional random fields extended for directed graphs. Machine Learning, 106(9-10):1271–1288, 2017.
 </li>	
 <li>
-UmGCRF: Jesse  Glass,  Mohamed  F  Ghalwash,  Milan  Vukicevic,  and  Zoran  Obradovic.   Extendingthe  modelling  capacity  of  gaussian  conditional  random  fields  while  learning  faster.   InProceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI-16), pages1596–1602, 2016</p>
+UmGCRF: Jesse  Glass,  Mohamed  F  Ghalwash,  Milan  Vukicevic,  and  Zoran  Obradovic.   Extending the  modelling  capacity  of  Gaussian  conditional  random  fields  while  learning  faster.   In Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI-16), pages1596–1602, 2016</p>
 </li>	
 <li>
-RLSR: Chao Han, Shanshan Zhang, Mohamed Ghalwash, Slobodan Vucetic, and Zoran Obradovic.Joint learning of representation and structure for sparse regression on graphs.  InPro-ceedings of the SIAM International Conference on Data Mining, pages 846–854, 2016</p>
+RLSR: Chao Han, Shanshan Zhang, Mohamed Ghalwash, Slobodan Vucetic, and Zoran Obradovic.Joint learning of representation and structure for sparse regression on graphs.  In Proceedings of the SIAM International Conference on Data Mining, pages 846–854, 2016</p>
 </li>
 <li>
-up-GCRF: Djordje Gligorijevic, Jelena Stojanovic, and Zoran Obradovic.  Uncertainty propagation inlong-term  structured  regression  on  evolving  networks.   InProceedings  of  the  ThirtiethAAAI Conference on Artificial Intelligence (AAAI-16), pages 1603–1609, 2016</p>
+up-GCRF: Djordje Gligorijevic, Jelena Stojanovic, and Zoran Obradovic.  Uncertainty propagation inlong-term  structured  regression  on  evolving  networks.   In Proceedings  of  the  Thirtieth  AAAI Conference on Artificial Intelligence (AAAI-16), pages 1603–1609, 2016</p>
 </li>
 <li>
-m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zoran  Obradovic.   Semi-supervised  learning  for  structured  regression  on  partially  observed  attributed  graphs.InProceedings  of  the  SIAM  International  Conference  on  Data  Mining,  pages 217–225,2015</p>
+m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zoran  Obradovic.   Semi-supervised  learning  for  structured  regression  on  partially  observed  attributed  graphs. In Proceedings  of  the  SIAM  International  Conference  on  Data  Mining,  pages 217–225,2015
 </li>
 </ul>
 
