@@ -14,7 +14,6 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
   <li> <a href="#r">References</a></li> 
    <li> <a href="#l"> External libraries</a></li> 
    <li> <a href="#c">Contibutors</a></li> 
-     <li> <a href="#de">Developer</a></li> 
 </ul>
 
 <a id="i" class="anchor" aria-hidden="true" href="#c"></a>
@@ -159,6 +158,7 @@ m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zor
 <a id="c" class="anchor" aria-hidden="true" href="#c"></a>
 # Contibutors
 
+- Tijana (Vujicic) Markovic
 - Vladan Devedzic
 - Fang Zhou
 - Zoran Obradovic
@@ -166,9 +166,4 @@ m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zor
 - Jelena Stojanovic
 - Djordje Gligorijevic
 - Chao Han
-
-<a id="de" class="anchor" aria-hidden="true" href="#de"></a>
-# Developer
-
-Tijana (Vujicic) Markovic
 
