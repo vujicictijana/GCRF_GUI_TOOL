@@ -10,6 +10,7 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
   <li> <a href="#m">Methods</a></li> 
     <li> <a href="#d">Datasets</a></li> 
    <li> <a href="#a">Accuracy measure</a></li> 
+  <li> <a href="#r">References</a></li> 
    <li> <a href="#c">Contibutors</a></li> 
 </ul>
 
@@ -32,7 +33,7 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
 <a id="d" class="anchor" aria-hidden="true" href="#c"></a>
 # Datasets
 
-Tool provides x dataset samples.
+Tool provides 7 dataset samples.
 
 <ul>
   <li> Geostep Asymmetric: 
@@ -114,6 +115,27 @@ Users can add their own dataset using <i>Add dataset</i> option in <i>Datasets</
 
 R<sup>2</sup>  coefficient of determination is used to calculate the regression accuracy of all methods. R<sup>2</sup>  measures how closely the output of the model matches the actual value of the data. A score of 0 indicates a very poor matching, while a score of 1 indicates a perfect match. 
 
+<a id="r" class="anchor" aria-hidden="true" href="#c"></a>
+# References
+<li>
+GCRF: Vladan  Radosavljevic,  Slobodan  Vucetic,  and  Zoran  Obradovic.   Continuous  conditionalrandom fields for regression in remote sensing. InProccedings of European Conference onArtificial Intelligence (ECAI), pages 809–814, 2010.</p>
+</li>
+<li>
+DirGCRF: Tijana Vujicic, Jesse Glass, Fang Zhou, and Zoran Obradovic. Gaussian conditional randomfields extended for directed graphs.Machine Learning, 106(9-10):1271–1288, 2017.
+</li>	
+<li>
+UmGCRF: Jesse  Glass,  Mohamed  F  Ghalwash,  Milan  Vukicevic,  and  Zoran  Obradovic.   Extendingthe  modelling  capacity  of  gaussian  conditional  random  fields  while  learning  faster.   InProceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI-16), pages1596–1602, 2016</p>
+</li>	
+<li>
+RLSR: Chao Han, Shanshan Zhang, Mohamed Ghalwash, Slobodan Vucetic, and Zoran Obradovic.Joint learning of representation and structure for sparse regression on graphs.  InPro-ceedings of the SIAM International Conference on Data Mining, pages 846–854, 2016</p>
+</li>
+<li>
+up-GCRF: Djordje Gligorijevic, Jelena Stojanovic, and Zoran Obradovic.  Uncertainty propagation inlong-term  structured  regression  on  evolving  networks.   InProceedings  of  the  ThirtiethAAAI Conference on Artificial Intelligence (AAAI-16), pages 1603–1609, 2016</p>
+</li>
+<li>
+m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zoran  Obradovic.   Semi-supervised  learning  for  structured  regression  on  partially  observed  attributed  graphs.InProceedings  of  the  SIAM  International  Conference  on  Data  Mining,  pages 217–225,2015</p>
+</li>
+</ul>
 
 <a id="c" class="anchor" aria-hidden="true" href="#c"></a>
 # Contibutors
