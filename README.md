@@ -28,7 +28,7 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
 
 - Representation  Learning  based  Structured  Regression  (RLSR) simultaneously learns hidden representation of objects and relationships among outputs.
 
-# Accuary measure
+# Accuracy measure
 
 R<sup>2</sup>  coefficient of determination is used to calculate the regression accuracy of all methods. R<sup>2</sup>  measures how closely the output of the model matches the actual value of the data. A score of 0 indicates a very poor matching, while a score of 1 indicates a perfect match. 
 
