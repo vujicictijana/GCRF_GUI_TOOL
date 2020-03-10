@@ -117,6 +117,7 @@ R<sup>2</sup>  coefficient of determination is used to calculate the regression 
 
 <a id="r" class="anchor" aria-hidden="true" href="#c"></a>
 # References
+<ul>
 <li>
 GCRF: Vladan  Radosavljevic,  Slobodan  Vucetic,  and  Zoran  Obradovic.   Continuous  conditionalrandom fields for regression in remote sensing. InProccedings of European Conference onArtificial Intelligence (ECAI), pages 809–814, 2010.</p>
 </li>
