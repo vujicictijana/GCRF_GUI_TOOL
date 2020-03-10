@@ -12,6 +12,7 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
     <li> <a href="#d">Datasets</a></li> 
    <li> <a href="#a">Accuracy measure</a></li> 
   <li> <a href="#r">References</a></li> 
+   <li> <a href="#l"> External libraries</a></li> 
    <li> <a href="#c">Contibutors</a></li> 
 </ul>
 
@@ -145,6 +146,15 @@ m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zor
 </li>
 </ul>
 
+<a id="c" class="anchor" aria-hidden="true" href="#l"></a>
+# External libraries
+
+<ul>
+    <li> <a href="http://ojalgo.org/">OjAlgo</a> (oj! Algorithms) for matrix calculations</li>
+    <li> <a href="http://neuroph.sourceforge.net/">Neuroph</a> for neural networks implementation</li>
+    <li> <a href="https://code.google.com/archive/p/matlabcontrol/">Matlabcontrol</a> for calling Matlab from Java</li>
+    </ul>
+    
 <a id="c" class="anchor" aria-hidden="true" href="#c"></a>
 # Contibutors
 - Tijana (Vujicic) Markovic
