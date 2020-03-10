@@ -3,7 +3,7 @@
 The GCRFs tool is an open-source software that integrates vari-ous GCRF methods and supports training and testing of those methods on synthetic andreal-world  datasets.   
 
 <ul>
-  <li> <a href="#methods">Methods included</a></li> 
+  <li> <a href="# Methods included">Methods included</a></li> 
 </ul>
 
 # Methods included
