@@ -157,7 +157,7 @@ m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zor
     
 <a id="c" class="anchor" aria-hidden="true" href="#c"></a>
 # Contibutors
-- Tijana (Vujicic) Markovic
+
 - Vladan Devedzic
 - Fang Zhou
 - Zoran Obradovic
