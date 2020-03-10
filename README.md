@@ -7,14 +7,15 @@ The Gaussian Conditional Random Fields (GCRF) model is one type of structured re
 The GCRFs tool is an open-source software that integrates vari-ous GCRF methods and supports training and testing of those methods on synthetic and real-world  datasets.   
 
 <ul>
-  <li> <a href="#m">Methods included</a></li> 
-  
+  <li> <a href="#m">Methods</a></li> 
+    <li> <a href="#d">Datasets</a></li> 
+   <li> <a href="#a">Accuracy measure</a></li> 
    <li> <a href="#c">Contibutors</a></li> 
 </ul>
 
 
 <a id="m" class="anchor" aria-hidden="true" href="#c"></a>
-# Methods included
+# Methods
 
 - Gaussian Conditional Random Fields (GCRF) is structured regression model that incorporates the outputs of unstructuredpredictors (based on the given attributes values) and the correlation between output vari-ables in order to achieve a higher prediction accuracy. 
 
@@ -28,6 +29,86 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
 
 - Representation  Learning  based  Structured  Regression  (RLSR) simultaneously learns hidden representation of objects and relationships among outputs.
 
+<a id="d" class="anchor" aria-hidden="true" href="#c"></a>
+# Datasets
+
+Tool provides x dataset samples.
+
+<ul>
+  <li> Geostep Asymmetric: 
+    <ul>
+       <li>Nodes: treasure hunt games - 25 for train, 25 for test <\li>
+         <li>Network: similarity between games, based on common number of clues</li> 
+ <li>Attributes: 6 - the number of clues in each category (business, social, travel, and irrelevant), game privacy scope, and game duration</li> 
+
+ <li>Goal: predict probability that the game can be used for touristic purposes </li>
+
+ <li>Note:Linear regression cannot be applied to this data. </li>
+ </ul>
+ </li>
+
+  <li> Geostep Symmetric: 
+<ul>
+       <li>Similarity is converted from asymmetric to symmetric </li>
+
+ <li>Note:
+Linear regression cannot be applied to this data.</li>
+ <li>Teen Asymmetric 1 x: 
+  <ul>
+<li>Nodes: 50 teenagers </li>
+
+<li>Network: friendship network - teenagers were asked to identify up to 12 best friends </li>
+
+<li>Attribute: teenager's alcohol consumption (ranging from 1 to 5) in previous time point </li>
+
+<li>Goal: predict alcohol consumption at the observation time point </li>
+</ul></li>
+
+<li>Teen Asymmetric 3 x: <ul>
+<li>Nodes: 50 teenagers </li>
+<li>Network: friendship network - teenagers were asked to identify up to 12 best friends </li>
+<li>Attributes: teenager's alcohol consumption (ranging from 1 to 5) in three previous time points </li>
+<li>Goal: predict alcohol consumption at the observation time point </li>
+</ul></li>
+<li>Energy RLSR:  <ul>
+<li>Nodes: 10 
+
+<li>Network: no network (method should learn similarity)  </li>
+
+<li>Attribute: 1 </li> 
+
+<li>Goal: predict daily solar energy income  </li>
+
+<li>Time points: 1600  </li>
+
+</ul></li>
+<li>Rain up-GCRF: <ul><li>
+<li>Nodes: 100 </li>
+
+<li>Network: no network (method should learn similarity) </li>
+
+<li>Attribute: 2 </li>
+
+<li>Goal: predict rainfall </li>
+
+<li>Time points: 708 </li>
+
+</ul></li>
+<li>Random m-GCRF: 
+<ul><li>
+<li>Randomly generated data</li>
+
+<li>Nodes: 20</li>
+
+<li>Attributes: 3</li>
+
+<li>Time points: 3</li>
+</ul></li>
+</ul>
+
+Users can add their own dataset using <i>Add dataset</i> option in <i>Datasets</i> menu item.
+
+<a id="a" class="anchor" aria-hidden="true" href="#c"></a>
 # Accuracy measure
 
 R<sup>2</sup>  coefficient of determination is used to calculate the regression accuracy of all methods. R<sup>2</sup>  measures how closely the output of the model matches the actual value of the data. A score of 0 indicates a very poor matching, while a score of 1 indicates a perfect match. 
