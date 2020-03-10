@@ -6,8 +6,7 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
   <li> <a href="#m">Methods included</a></li> 
 </ul>
 
-#m Methods included
-=====================
+# Methods included
 
 - Gaussian Conditional Random Fields (GCRF) is structured regression model that incorporates the outputs of unstructuredpredictors (based on the given attributes values) and the correlation between output vari-ables in order to achieve a higher prediction accuracy. 
 
