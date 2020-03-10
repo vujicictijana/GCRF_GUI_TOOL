@@ -21,9 +21,8 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
 
 - Representation  Learning  based  Structured  Regression  (RLSR) simultaneously learns hidden representation of objects and relationships among outputs.
 
-
-<a id="c" class="anchor" aria-hidden="true" href="#c"></a># Contibutors
-
+# Contibutors
+<a id="c" class="anchor" aria-hidden="true" href="#c"></a>
 - Tijana (Vujicic) Markovic
 - Vladan Devedzic
 - Fang Zhou
