@@ -119,7 +119,7 @@ R<sup>2</sup>  coefficient of determination is used to calculate the regression 
 # References
 <ul>
 <li>
-GCRF: Vladan  Radosavljevic,  Slobodan  Vucetic,  and  Zoran  Obradovic.   Continuous  conditional random fields for regression in remote sensing. In Proccedings of European Conference on Artificial Intelligence (ECAI), pages 809–814, 2010 (<a href="http://www.ist.temple.edu/~zoran/papers/ECAI125.pdf">PDF</a>)</p>
+GCRF: Vladan  Radosavljevic,  Slobodan  Vucetic,  and  Zoran  Obradovic.   Continuous  conditional random fields for regression in remote sensing. In Proccedings of European Conference on Artificial Intelligence (ECAI), pages 809–814, 2010 (<a href="http://www.ist.temple.edu/~zoran/papers/ECAI125.pdf">PDF</a>)
 </li>
 <li>
 DirGCRF: Tijana Vujicic, Jesse Glass, Fang Zhou, and Zoran Obradovic. Gaussian conditional random fields extended for directed graphs. Machine Learning, 106(9-10):1271–1288, 2017 (<a href="http://www.dabi.temple.edu/~zoran/papers/tijanadmkd2017.pdf">PDF</a>)
