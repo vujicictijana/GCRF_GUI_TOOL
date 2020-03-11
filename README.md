@@ -170,7 +170,27 @@ The scalability of the tool and the running behaviour of different methods were 
         <td> m-GRCRF</td>
         <td> up-GRCRF</td>
         <td> RLSR</td>
-</tr>
+    </tr>
+      <tr>
+        <td>100 </td>
+        <td>5,094 </td>
+        <td> 0.27 s </td>
+        <td>  0.17 s</td>
+        <td>  6.62 s</td>
+        <td>  8.49 s </td>
+        <td> 26.84 s</td>
+        <td>  69.25 s</td>
+    </tr>
+       <tr>
+        <td>500  </td>
+        <td>127,540  </td>
+        <td> 16.98 s </td>
+        <td>   9.49 s </td>
+        <td>  7.45 s </td>
+        <td>  17 s </td>
+        <td> 6.58 min</td>
+        <td>  8.25 min</td>
+    </tr>
 <table>
     
 
