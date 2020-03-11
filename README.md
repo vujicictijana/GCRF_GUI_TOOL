@@ -35,6 +35,8 @@ User manual is available <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL
 <a id="m" class="anchor" aria-hidden="true" href="#c"></a>
 # Methods
 
+Structured regression methods:
+
 - Gaussian Conditional Random Fields (GCRF) is structured regression model that incorporates the outputs of unstructuredpredictors (based on the given attributes values) and the correlation between output vari-ables in order to achieve a higher prediction accuracy. 
 
 - Directed  GCRF  (DirGCRF)  extends  the  GCRF  method  byconsidering asymmetric similarity (directed graphs).
@@ -46,6 +48,11 @@ User manual is available <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL
 - Uncertainty Propagation GCRF (up-GCRF) takes into ac-count uncertainty that comes from the data when estimating uncertainty of the predictions. 
 
 - Representation  Learning  based  Structured  Regression  (RLSR) simultaneously learns hidden representation of objects and relationships among outputs.
+
+Unstructured predictors:
+- Neural networks
+- Linear Regression
+- Multivariate Linear Regression 
 
 <a id="d" class="anchor" aria-hidden="true" href="#c"></a>
 # Datasets
