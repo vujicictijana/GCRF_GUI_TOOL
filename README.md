@@ -28,7 +28,7 @@ User manual is available <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL
 # Technical requirements
 <ul>
     <li>Java 8</li>
-    <li>Matlab (optional, if you want to test methods: UmGCRF, m-GCRF, up-GCRF, RLSR)</li>
+    <li>Matlab (optional, if you want to test following methods: UmGCRF, m-GCRF, up-GCRF, and RLSR)</li>
     </ul>
 
 <a id="m" class="anchor" aria-hidden="true" href="#c"></a>
