@@ -161,7 +161,7 @@ m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zor
 The scalability of the tool and the running behaviour of different methods were assessed on different datasets with varying numbers of nodes: 100, 500, 1000 and 5000. All experiments were run on Windows with 16GB RAM memory and 3.4GHz CPU. The time consumption is presented after 50 iterations and the results are shown in the table bellow.
 
 <table>
-    <th>
+    <tr>
         <td>No. of nodes </td>
         <td>No. of edges </td>
         <td> GCRF </td>
@@ -170,7 +170,7 @@ The scalability of the tool and the running behaviour of different methods were 
         <td> m-GRCRF</td>
         <td> up-GRCRF</td>
         <td> RLSR</td>
-    </th>
+    </tr>
       <tr>
         <td>100 </td>
         <td>5,094 </td>
@@ -201,9 +201,8 @@ The scalability of the tool and the running behaviour of different methods were 
         <td>27.6 min </td>
         <td>  1h 18 min </td>
     </tr>
-    
-     <tr>
-        <td>5000 </td>
+ <tr>
+     <td>5000</td>
         <td>12,749,518</td>
         <td>  4h 45 min </td>
         <td>   2h 12 min </td>
