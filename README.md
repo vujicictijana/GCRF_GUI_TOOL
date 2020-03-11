@@ -16,6 +16,7 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
   <li> <a href="#r">References</a></li> 
    <li> <a href="#l"> External libraries</a></li> 
    <li> <a href="#c">Contibutors</a></li> 
+     <li> <a href="#q">Questionnaire for tool evaluation</a></li> 
 </ul>
 
 <a id="i" class="anchor" aria-hidden="true" href="#c"></a>
@@ -243,4 +244,11 @@ The scalability of the tool and the running behaviour of different methods were 
 - Chao Han
 - Ivan Knezevic
 - Petar Radunovic
+
+<a id="q" class="anchor" aria-hidden="true" href="#q"></a>
+# Questionnaire for tool evaluation
+
+The main goal of GCRFs tool is to provide straightforward and user-friendly graphical user interface that will simplify the use of GCRF methods for expert and non-expert users. In order to get a detailed insight into the users’ experiences and opinions, we have created a questionnaire for tool evaluation.
+
+Please fill the <a href="https://goo.gl/forms/1kVVMLc1lVe1eYU32"> questionnaire</a>, we are opened for your opinions and suggestions.
 
