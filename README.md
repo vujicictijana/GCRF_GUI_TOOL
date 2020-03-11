@@ -8,6 +8,7 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
 
 <ul>
     <li> <a href="#i">Installation and User manual</a></li> 
+    <li> <a href="#t">Technical requirements</a></li> 
   <li> <a href="#m">Methods</a></li> 
     <li> <a href="#d">Datasets</a></li> 
    <li> <a href="#a">Accuracy measure</a></li> 
@@ -22,6 +23,13 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
 Download zip file <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL/raw/master/gcrfs.zip">here</a>.<br>
 Extract zip to the desired location. The extracted folder GCRFsTOOL contains the executable file gui.jar. <br> <br>
 User manual is available <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL/raw/master/Manual.pdf">here</a>.
+
+<a id="t" class="anchor" aria-hidden="true" href="#t"></a>
+# Technical requirements
+<ul>
+    <li>Java 8 installed</li>
+    <li>Matlab (optional, if you want to test methods: UmGCRF, m-GCRF, up-GCRF, RLSR)</li>
+    </ul>
 
 <a id="m" class="anchor" aria-hidden="true" href="#c"></a>
 # Methods
