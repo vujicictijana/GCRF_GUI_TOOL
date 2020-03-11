@@ -12,6 +12,7 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
   <li> <a href="#m">Methods</a></li> 
     <li> <a href="#d">Datasets</a></li> 
    <li> <a href="#a">Accuracy measure</a></li> 
+   <li> <a href="#e"> Efficiency</a></li>
   <li> <a href="#r">References</a></li> 
    <li> <a href="#l"> External libraries</a></li> 
    <li> <a href="#c">Contibutors</a></li> 
@@ -153,6 +154,25 @@ up-GCRF: Djordje Gligorijevic, Jelena Stojanovic, and Zoran Obradovic.  Uncertai
 m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zoran  Obradovic.   Semi-supervised  learning  for  structured  regression  on  partially  observed  attributed  graphs. In Proceedings  of  the  SIAM  International  Conference  on  Data  Mining,  pages 217–225, 2015 (<a href="http://www.dabi.temple.edu/~zoran/papers/StojanovicSDM15.pdf">PDF</a>)
 </li>
 </ul>
+
+<a id="e" class="anchor" aria-hidden="true" href="#e"></a>
+# Efficiency
+
+The scalability of the tool and the running behaviour of different methods were assessed on different datasets with varying numbers of nodes: 100, 500, 1000 and 5000. All experiments were run on Windows with 16GB RAM memory and 3.4GHz CPU. The time consumption is presented after 50 iterations and the results are shown in the table bellow.
+
+<table>
+    <tr>
+        <td>No. of nodes </td>
+        <td>No. of edges </td>
+        <td> GCRF </td>
+        <td> DirGCRF</td>
+        <td> UmGRCRF</td>
+        <td> m-GRCRF</td>
+        <td> up-GRCRF</td>
+        <td> RLSR</td>
+</tr>
+<table>
+    
 
 <a id="l" class="anchor" aria-hidden="true" href="#l"></a>
 # External libraries
