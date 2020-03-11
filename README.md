@@ -158,7 +158,7 @@ m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zor
 <a id="e" class="anchor" aria-hidden="true" href="#e"></a>
 # Efficiency
 
-The scalability of the tool and the running behaviour of different methods were assessed on different datasets with varying numbers of nodes: 100, 500, 1000 and 5000. All experiments were run on Windows with 16GB RAM memory and 3.4GHz CPU. The time consumption is presented after 50 iterations and the results are shown in the table bellow.
+The scalability of the tool and the running behaviour of different methods were assessed on different datasets with varying numbers of nodes: 100, 500, 1000 and 5000. All experiments were run on Windows with 16GB RAM memory and 3.4GHz CPU. The time consumption is presented after 50 iterations and the results are shown in the table below.
 
 <table>
     <tr>
