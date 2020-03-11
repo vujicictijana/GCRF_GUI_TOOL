@@ -191,6 +191,27 @@ The scalability of the tool and the running behaviour of different methods were 
         <td> 6.58 min</td>
         <td>  8.25 min</td>
     </tr>
+ <tr>
+        <td>1000 </td>
+        <td>509,376</td>
+        <td>  129.4 s  </td>
+        <td>   69.57 s </td>
+        <td> 8 s </td>
+        <td>  53.15 s </td>
+        <td>27.6 min </td>
+        <td>  1h 18 min </td>
+    </tr>
+    
+     <tr>
+        <td>5000 </td>
+        <td>12,749,518</td>
+        <td>  4h 45 min </td>
+        <td>   2h 12 min </td>
+        <td> 34.48 s</td>
+        <td>  65 min </td>
+        <td>N/A</td>
+        <td>  N/A</td>
+    </tr>
 <table>
     
 
