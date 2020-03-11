@@ -250,5 +250,5 @@ The scalability of the tool and the running behaviour of different methods were 
 
 The main goal of GCRFs tool is to provide straightforward and user-friendly graphical user interface that will simplify the use of GCRF methods for expert and non-expert users. In order to get a detailed insight into the users’ experiences and opinions, we have created a questionnaire for tool evaluation.
 
-Please fill the <a href="https://goo.gl/forms/1kVVMLc1lVe1eYU32"> questionnaire</a>, we are opened for your opinions and suggestions.
+Please fill out the <a href="https://goo.gl/forms/1kVVMLc1lVe1eYU32"> questionnaire</a>, we are opened for your opinions and suggestions.
 
