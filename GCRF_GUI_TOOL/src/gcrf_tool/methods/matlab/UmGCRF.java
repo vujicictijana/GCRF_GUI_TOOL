@@ -84,7 +84,8 @@ public class UmGCRF {
 				proxy.disconnect();
 
 			} catch (Exception e) {
-				message = "An internal MATLAB exception occurred. Please check your data.";
+				message = "An internal MATLAB exception occurred. Please check your data. Optimization toolbox is required.";
+				message += "OUTPUT:null";
 			}
 
 		

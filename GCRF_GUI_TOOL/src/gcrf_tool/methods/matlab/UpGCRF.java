@@ -114,7 +114,7 @@ public class UpGCRF {
 
 			} catch (Exception e) {
 				// e.printStackTrace();
-				message = "An internal MATLAB exception occurred. Please check your data.";
+				message = "An internal MATLAB exception occurred. Please check your data. Optimization toolbox is required.";
 			}
 
 			// close matlab

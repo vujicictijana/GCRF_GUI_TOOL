@@ -527,7 +527,7 @@ public class TrainTemporalPanel extends JPanel {
 
 	private JButton getBtnTrain() {
 		if (btnTrain == null) {
-			btnTrain = new JButton("TRAIN & TEST");
+			btnTrain = new JButton("TRAIN and TEST");
 			btnTrain.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
