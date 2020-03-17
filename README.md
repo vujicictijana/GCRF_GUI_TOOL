@@ -22,7 +22,7 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
 <a id="i" class="anchor" aria-hidden="true" href="#c"></a>
 # Installation and User manual
 
-Download zip file <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL/raw/master/gcrfs.zip">here</a>.<br>
+Download zip file <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL/raw/master/GCRFsTOOL.zip">here</a>.<br>
 Extract zip to the desired location. The extracted folder GCRFsTOOL contains the executable file gui.jar. <br> <br>
 User manual is available <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL/raw/master/Manual.pdf">here</a>.
 
