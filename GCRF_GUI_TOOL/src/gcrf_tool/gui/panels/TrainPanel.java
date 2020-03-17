@@ -890,6 +890,7 @@ public class TrainPanel extends JPanel {
 					} else {
 						lblStandard.setVisible(false);
 						chckbxStandard.setVisible(false);
+						btnQuestionApplyStandard.setVisible(false);
 					}
 					if (method.equalsIgnoreCase("DirGCRF") || method.equalsIgnoreCase("GCRF")) {
 						showGradientDescentParams();
