@@ -358,7 +358,7 @@ public class TrainRandomPanel extends JPanel {
 
 	private JLabel getLblTestRandomModels() {
 		if (lblTrainRandomModels == null) {
-			lblTrainRandomModels = new JLabel("TRAIN RANDOM MODELS:");
+			lblTrainRandomModels = new JLabel("Train on random networks:");
 			lblTrainRandomModels.setOpaque(true);
 			lblTrainRandomModels.setHorizontalAlignment(SwingConstants.CENTER);
 			lblTrainRandomModels.setForeground(Color.WHITE);

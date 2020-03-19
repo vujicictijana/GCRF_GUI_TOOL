@@ -360,7 +360,7 @@ public class TestRandomPanel extends JPanel {
 
 	private JLabel getLblTestRandomModels() {
 		if (lblTestRandomModels == null) {
-			lblTestRandomModels = new JLabel("TEST RANDOM MODELS:");
+			lblTestRandomModels = new JLabel("Test on random networks:");
 			lblTestRandomModels.setOpaque(true);
 			lblTestRandomModels.setHorizontalAlignment(SwingConstants.CENTER);
 			lblTestRandomModels.setForeground(Color.WHITE);
