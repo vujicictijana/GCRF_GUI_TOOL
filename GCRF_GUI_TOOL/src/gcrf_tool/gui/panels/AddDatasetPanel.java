@@ -693,7 +693,7 @@ public class AddDatasetPanel extends JPanel {
 						}
 
 						JOptionPane.showMessageDialog(mainFrame,
-								"Dataset is created successfully.", "Error",
+								"Dataset is created successfully.", "Success",
 								JOptionPane.INFORMATION_MESSAGE);
 						resetValues();
 					}
