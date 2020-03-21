@@ -8,23 +8,35 @@ The GCRFs tool is an open-source software that integrates vari-ous GCRF methods 
 
 <ul>
     <li> <a href="#i">Installation and User manual</a></li> 
+    <li> <a href="#t">Technical requirements</a></li> 
   <li> <a href="#m">Methods</a></li> 
     <li> <a href="#d">Datasets</a></li> 
    <li> <a href="#a">Accuracy measure</a></li> 
+   <li> <a href="#e"> Efficiency</a></li>
   <li> <a href="#r">References</a></li> 
    <li> <a href="#l"> External libraries</a></li> 
    <li> <a href="#c">Contibutors</a></li> 
+     <li> <a href="#q">Questionnaire for tool evaluation</a></li> 
 </ul>
 
 <a id="i" class="anchor" aria-hidden="true" href="#c"></a>
 # Installation and User manual
 
-Download zip file <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL/raw/master/gcrfs.zip">here</a>.<br>
+Download zip file <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL/raw/master/GCRFsTOOL.zip">here</a>.<br>
 Extract zip to the desired location. The extracted folder GCRFsTOOL contains the executable file gui.jar. <br> <br>
 User manual is available <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL/raw/master/Manual.pdf">here</a>.
 
+<a id="t" class="anchor" aria-hidden="true" href="#t"></a>
+# Technical requirements
+<ul>
+    <li>Java 8</li>
+    <li>Matlab (optional, if you want to test following methods: UmGCRF, m-GCRF, up-GCRF, and RLSR)</li>
+    </ul>
+
 <a id="m" class="anchor" aria-hidden="true" href="#c"></a>
 # Methods
+
+Structured regression methods:
 
 - Gaussian Conditional Random Fields (GCRF) is structured regression model that incorporates the outputs of unstructuredpredictors (based on the given attributes values) and the correlation between output vari-ables in order to achieve a higher prediction accuracy. 
 
@@ -37,6 +49,11 @@ User manual is available <a href="https://github.com/vujicictijana/GCRF_GUI_TOOL
 - Uncertainty Propagation GCRF (up-GCRF) takes into ac-count uncertainty that comes from the data when estimating uncertainty of the predictions. 
 
 - Representation  Learning  based  Structured  Regression  (RLSR) simultaneously learns hidden representation of objects and relationships among outputs.
+
+Unstructured predictors:
+- Neural networks
+- Linear Regression
+- Multivariate Linear Regression 
 
 <a id="d" class="anchor" aria-hidden="true" href="#c"></a>
 # Datasets
@@ -146,6 +163,65 @@ m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zor
 </li>
 </ul>
 
+<a id="e" class="anchor" aria-hidden="true" href="#e"></a>
+# Efficiency
+
+The scalability of the tool and the running behaviour of different methods were assessed on different datasets with varying numbers of nodes: 100, 500, 1000 and 5000. All experiments were run on Windows with 16GB RAM memory and 3.4GHz CPU. The time consumption is presented after 50 iterations and the results are shown in the table below.
+
+<table>
+    <tr>
+        <td>No. of nodes </td>
+        <td>No. of edges </td>
+        <td> GCRF </td>
+        <td> DirGCRF</td>
+        <td> UmGRCRF</td>
+        <td> m-GRCRF</td>
+        <td> up-GRCRF</td>
+        <td> RLSR</td>
+    </tr>
+      <tr>
+        <td>100 </td>
+        <td>5,094 </td>
+        <td> 0.27 s </td>
+        <td>  0.17 s</td>
+        <td>  6.62 s</td>
+        <td>  8.49 s </td>
+        <td> 26.84 s</td>
+        <td>  69.25 s</td>
+    </tr>
+       <tr>
+        <td>500  </td>
+        <td>127,540  </td>
+        <td> 16.98 s </td>
+        <td>   9.49 s </td>
+        <td>  7.45 s </td>
+        <td>  17 s </td>
+        <td> 6.58 min</td>
+        <td>  8.25 min</td>
+    </tr>
+ <tr>
+        <td>1000 </td>
+        <td>509,376</td>
+        <td>  129.4 s  </td>
+        <td>   69.57 s </td>
+        <td> 8 s </td>
+        <td>  53.15 s </td>
+        <td>27.6 min </td>
+        <td>  1h 18 min </td>
+    </tr>
+ <tr>
+     <td>5000</td>
+        <td>12,749,518</td>
+        <td>  4h 45 min </td>
+        <td>   2h 12 min </td>
+        <td> 34.48 s</td>
+        <td>  65 min </td>
+        <td>N/A</td>
+        <td>  N/A</td>
+    </tr>
+</table>
+    
+
 <a id="l" class="anchor" aria-hidden="true" href="#l"></a>
 # External libraries
 
@@ -154,9 +230,10 @@ m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zor
     <li> <a href="http://neuroph.sourceforge.net/">Neuroph</a> for neural networks implementation</li>
     <li> <a href="https://code.google.com/archive/p/matlabcontrol/">Matlabcontrol</a> for calling Matlab from Java</li>
     </ul>
-    
+ 
 <a id="c" class="anchor" aria-hidden="true" href="#c"></a>
 # Contibutors
+
 - Tijana (Vujicic) Markovic
 - Vladan Devedzic
 - Fang Zhou
@@ -165,4 +242,13 @@ m-GCRF: Jelena  Stojanovic,  Milos  Jovanovic,  Djordje  Gligorijevic,  and  Zor
 - Jelena Stojanovic
 - Djordje Gligorijevic
 - Chao Han
+- Ivan Knezevic
+- Petar Radunovic
+
+<a id="q" class="anchor" aria-hidden="true" href="#q"></a>
+# Questionnaire for tool evaluation
+
+The main goal of GCRFs tool is to provide straightforward and user-friendly graphical user interface that will simplify the use of GCRF methods for expert and non-expert users. In order to get a detailed insight into the users’ experiences and opinions, we have created a questionnaire for tool evaluation.
+
+Please fill out the <a href="https://goo.gl/forms/1kVVMLc1lVe1eYU32"> questionnaire</a>, we are opened for your opinions and suggestions.
 
