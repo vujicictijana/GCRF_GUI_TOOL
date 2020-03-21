@@ -38,6 +38,8 @@ import gcrf_tool.gui.threads.TestWithRandomForGUI;
 import javax.swing.JComboBox;
 
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.awt.event.ItemEvent;
 import java.awt.event.ActionListener;
@@ -195,6 +197,7 @@ public class TestRandomPanel extends JPanel {
 			btnTrain = new JButton("TEST");
 			btnTrain.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 					String message = validateData();
 					if (message != null) {
 						JOptionPane.showMessageDialog(mainFrame, message, "Error", JOptionPane.ERROR_MESSAGE);
@@ -213,6 +216,7 @@ public class TestRandomPanel extends JPanel {
 						frame.setLocationRelativeTo(null);
 						TestWithRandomForGUI test = new TestWithRandomForGUI(frame, mainFrame, panelForTable, model,
 								noOfNodes, times, probability, alphaGen, betaGen);
+					
 						test.start();
 					}
 				}
@@ -222,10 +226,50 @@ public class TestRandomPanel extends JPanel {
 		}
 		return btnTrain;
 	}
+	public void refreshCMB() {
+		cmbModel.removeAllItems();
+		File f = new File(Reader.jarFile() + "/RandomModels");
+		if (f.exists()) {
 
+			String[] files = Reader.getAllFiles(Reader.jarFile() + "/RandomModels");
+			if(files.length==0){
+				cmbModel.addItem("You should train random model first.");
+				return ;
+				
+			}
+
+			cmbModel.addItem("choose model");
+			for (int i = 0; i < files.length; i++) {
+				cmbModel.addItem(files[i]);
+			}
+			cmbModel.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent arg0) {
+					if (cmbModel.getSelectedItem()!= null && cmbModel.getSelectedItem().toString().contains("probability")) {
+
+						String model = Reader.jarFile() + "/RandomModels/"
+								+ cmbModel.getSelectedItem().toString().replaceAll(" - ", "/");
+						String probModel = model.split("/")[model.split("/").length - 1];
+						probModel = probModel.substring(probModel.indexOf("s") + 1, probModel.indexOf("p"));
+						txtProb.setEnabled(true);
+						txtProb.setText(probModel);
+					}
+				}
+			});
+		}else{
+
+			cmbModel.addItem("You should train random model first.");
+		}
+		revalidate();
+		repaint();
+	}
+
+
+
+	  
 	private JComboBox<String> getCmbModel() {
 		if (cmbModel == null) {
 			cmbModel = new JComboBox<String>();
+
 			File f = new File(Reader.jarFile() + "/RandomModels");
 			if (f.exists()) {
 
@@ -240,9 +284,11 @@ public class TestRandomPanel extends JPanel {
 				for (int i = 0; i < files.length; i++) {
 					cmbModel.addItem(files[i]);
 				}
+				
 				cmbModel.addItemListener(new ItemListener() {
+					
 					public void itemStateChanged(ItemEvent arg0) {
-						if (cmbModel.getSelectedItem().toString().contains("probability")) {
+						if (cmbModel.getSelectedItem()!= null && cmbModel.getSelectedItem().toString().contains("probability")) {
 
 							String model = Reader.jarFile() + "/RandomModels/"
 									+ cmbModel.getSelectedItem().toString().replaceAll(" - ", "/");

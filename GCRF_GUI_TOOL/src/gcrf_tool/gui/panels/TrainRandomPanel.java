@@ -82,6 +82,7 @@ public class TrainRandomPanel extends JPanel {
 	private JPanel panelForTable;
 	private JLabel lblTime;
 	private JLabel lblTrainRandomModels;
+	private TestRandomPanel testPanel;
 
 	private JTabbedPane tabbedPane;
 
@@ -169,6 +170,14 @@ public class TrainRandomPanel extends JPanel {
 			tabbedPane.addTab("TEST", null, panel2,
 					"Parameters for training GCRF and DirGCRF");
 			tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+			
+			tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+		        public void stateChanged(javax.swing.event.ChangeEvent evt) {
+		            if(tabbedPane.getSelectedIndex()==1) {
+		            	testPanel.refreshCMB();
+		            }
+		        }
+		});
 			
 		}
 		return tabbedPane;
@@ -341,8 +350,8 @@ public class TrainRandomPanel extends JPanel {
 	protected JComponent makePanelTest() {
 		JPanel panel = new JPanel(false);
 		
-		TestRandomPanel t = new TestRandomPanel(mainFrame);
-		panel = t;
+		 testPanel = new TestRandomPanel(mainFrame);
+		panel = testPanel;
 		
 		return panel;
 	}
